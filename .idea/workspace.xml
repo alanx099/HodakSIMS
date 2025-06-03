@@ -5,15 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4471e722-e8a0-4346-a13e-98506052ee56" name="Changes" comment="Ground Zero">
-      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/ScreenManagerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/UserRoles.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/main/Login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/RegisterController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/interfaces/Auth.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/CurrentUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Entity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/View.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/AbstractRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/Register.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/Welcome.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/pogreske.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/pogreske.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/ScreenManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/ScreenManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/WelcomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/WelcomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/main/SIMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/main/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/Login.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/main/Welcome.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/main/Welcome.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +34,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -62,7 +72,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/SIMS/HodakSIMS/src/main/resources/sims/hodaksims/main",
+    "last_opened_file_path": "D:/SIMS/HodakSIMS/src/main/resources/sims/hodaksims/controller",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -77,22 +87,27 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\SIMS\HodakSIMS\src\main\resources\sims\hodaksims\controller" />
       <recent name="D:\SIMS\HodakSIMS\src\main\resources\sims\hodaksims\main" />
+      <recent name="D:\SIMS\HodakSIMS\src\main\resources" />
       <recent name="C:\Users\Marko\IdeaProjects\HodakSIMS" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\SIMS\HodakSIMS\src\main\resources\sims\hodaksims\controller" />
+      <recent name="D:\SIMS\HodakSIMS\src\main\resources\controller" />
       <recent name="C:\Users\Marko\IdeaProjects\HodakSIMS\src\main\resources\sims\hodaksims\main" />
       <recent name="C:\Users\Marko\IdeaProjects\HodakSIMS\src\main\resources\sims\hodaksims\" />
       <recent name="C:\Users\Marko\IdeaProjects\HodakSIMS\src\main\resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="sims.hodaksims.controller" />
       <recent name="sims.hodaksims.main" />
+      <recent name="sims.hodaksims.controller" />
+      <recent name="sims.hodaksims" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="Start" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="sims.hodaksims.main.Main" />
+      <option name="MAIN_CLASS_NAME" value="sims.hodaksims.main.SIMS" />
       <module name="HodakSIMS" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -121,7 +136,8 @@
       <workItem from="1739300440443" duration="2291000" />
       <workItem from="1748604636117" duration="1723000" />
       <workItem from="1748625930846" duration="216000" />
-      <workItem from="1748626194156" duration="7563000" />
+      <workItem from="1748626194156" duration="17460000" />
+      <workItem from="1748960426234" duration="17439000" />
     </task>
     <servers />
   </component>

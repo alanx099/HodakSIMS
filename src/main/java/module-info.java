@@ -15,8 +15,10 @@ module sims.hodaksims {
 
     opens sims.hodaksims to javafx.fxml;
     exports sims.hodaksims;
-    exports sims.hodaksims.main;
-    opens sims.hodaksims.main to javafx.fxml;
     exports sims.hodaksims.controller;
     opens sims.hodaksims.controller to javafx.fxml;
+    exports sims.hodaksims.model;
+    opens sims.hodaksims.model to javafx.fxml;
+    exports sims.hodaksims.main;
+    opens sims.hodaksims.main to javafx.fxml;
 }

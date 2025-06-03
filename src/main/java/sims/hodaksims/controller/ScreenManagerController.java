@@ -1,32 +1,37 @@
 package sims.hodaksims.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sims.hodaksims.model.View;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class ScreenManagerController {
-     private Stage stage;
-     private Scene scene;
+    private static final Logger log = LoggerFactory.getLogger(ScreenManagerController.class);
+    private ScreenManagerController() {
+    }
 
-    public void switchToScene1(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Welcome.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    private static Scene scene;
+    public static void setScene(Scene scene){
+        ScreenManagerController.scene = scene;
     }
-    public void switchToSceneLogin(ActionEvent event)  throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("src/main/resources/sims/hodaksims/main/Login.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
+
+    public static void switchTo(View view){
+        if (scene == null) {
+            log.info("Nije odabrana scena");
+            return;
+        }
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(ScreenManagerController.class.getResource(view.getFilename())));
+           scene.setRoot(root);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
     }
+
 }

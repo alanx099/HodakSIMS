@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sims.hodaksims.controller.LoginController">
    <children>
       <GridPane prefHeight="400.0" prefWidth="600.0">
@@ -42,14 +41,14 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField promptText="KORISNIČKO IME" GridPane.columnSpan="2147483647" />
-                  <PasswordField promptText="LOZINKA" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
-                  <Button fx:id="prijava" mnemonicParsing="false" onAction="#goToApp" text="Prijava" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <TextField fx:id="userName" promptText="KORISNIČKO IME" GridPane.columnSpan="2147483647" />
+                  <PasswordField fx:id="password" promptText="LOZINKA" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+                  <Button fx:id="login" mnemonicParsing="false" onAction="#goToWelcome" text="Prijava" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="Registracija" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button fx:id="register" mnemonicParsing="false" onAction="#goToRegister" text="Registracija" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
          </children>
