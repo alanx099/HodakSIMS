@@ -15,6 +15,11 @@ import java.util.List;
 
 
 public class RegisterController  {
+    /**
+     * Klasa za upravljanje register prozora
+     *
+     * <p>Ova klasa služi za kontrolu register prozora, na ovom prozoru unosimo nove korisnike</p>
+     */
     private static final Logger log = LoggerFactory.getLogger(RegisterController.class);
     @FXML
     TextField userNameField;
@@ -26,9 +31,18 @@ public class RegisterController  {
     public void initialize(){
         rolesBox.getItems().addAll(UserRoles.values());
     }
+
+    /**
+     * Go back meoda usmjeruje korisnika natrag na početni login ekran ukoliko nije potrebno
+     * dodavanje korisnika
+     */
     public void goBack(){
         ScreenManagerController.switchTo(View.LOGIN);
     }
+
+    /**
+     * enterUser Metoda unosi korisnika u daoteku te nakon uspješnog unosa vraća korisnika na ekran za prijavu
+     */
     public void enterUser(){
         String userName = userNameField.getText();
         String password = passwordField.getText();

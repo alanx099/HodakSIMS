@@ -2,7 +2,6 @@ package sims.hodaksims.model;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sims.hodaksims.controller.RegisterController;
 import sims.hodaksims.interfaces.Auth;
 
 import java.io.*;
@@ -10,6 +9,19 @@ import java.util.List;
 import java.util.Objects;
 
 public class User extends Entity implements Serializable, Auth {
+    /**
+     * User klasa namjenjena za instancijanje korisnika
+     * <p>
+     *     Ova klasa nam pomaže s baratanjem s korisnicima vrlo intuitivno.
+     * </p>
+     * <p>
+     *     Ova klasa koristi Builder design pattern kako bi instanciranje bilo
+     *     jednostavno i brzo. Uz to ova klasa implementira sučelja Serializable
+     *     i Auth. Serializable za nas služi kako bi lako dohvatili podatke iz
+     *     datoteke, te sučelje auth kako bi autentificirali korisnike prilikom
+     *     prijave
+     * </p>
+     */
     private static final Logger log = LoggerFactory.getLogger(User.class);
     private String username;
     private String password;
@@ -65,12 +77,24 @@ public class User extends Entity implements Serializable, Auth {
                 ", role=" + role +
                 '}';
     }
+
+    /**
+     * Metoda za spremanje listu korisnika u binarnu datoteku koja sadrži naše korisnike
+     * @param users
+     * @throws IOException
+     */
     public static void saveUsers(List<User> users) throws IOException {
         try(FileOutputStream fileOut = new FileOutputStream("users.ser");
         ObjectOutputStream out = new ObjectOutputStream(fileOut)){
         out.writeObject(users);
         }
     }
+
+    /**
+     * Metoda koja učitava korisnike u statičnu varijablu user ali također i vraća tu istu listu korisnika
+     * @return List<User>
+     * @throws IOException
+     */
     public static List<User> loadUsers()throws IOException {
         try (
             FileInputStream fileIn = new FileInputStream("users.ser");

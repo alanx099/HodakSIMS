@@ -12,6 +12,8 @@ module sims.hodaksims {
     requires com.almasb.fxgl.all;
     requires java.logging;
     requires org.slf4j;
+    requires java.sql;
+    requires com.fasterxml.jackson.databind;
 
     opens sims.hodaksims to javafx.fxml;
     exports sims.hodaksims;

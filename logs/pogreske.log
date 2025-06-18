@@ -1,27 +1,2 @@
-2025-06-03 21:31:04,002 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33] 
-/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml
-
-2025-06-03 21:33:33,003 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33] 
-/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml
-
-2025-06-03 21:33:36,324 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33] 
-/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml
-
-2025-06-03 21:33:36,484 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33] 
-/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml
-
-2025-06-03 21:33:36,645 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33] 
-/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml
-
-2025-06-03 21:33:36,802 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33] 
-/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml
-
-2025-06-03 21:33:36,949 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33] 
-/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml
-
-2025-06-03 21:33:37,115 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33] 
-/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml
-
-2025-06-03 21:35:03,343 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33] 
-/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml
-
+2025-06-13 23:06:39,553 ERROR [JavaFX Application Thread] s.h.i.Auth [Auth.java:22] No value present
+2025-06-18 18:15:59,022 ERROR [JavaFX Application Thread] s.h.i.Auth [Auth.java:22] No value present

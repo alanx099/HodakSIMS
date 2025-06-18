@@ -1,0 +1,325 @@
+[33mcommit 5f21932bbcdac8d4d0aab6f6b68b3b24fc9a1b5b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: unknown <Alan Hodak>
+Date:   Tue Jun 3 21:45:43 2025 +0200
+
+    Sustav za autentifikaciju korisnika te dodavanje korisnika implementiran
+
+[1mdiff --git a/.idea/workspace.xml b/.idea/workspace.xml[m
+[1mindex 6e55a76..0235254 100644[m
+[1m--- a/.idea/workspace.xml[m
+[1m+++ b/.idea/workspace.xml[m
+[36m@@ -5,15 +5,24 @@[m
+   </component>[m
+   <component name="ChangeListManager">[m
+     <list default="true" id="4471e722-e8a0-4346-a13e-98506052ee56" name="Changes" comment="Ground Zero">[m
+[31m-      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/LoginController.java" afterDir="false" />[m
+[31m-      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/ScreenManagerController.java" afterDir="false" />[m
+[31m-      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/User.java" afterDir="false" />[m
+[31m-      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/UserRoles.java" afterDir="false" />[m
+[31m-      <change afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/main/Login.fxml" afterDir="false" />[m
+[31m-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />[m
+[32m+[m[32m      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/RegisterController.java" afterDir="false" />[m
+[32m+[m[32m      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/interfaces/Auth.java" afterDir="false" />[m
+[32m+[m[32m      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/CurrentUser.java" afterDir="false" />[m
+[32m+[m[32m      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Entity.java" afterDir="false" />[m
+[32m+[m[32m      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/View.java" afterDir="false" />[m
+[32m+[m[32m      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/AbstractRepository.java" afterDir="false" />[m
+[32m+[m[32m      <change afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/Register.fxml" afterDir="false" />[m
+[32m+[m[32m      <change afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/Welcome.fxml" afterDir="false" />[m
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />[m
+       <change beforePath="$PROJECT_DIR$/logs/pogreske.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/pogreske.log" afterDir="false" />[m
+[31m-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/main/Main.java" afterDir="false" />[m
+[32m+[m[32m      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />[m
+[32m+[m[32m      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />[m
+[32m+[m[32m      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/LoginController.java" afterDir="false" />[m
+[32m+[m[32m      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/ScreenManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/ScreenManagerController.java" afterDir="false" />[m
+[32m+[m[32m      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/WelcomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/WelcomeController.java" afterDir="false" />[m
+[32m+[m[32m      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/main/SIMS.java" afterDir="false" />[m
+[32m+[m[32m      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/User.java" afterDir="false" />[m
+[32m+[m[32m      <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/main/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/Login.fxml" afterDir="false" />[m
+       <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/main/Welcome.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/main/Welcome.fxml" afterDir="false" />[m
+     </list>[m
+     <option name="SHOW_DIALOG" value="false" />[m
+[36m@@ -25,6 +34,7 @@[m
+     <option name="RECENT_TEMPLATES">[m
+       <list>[m
+         <option value="Enum" />[m
+[32m+[m[32m        <option value="Interface" />[m
+         <option value="Class" />[m
+       </list>[m
+     </option>[m
+[36m@@ -62,7 +72,7 @@[m
+     "git-widget-placeholder": "master",[m
+     "ignore.virus.scanning.warn.message": "true",[m
+     "kotlin-language-version-configured": "true",[m
+[31m-    "last_opened_file_path": "D:/SIMS/HodakSIMS/src/main/resources/sims/hodaksims/main",[m
+[32m+[m[32m    "last_opened_file_path": "D:/SIMS/HodakSIMS/src/main/resources/sims/hodaksims/controller",[m
+     "node.js.detected.package.eslint": "true",[m
+     "node.js.detected.package.tslint": "true",[m
+     "node.js.selected.package.eslint": "(autodetect)",[m
+[36m@@ -77,22 +87,27 @@[m
+ }]]></component>[m
+   <component name="RecentsManager">[m
+     <key name="CopyFile.RECENT_KEYS">[m
+[32m+[m[32m      <recent name="D:\SIMS\HodakSIMS\src\main\resources\sims\hodaksims\controller" />[m
+       <recent name="D:\SIMS\HodakSIMS\src\main\resources\sims\hodaksims\main" />[m
+[32m+[m[32m      <recent name="D:\SIMS\HodakSIMS\src\main\resources" />[m
+       <recent name="C:\Users\Marko\IdeaProjects\HodakSIMS" />[m
+     </key>[m
+     <key name="MoveFile.RECENT_KEYS">[m
+[32m+[m[32m      <recent name="D:\SIMS\HodakSIMS\src\main\resources\sims\hodaksims\controller" />[m
+[32m+[m[32m      <recent name="D:\SIMS\HodakSIMS\src\main\resources\controller" />[m
+       <recent name="C:\Users\Marko\IdeaProjects\HodakSIMS\src\main\resources\sims\hodaksims\main" />[m
+       <recent name="C:\Users\Marko\IdeaProjects\HodakSIMS\src\main\resources\sims\hodaksims\" />[m
+       <recent name="C:\Users\Marko\IdeaProjects\HodakSIMS\src\main\resources" />[m
+     </key>[m
+     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">[m
+[31m-      <recent name="sims.hodaksims.controller" />[m
+       <recent name="sims.hodaksims.main" />[m
+[32m+[m[32m      <recent name="sims.hodaksims.controller" />[m
+[32m+[m[32m      <recent name="sims.hodaksims" />[m
+     </key>[m
+   </component>[m
+   <component name="RunManager">[m
+     <configuration name="Start" type="Application" factoryName="Application">[m
+[31m-      <option name="MAIN_CLASS_NAME" value="sims.hodaksims.main.Main" />[m
+[32m+[m[32m      <option name="MAIN_CLASS_NAME" value="sims.hodaksims.main.SIMS" />[m
+       <module name="HodakSIMS" />[m
+       <method v="2">[m
+         <option name="Make" enabled="true" />[m
+[36m@@ -121,7 +136,8 @@[m
+       <workItem from="1739300440443" duration="2291000" />[m
+       <workItem from="1748604636117" duration="1723000" />[m
+       <workItem from="1748625930846" duration="216000" />[m
+[31m-      <workItem from="1748626194156" duration="7563000" />[m
+[32m+[m[32m      <workItem from="1748626194156" duration="17460000" />[m
+[32m+[m[32m      <workItem from="1748960426234" duration="17439000" />[m
+     </task>[m
+     <servers />[m
+   </component>[m
+[1mdiff --git a/logs/pogreske.log b/logs/pogreske.log[m
+[1mindex 9bb2f88..53905f3 100644[m
+[1m--- a/logs/pogreske.log[m
+[1m+++ b/logs/pogreske.log[m
+[36m@@ -1,14 +1,27 @@[m
+[31m-2025-02-11 20:05:07,038 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:17] The application is started...[m
+[31m-2025-02-11 20:13:01,795 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:17] The application is started...[m
+[31m-2025-02-11 20:34:45,760 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:16] The application is started...[m
+[31m-2025-02-11 20:36:16,826 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:16] The application is started...[m
+[31m-2025-05-30 13:36:45,053 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:16] The application is started...[m
+[31m-2025-05-30 19:30:48,901 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:16] The application is started...[m
+[31m-2025-05-30 21:32:39,489 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:18] The application is started...[m
+[31m-2025-05-30 21:34:14,426 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:18] The application is started...[m
+[31m-2025-05-30 21:37:53,432 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:18] The application is started...[m
+[31m-2025-05-30 21:40:12,658 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:18] The application is started...[m
+[31m-2025-05-30 21:43:41,998 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:18] The application is started...[m
+[31m-2025-05-30 21:44:29,216 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:18] The application is started...[m
+[31m-2025-05-30 21:47:02,977 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:18] The application is started...[m
+[31m-2025-05-30 21:47:21,924 INFO [JavaFX Application Thread] s.h.m.Main [Main.java:18] The application is started...[m
+[32m+[m[32m2025-06-03 21:31:04,002 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33][m[41m [m
+[32m+[m[32m/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml[m
+[32m+[m
+[32m+[m[32m2025-06-03 21:33:33,003 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33][m[41m [m
+[32m+[m[32m/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml[m
+[32m+[m
+[32m+[m[32m2025-06-03 21:33:36,324 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33][m[41m [m
+[32m+[m[32m/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml[m
+[32m+[m
+[32m+[m[32m2025-06-03 21:33:36,484 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33][m[41m [m
+[32m+[m[32m/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml[m
+[32m+[m
+[32m+[m[32m2025-06-03 21:33:36,645 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33][m[41m [m
+[32m+[m[32m/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml[m
+[32m+[m
+[32m+[m[32m2025-06-03 21:33:36,802 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33][m[41m [m
+[32m+[m[32m/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml[m
+[32m+[m
+[32m+[m[32m2025-06-03 21:33:36,949 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33][m[41m [m
+[32m+[m[32m/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml[m
+[32m+[m
+[32m+[m[32m2025-06-03 21:33:37,115 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33][m[41m [m
+[32m+[m[32m/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml[m
+[32m+[m
+[32m+[m[32m2025-06-03 21:35:03,343 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:33][m[41m [m
+[32m+[m[32m/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Welcome.fxml[m
+[41m+[m
+[1mdiff --git a/pom.xml b/pom.xml[m
+[1mindex 139119d..4519fc4 100644[m
+[1m--- a/pom.xml[m
+[1m+++ b/pom.xml[m
+[36m@@ -18,12 +18,12 @@[m
+         <dependency>[m
+             <groupId>org.openjfx</groupId>[m
+             <artifactId>javafx-controls</artifactId>[m
+[31m-            <version>17.0.6</version>[m
+[32m+[m[32m            <version>23.0.1</version>[m
+         </dependency>[m
+         <dependency>[m
+             <groupId>org.openjfx</groupId>[m
+             <artifactId>javafx-fxml</artifactId>[m
+[31m-            <version>17.0.6</version>[m
+[32m+[m[32m            <version>23.0.1</version>[m
+         </dependency>[m
+         <dependency>[m
+             <groupId>org.openjfx</groupId>[m
+[36m@@ -138,7 +138,7 @@[m
+                         <!-- Default configuration for running with: mvn clean javafx:run -->[m
+                         <id>default-cli</id>[m
+                         <configuration>[m
+[31m-                            <mainClass>sims.hodaksims/sims.hodaksims.main.Main</mainClass>[m
+[32m+[m[32m                            <mainClass>sims.hodaksims/sims.hodaksims.main.SIMS</mainClass>[m
+                             <launcher>app</launcher>[m
+                             <jlinkZipName>app</jlinkZipName>[m
+                             <jlinkImageName>app</jlinkImageName>[m
+[1mdiff --git a/src/main/java/module-info.java b/src/main/java/module-info.java[m
+[1mindex 5ecfcbd..4890612 100644[m
+[1m--- a/src/main/java/module-info.java[m
+[1m+++ b/src/main/java/module-info.java[m
+[36m@@ -15,8 +15,10 @@[m [mmodule sims.hodaksims {[m
+ [m
+     opens sims.hodaksims to javafx.fxml;[m
+     exports sims.hodaksims;[m
+[31m-    exports sims.hodaksims.main;[m
+[31m-    opens sims.hodaksims.main to javafx.fxml;[m
+     exports sims.hodaksims.controller;[m
+     opens sims.hodaksims.controller to javafx.fxml;[m
+[32m+[m[32m    exports sims.hodaksims.model;[m
+[32m+[m[32m    opens sims.hodaksims.model to javafx.fxml;[m
+[32m+[m[32m    exports sims.hodaksims.main;[m
+[32m+[m[32m    opens sims.hodaksims.main to javafx.fxml;[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/src/main/java/sims/hodaksims/controller/LoginController.java b/src/main/java/sims/hodaksims/controller/LoginController.java[m
+[1mindex b328e19..b54c2ee 100644[m
+[1m--- a/src/main/java/sims/hodaksims/controller/LoginController.java[m
+[1m+++ b/src/main/java/sims/hodaksims/controller/LoginController.java[m
+[36m@@ -1,4 +1,38 @@[m
+ package sims.hodaksims.controller;[m
+ [m
+[32m+[m[32mimport javafx.fxml.FXML;[m
+[32m+[m[32mimport javafx.scene.control.Alert;[m
+[32m+[m[32mimport javafx.scene.control.Button;[m
+[32m+[m[32mimport javafx.scene.control.TextField;[m
+[32m+[m[32mimport sims.hodaksims.interfaces.Auth;[m
+[32m+[m[32mimport sims.hodaksims.model.User;[m
+[32m+[m[32mimport sims.hodaksims.model.View;[m
+[32m+[m
+ public class LoginController {[m
+[32m+[m[32m    @FXML[m
+[32m+[m[32m    TextField userName;[m
+[32m+[m[32m    @FXML[m
+[32m+[m[32m    TextField password;[m
+[32m+[m[32m    @FXML[m
+[32m+[m[32m    Button login;[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    public void goToWelcome(){[m
+[32m+[m[32m        String user = userName.getText();[m
+[32m+[m[32m        String pass = password.getText();[m
+[32m+[m[32m        User currUser = new User.UserBuilder(user).setPassword(pass).build();[m
+[32m+[m[32m        if(Auth.authorization(currUser)){[m
+[32m+[m[32m            ScreenManagerController.switchTo(View.WELCOME);[m
+[32m+[m[32m        }else{[m
+[32m+[m[32m            Alert alert = new Alert(Alert.AlertType.ERROR);[m
+[32m+[m[32m            alert.setTitle("Pogreška");[m
+[32m+[m[32m            alert.setHeaderText("Korisnički podatci neispravni");[m
+[32m+[m[32m            alert.setContentText("Neispravni");[m
+[32m+[m[32m            alert.showAndWait();[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m    public void goToRegister(){[m
+[32m+[m[32m        ScreenManagerController.switchTo(View.REGISTER);[m
+[32m+[m[32m    }[m
+[32m+[m
+ }[m
+[1mdiff --git a/src/main/java/sims/hodaksims/controller/RegisterController.java b/src/main/java/sims/hodaksims/controller/RegisterController.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4cdf6c1[m
+[1m--- /dev/null[m
+[1m+++ b/src/main/java/sims/hodaksims/controller/RegisterController.java[m
+[36m@@ -0,0 +1,56 @@[m
+[32m+[m[32mpackage sims.hodaksims.controller;[m
+[32m+[m
+[32m+[m[32mimport javafx.fxml.FXML;[m
+[32m+[m[32mimport javafx.scene.control.ComboBox;[m
+[32m+[m[32mimport javafx.scene.control.TextField;[m
+[32m+[m[32mimport org.slf4j.Logger;[m
+[32m+[m[32mimport org.slf4j.LoggerFactory;[m
+[32m+[m[32mimport sims.hodaksims.model.User;[m
+[32m+[m[32mimport sims.hodaksims.model.UserRoles;[m
+[32m+[m[32mimport sims.hodaksims.model.View;[m
+[32m+[m
+[32m+[m[32mimport java.io.IOException;[m
+[32m+[m[32mimport java.util.ArrayList;[m
+[32m+[m[32mimport java.util.List;[m
+[32m+[m
+[32m+[m
+[32m+[m[32mpublic class RegisterController  {[m
+[32m+[m[32m    private static final Logger log = LoggerFactory.getLogger(RegisterController.class);[m
+[32m+[m[32m    @FXML[m
+[32m+[m[32m    TextField userNameField;[m
+[32m+[m[32m    @FXML[m
+[32m+[m[32m    TextField passwordField;[m
+[32m+[m[32m    @FXML[m
+[32m+[m[32m    ComboBox<UserRoles> rolesBox;[m
+[32m+[m
+[32m+[m[32m    public void initialize(){[m
+[32m+[m[32m        rolesBox.getItems().addAll(UserRoles.values());[m
+[32m+[m[32m    }[m
+[32m+[m[32m    public void goBack(){[m
+[32m+[m[32m        ScreenManagerController.switchTo(View.LOGIN);[m
+[32m+[m[32m    }[m
+[32m+[m[32m    public void enterUser(){[m
+[32m+[m[32m        String userName = userNameField.getText();[m
+[32m+[m[32m        String password = passwordField.getText();[m
+[32m+[m[32m        UserRoles role = rolesBox.getValue();[m
+[32m+[m
+[32m+[m[32m        User newUser = new User.UserBuilder(userName).setPassword(password).setRole(role).build();[m
+[32m+[m[32m        try {[m
+[32m+[m[32m            List<User> updatedUsers = User.loadUsers();[m
+[32m+[m[32m            updatedUsers.add(newUser);[m
+[32m+[m[32m            User.saveUsers(updatedUsers);[m
+[32m+[m[32m            System.out.println(updatedUsers);[m
+[32m+[m[32m        } catch (IOException e){[m
+[32m+[m[32m            try {[m
+[32m+[m[32m                List<User> updatedUsers = new ArrayList<>();[m
+[32m+[m[32m                updatedUsers.add(newUser);[m
+[32m+[m[32m                User.saveUsers(updatedUsers);[m
+[32m+[m[32m                System.out.println(updatedUsers);[m
+[32m+[m[32m            } catch (IOException _){[m
+[32m+[m[32m                log.error(e.getMessage());[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[32m        ScreenManagerController.switchTo(View.LOGIN);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/main/java/sims/hodaksims/controller/ScreenManagerController.java b/src/main/java/sims/hodaksims/controller/ScreenManagerController.java[m
+[1mindex 8c7fe22..06680d3 100644[m
+[1m--- a/src/main/java/sims/hodaksims/controller/ScreenManagerController.java[m
+[1m+++ b/src/main/java/sims/hodaksims/controller/ScreenManagerController.java[m
+[36m@@ -1,32 +1,37 @@[m
+ package sims.hodaksims.controller;[m
+ [m
+[31m-import javafx.event.ActionEvent;[m
+ import javafx.fxml.FXMLLoader;[m
+[31m-import javafx.scene.Node;[m
+ import javafx.scene.Parent;[m
+ import javafx.scene.Scene;[m
+[31m-import javafx.stage.Stage;[m
+[31m-[m
+[32m+[m[32mimport org.slf4j.Logger;[m
+[32m+[m[32mimport org.slf4j.LoggerFactory;[m
+[32m+[m[32mimport sims.hodaksims.model.View;[m
+ [m
+ import java.io.IOException;[m
+ import java.util.Objects;[m
+ [m
+ public class ScreenManagerController {[m
+[31m-     private Stage stage;[m
+[31m-     private Scene scene;[m
+[32m+[m[32m    private static final Logger log = LoggerFactory.getLogger(ScreenManagerController.class);[m
+[32m+[m[32m    private ScreenManagerController() {[m
+[32m+[m[32m    }[m
+ [m
+[31m-    public void switchToScene1(ActionEvent event) t

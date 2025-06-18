@@ -12,11 +12,14 @@ import sims.hodaksims.controller.ScreenManagerController;
 import sims.hodaksims.model.View;
 
 public class SIMS extends Application {
+    /**
+     * Ulaz u aplikaciju
+     * ovdje se pokreće sve
+     */
     private static final Logger log = LoggerFactory.getLogger(SIMS.class);
 
     @Override
     public void start(Stage stage) throws IOException {
-        //log.info("The application is started...");
         Scene scene = new Scene(new Region());
         ScreenManagerController.setScene(scene);
         ScreenManagerController.switchTo(View.LOGIN);

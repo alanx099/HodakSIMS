@@ -9,6 +9,13 @@ import sims.hodaksims.model.User;
 import sims.hodaksims.model.View;
 
 public class LoginController {
+    /**
+     * Login controller klasa koja upravlja login ekranom
+     *
+     * <p>
+     *     Ova klasa upravlja s login ekranom za korisnike.
+     * </p>
+     */
     @FXML
     TextField userName;
     @FXML
