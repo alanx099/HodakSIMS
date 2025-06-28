@@ -1,2 +1,7 @@
-2025-06-13 23:06:39,553 ERROR [JavaFX Application Thread] s.h.i.Auth [Auth.java:22] No value present
-2025-06-18 18:15:59,022 ERROR [JavaFX Application Thread] s.h.i.Auth [Auth.java:22] No value present
+2025-06-27 23:09:27,730 INFO [JavaFX Application Thread] s.h.i.Authenticable [Authenticable.java:18] Kikiriki7
+2025-06-27 23:09:29,256 INFO [JavaFX Application Thread] s.h.c.LoginController [LoginController.java:53] Krivi unos korisničkih podataka 
+2025-06-27 23:09:33,951 INFO [JavaFX Application Thread] s.h.i.Authenticable [Authenticable.java:18] Kikiriki7
+2025-06-27 23:09:33,953 INFO [JavaFX Application Thread] s.h.i.Authenticable [Authenticable.java:18] Kikiriki7
+2025-06-27 23:09:54,126 INFO [JavaFX Application Thread] s.h.r.WarehouseRepository [WarehouseRepository.java:68] 33
+2025-06-28 14:41:34,397 INFO [JavaFX Application Thread] s.h.i.Authenticable [Authenticable.java:18] Kikiriki7
+2025-06-28 14:41:34,443 INFO [JavaFX Application Thread] s.h.i.Authenticable [Authenticable.java:18] Kikiriki7

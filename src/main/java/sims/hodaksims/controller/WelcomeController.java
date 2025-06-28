@@ -16,7 +16,7 @@ public class WelcomeController {
     private AbstractRepository<Warehouse>warehouse = new WarehouseRepository<>();
     private List<Warehouse> warehousesTest = warehouse.findAll();
     public void initialize(){
-
+        // TODO document why this method is empty
     }
 
    @FXML

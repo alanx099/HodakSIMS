@@ -2,13 +2,14 @@ package sims.hodaksims.model;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sims.hodaksims.interfaces.Auth;
+import sims.hodaksims.interfaces.Authenticable;
+import sims.hodaksims.repository.UsersRepository;
 
 import java.io.*;
 import java.util.List;
 import java.util.Objects;
 
-public class User extends Entity implements Serializable, Auth {
+public non-sealed class User extends Entity implements Serializable, Authenticable {
     /**
      * User klasa namjenjena za instancijanje korisnika
      * <p>
@@ -96,14 +97,9 @@ public class User extends Entity implements Serializable, Auth {
      * @throws IOException
      */
     public static List<User> loadUsers()throws IOException {
-        try (
-            FileInputStream fileIn = new FileInputStream("users.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn)
-        ){
-            User.userList = (List<User>) in.readObject();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        UsersRepository<User> userRep = new UsersRepository<>();
+            User.userList = userRep.findAll();
+
         return User.userList;
     }
 
@@ -113,6 +109,7 @@ public class User extends Entity implements Serializable, Auth {
         private final String username;
         private String password;
         private UserRoles role;
+        private Long id;
         public  UserBuilder(String user){
             this.username = user;
         }
@@ -121,9 +118,14 @@ public class User extends Entity implements Serializable, Auth {
             return this;
         }
         public UserBuilder setRole(UserRoles roleSet){
-            this.role = roleSet;
+             this.role = roleSet;
+             return this;
+        }
+        public UserBuilder setId(Long uId){
+            this.id = uId;
             return this;
         }
+
 
         public User build(){
             return new User(this);

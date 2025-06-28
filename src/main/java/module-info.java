@@ -14,6 +14,7 @@ module sims.hodaksims {
     requires org.slf4j;
     requires java.sql;
     requires com.fasterxml.jackson.databind;
+    requires ch.qos.logback.classic;
 
     opens sims.hodaksims to javafx.fxml;
     exports sims.hodaksims;

@@ -1,6 +1,7 @@
 package sims.hodaksims.model;
+import sims.hodaksims.interfaces.Authenticable;
 
-public class CurrentUser {
+public non-sealed class CurrentUser implements Authenticable  {
     /**
      * Singleton klasa koja prati trenutnog korisnika
      * <p>

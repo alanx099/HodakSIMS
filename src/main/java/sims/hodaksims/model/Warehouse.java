@@ -20,8 +20,16 @@ public class Warehouse extends Entity{
         this.country = country;
         this.streetName = streetName;
     }
-
-    public List<Product> getInventar() {
+    public Warehouse(String name, String city, String postalCode, String streetNumber, String country, String streetName, List<WareCapacity> capacity) {
+        this.name = name;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.streetNumber = streetNumber;
+        this.country = country;
+        this.streetName = streetName;
+        this.capacity = capacity;
+    }
+        public List<Product> getInventar() {
         return inventar;
     }
 

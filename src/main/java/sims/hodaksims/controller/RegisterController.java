@@ -8,10 +8,15 @@ import org.slf4j.LoggerFactory;
 import sims.hodaksims.model.User;
 import sims.hodaksims.model.UserRoles;
 import sims.hodaksims.model.View;
+import sims.hodaksims.repository.UsersRepository;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 public class RegisterController  {
@@ -47,22 +52,18 @@ public class RegisterController  {
         String userName = userNameField.getText();
         String password = passwordField.getText();
         UserRoles role = rolesBox.getValue();
-
-        User newUser = new User.UserBuilder(userName).setPassword(password).setRole(role).build();
+        UsersRepository<User> userRep  = new UsersRepository<>();
         try {
-            List<User> updatedUsers = User.loadUsers();
+
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(password.getBytes());
+            User newUser = new User.UserBuilder(userName).setPassword(Arrays.toString(hashBytes)).setRole(role).build();
+            List<User> updatedUsers = userRep.findAll();
             updatedUsers.add(newUser);
-            User.saveUsers(updatedUsers);
-            System.out.println(updatedUsers);
-        } catch (IOException e){
-            try {
-                List<User> updatedUsers = new ArrayList<>();
-                updatedUsers.add(newUser);
-                User.saveUsers(updatedUsers);
-                System.out.println(updatedUsers);
-            } catch (IOException _){
-                log.error(e.getMessage());
-            }
+            userRep.save(updatedUsers);
+
+        } catch (NoSuchAlgorithmException e){
+            log.info(e.getMessage());
         }
         ScreenManagerController.switchTo(View.LOGIN);
     }

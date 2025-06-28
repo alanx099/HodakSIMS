@@ -17,6 +17,11 @@ public class WareCapacity extends Entity{
         this.filled = filled;
     }
 
+    public WareCapacity(Category category, Integer capacity) {
+        this.category = category;
+        this.capacity = capacity;
+    }
+
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
