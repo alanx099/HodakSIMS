@@ -20,7 +20,7 @@ public class SIMS extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Scene scene = new Scene(new Region());
+        Scene scene = new Scene(new Region(), 1065, 611);
         ScreenManagerController.setScene(scene);
         ScreenManagerController.switchTo(View.LOGIN);
         stage.setTitle("SIMS");

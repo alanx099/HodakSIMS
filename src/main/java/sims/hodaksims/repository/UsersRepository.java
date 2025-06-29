@@ -16,15 +16,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
+/**
+ * UserRepository nasljeđuje apstratnu klasu {@link AbstractRepository} te implementira sve njene metode
+ * @param <T>
+ */
 public class UsersRepository<T extends User>{
     private static final Logger log = LoggerFactory.getLogger(UsersRepository.class);
     private static final String USERS_FILE_PATH = "dat/users.txt";
     private static final Integer ROWS_PER_USER = 4;
+
+    /**
+     * Metoda za pronalazak korisnika po njegovom id-u
+     * @param var1
+     * @return
+     * @throws RepositoryAccessException
+     */
     public T findById(Long var1) throws RepositoryAccessException {
         return null;
     }
 
+    /**
+     * Metoda find all vraća sve korisnike zapisane unutar datoteke
+     * users.txt
+     * @return
+     * @throws RepositoryAccessException
+     */
     public List<T> findAll() throws RepositoryAccessException {
         List<T> users = new ArrayList<>();
 
@@ -46,7 +62,12 @@ public class UsersRepository<T extends User>{
         return users;
     }
 
-    public void save(List<T> users) throws RepositoryAccessException/*Duplicate user error, Weak password*/ {
+    /**
+     * Metoda save sprema sve našekorisnike unutar datoteke users.txt
+     * @param users
+     * @throws RepositoryAccessException
+     */
+    public void save(List<T> users) throws RepositoryAccessException{
             try(PrintWriter writer = new PrintWriter(USERS_FILE_PATH)){
                 for(T user : users){
                     writer.println(user.getId());
@@ -56,8 +77,16 @@ public class UsersRepository<T extends User>{
                 }
                 writer.flush();
             }catch(FileNotFoundException _){
-
                 log.error("Problem accesing file " + USERS_FILE_PATH);
             }
+    }
+
+    /**
+     * Metoda update ažurira korisnike
+     * @param users
+     * @throws RepositoryAccessException
+     */
+    public void update(List<T> users) throws RepositoryAccessException{
+            this.save(users);
     }
 }

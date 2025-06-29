@@ -1,14 +1,16 @@
 package sims.hodaksims.model;
 
+import java.math.BigDecimal;
+
 /**
  * Product klasa
  */
 public class Product extends Entity{
     private String sku;
     private String name;
-    private Double price;
+    private BigDecimal price;
     private Category category;
-    //todo napraviti da je double u bazi
+    //todo napraviti da je Big decimal price u bazi
 
 
     public String getSku() {
@@ -27,11 +29,11 @@ public class Product extends Entity{
         this.name = name;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

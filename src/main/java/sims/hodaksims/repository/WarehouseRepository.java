@@ -10,12 +10,23 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * WareHouse repository nasljeđuuje abstrakrnu klasu {@link AbstractRepository}
+ * te implementira sve njene metode
+ * @param <T>
+ */
 public class WarehouseRepository<T extends Warehouse> extends AbstractRepository<T>{
     private static Logger log = LoggerFactory.getLogger(WarehouseRepository.class);
+
+    /**
+     *Metoda find by id potražuje klasu skladište u bazipodadataka te nam vraća objekt
+     * @param id
+     * @return
+     */
     public T findById(Long id){
-        try(Connection connection = DbConUtil.getConnection()){
+        try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("SELECT WAREHOUSE.* FROM WAREHOUSE WHERE ID = ?");
+        ){
             stmt.setLong(1,id);
             ResultSet resultSet = stmt.executeQuery();
             if(!resultSet.next()){
@@ -28,6 +39,12 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
         }
 
     }
+
+    /**
+     * Metoda find all nam vraća sva skladišta unutar baze
+     * @return
+     * @throws RepositoryAccessException
+     */
     public List<T>findAll() throws RepositoryAccessException{
             List<T> warehouses = new ArrayList<>();
             try(Connection connection = DbConUtil.getConnection()) {
@@ -44,6 +61,11 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
             }
     }
 
+    /**
+     * Metoda save u sklopu Warehouse radi transakciju koja sprema u odgovarajuću
+     * tablicu skladište te uz to i u odvojenu tablicu njen kapacitet
+     * @param entity
+     */
     public void save(T entity){
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("INSERT INTO " +
@@ -82,6 +104,54 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
             throw new RepositoryAccessException(e.getMessage());
         }
     }
+
+    /**
+     * Metoda update postavlja nove vrijednosti za postojeće skladište
+     * Izmjena briše sve unose za kapaciteta u bazi i piše nove
+     * @param entity
+     */
+    public void update(T entity){
+        try(Connection connection = DbConUtil.getConnection();
+            PreparedStatement stmt =connection.prepareStatement("UPDATE " +
+                            "WAREHOUSE SET NAME=?, CITY=?, COUNTRY=?, POSTAL_CODE=?, STREET_NUMBER=?, STREET_NAME=? WHERE ID =?",
+                    Statement.RETURN_GENERATED_KEYS
+            );){
+            stmt.setString(1, entity.getName());
+            stmt.setString(2, entity.getCity());
+            stmt.setString(3,entity.getCountry());
+            stmt.setString(4, entity.getPostalCode());
+            stmt.setString(5, entity.getStreetNumber());
+            stmt.setString(6, entity.getStreetName());
+            stmt.setLong(7, entity.getId());
+            stmt.executeUpdate();
+
+            try(PreparedStatement capStmt = connection.prepareStatement("DELETE FROM WAREHOUSE_CAPACITY WHERE WAREHOUSE_ID = ? ")) {
+                capStmt.setLong(1, entity.getId());
+                capStmt.executeUpdate();
+            }
+
+            for (WareCapacity cap : entity.getCapacity()) {
+                try (PreparedStatement capStmt = connection.prepareStatement("INSERT INTO WAREHOUSE_CAPACITY(CAPACITY, WAREHOUSE_ID, CATEGORY_ID) VALUES(?,?,?)")) {
+                    capStmt.setInt(1, cap.getCapacity());
+                    capStmt.setLong(2, entity.getId());
+                    capStmt.setLong(3, cap.getCategory().getId());
+                    capStmt.executeUpdate();
+                } catch (SQLException e) {
+                    log.error(e.getMessage());
+                }
+            }
+        }catch (SQLException e){
+            throw new RepositoryAccessException(e.getMessage());
+        }
+    }
+
+    /**
+     * Metoda extracWarehouseFromResultSet je pomoćna metoda za instanciranje
+     * objekat iz podataka dobivenih result setom
+     * @param resultSet
+     * @return
+     * @throws SQLException
+     */
     private T extracWarehouseFromResultSet(ResultSet resultSet) throws SQLException{
         Long id =resultSet.getLong("id");
         String name = resultSet.getString("name");

@@ -28,6 +28,12 @@ public non-sealed class User extends Entity implements Serializable, Authenticab
     private String password;
     private UserRoles role;
     private static List<User> userList;
+
+    /**
+     * Privatni konstrukor koji se poziva u podklasi
+     * 
+     * @param builder
+     */
     private User(UserBuilder builder) {
         this.username=builder.username;
         this.password=builder.password;
@@ -104,7 +110,9 @@ public non-sealed class User extends Entity implements Serializable, Authenticab
     }
 
 
-
+    /**
+     * Javno dostupna klasa za buildanje user klase
+     */
     public static class UserBuilder{
         private final String username;
         private String password;
@@ -126,7 +134,10 @@ public non-sealed class User extends Entity implements Serializable, Authenticab
             return this;
         }
 
-
+        /**
+         * završna metoda za instanciranje user objekta
+         * @return
+         */
         public User build(){
             return new User(this);
         }

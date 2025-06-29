@@ -2,6 +2,11 @@ package sims.hodaksims.model;
 
 import java.util.List;
 
+/**
+ * Warehouse klasa utjelovljuje entitete naših skladišta
+ * te unutar seve sadrži liste kapaciteta i proizvoda unutar
+ * skladišta
+ */
 public class Warehouse extends Entity{
     private String name;
     private String city;

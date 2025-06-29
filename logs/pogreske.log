@@ -5,3 +5,13 @@
 2025-06-27 23:09:54,126 INFO [JavaFX Application Thread] s.h.r.WarehouseRepository [WarehouseRepository.java:68] 33
 2025-06-28 14:41:34,397 INFO [JavaFX Application Thread] s.h.i.Authenticable [Authenticable.java:18] Kikiriki7
 2025-06-28 14:41:34,443 INFO [JavaFX Application Thread] s.h.i.Authenticable [Authenticable.java:18] Kikiriki7
+2025-06-28 14:45:28,323 INFO [JavaFX Application Thread] s.h.i.Authenticable [Authenticable.java:18] Kikiriki7
+2025-06-28 14:45:30,059 INFO [JavaFX Application Thread] s.h.c.LoginController [LoginController.java:53] Krivi unos korisničkih podataka 
+2025-06-28 14:45:32,306 INFO [JavaFX Application Thread] s.h.i.Authenticable [Authenticable.java:18] Kikiriki7
+2025-06-28 14:45:32,309 INFO [JavaFX Application Thread] s.h.i.Authenticable [Authenticable.java:18] Kikiriki7
+2025-06-29 00:57:41,277 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:52] Error resolving onAction='#goToWelcome', either the event handler is not in the Namespace or there is an error in the script.
+/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Login.fxml:49
+
+2025-06-29 00:58:16,240 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:52] Error resolving onAction='#goToWelcome', either the event handler is not in the Namespace or there is an error in the script.
+/D:/SIMS/HodakSIMS/target/classes/sims/hodaksims/controller/Login.fxml:49
+

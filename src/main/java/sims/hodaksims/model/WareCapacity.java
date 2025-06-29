@@ -1,5 +1,9 @@
 package sims.hodaksims.model;
 
+/**
+ * Klasa WareCApacity opisuje sklatište na način da se zna koju kategoriju
+ * stvari podržava i koliko je trenutno iskorišteno
+ */
 public class WareCapacity extends Entity{
     private Integer capacity;
     private Integer filled;

@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * Zapečaćeno sučelje Authenticatable koji mogu implementirati
+ * samo klasa User i singleton CurrentUser
+ */
 public sealed interface Authenticable permits CurrentUser, User {
     static final Logger log = LoggerFactory.getLogger(Authenticable.class);
     UsersRepository<User> userRep = new UsersRepository<>();
