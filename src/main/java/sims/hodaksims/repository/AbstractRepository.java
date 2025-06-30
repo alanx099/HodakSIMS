@@ -39,4 +39,11 @@ public abstract class AbstractRepository<T extends Entity> {
          * @throws RepositoryAccessException
          */
         public abstract void update(T var1)throws RepositoryAccessException;
+
+        /**
+         * Metoda kojom brišemo instance objekta iz spremišta
+         * @param var1
+         * @throws RepositoryAccessException
+         */
+        public abstract void delete(T var1) throws RepositoryAccessException;
 }

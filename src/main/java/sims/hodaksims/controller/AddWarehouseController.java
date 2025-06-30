@@ -5,17 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.StringConverter;
 import sims.hodaksims.model.Category;
 import sims.hodaksims.model.WareCapacity;
 import sims.hodaksims.model.Warehouse;
 import sims.hodaksims.repository.CategoryRepository;
 import sims.hodaksims.repository.WarehouseRepository;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AddWarehouseController {
     @FXML

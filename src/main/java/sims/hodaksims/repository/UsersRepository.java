@@ -80,7 +80,6 @@ public class UsersRepository<T extends User>{
                 log.error("Problem accesing file " + USERS_FILE_PATH);
             }
     }
-
     /**
      * Metoda update ažurira korisnike
      * @param users
@@ -89,4 +88,5 @@ public class UsersRepository<T extends User>{
     public void update(List<T> users) throws RepositoryAccessException{
             this.save(users);
     }
+
 }

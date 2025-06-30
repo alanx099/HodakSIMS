@@ -12,6 +12,8 @@ public class Category extends Entity{
         this.description = description;
     }
 
+
+
     public String getDescription() {
         return description;
     }

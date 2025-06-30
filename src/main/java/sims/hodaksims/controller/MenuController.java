@@ -14,6 +14,14 @@ public class MenuController {
         ScreenManagerController.switchTo(View.ADDWAREHOUSE);
     }
     @FXML
+    protected void switchToSceneListCategory() {
+        ScreenManagerController.switchTo(View.LISTCATEGORY);
+    }
+    @FXML
+    protected void switchToSceneAddCategory() {
+        ScreenManagerController.switchTo(View.ADDCATEGORY);
+    }
+    @FXML
     protected void logout() {
         ScreenManagerController.switchTo(View.LOGIN);
     }

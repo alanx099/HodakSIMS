@@ -5,6 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sims.hodaksims.model.Category;
+import sims.hodaksims.model.Entity;
 import sims.hodaksims.model.View;
 
 import java.io.IOException;
@@ -48,6 +50,23 @@ public class ScreenManagerController {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(ScreenManagerController.class.getResource(view.getFilename())));
            scene.setRoot(root);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+    }
+    public static<K extends AbstractUpdateController<V>,V extends Entity> void switchToWithData(View view, V podatak ){
+        if (scene == null) {
+            log.info("Nije odabrana scena");
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(ScreenManagerController.class.getResource(view.getFilename())));
+            Parent root = loader.load();
+
+            K controller = loader.getController();
+            controller.setFields(podatak);
+
+            scene.setRoot(root);
         } catch (IOException e) {
             log.error(e.getMessage());
         }

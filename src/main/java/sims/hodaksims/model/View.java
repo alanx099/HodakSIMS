@@ -7,6 +7,9 @@ public enum View {
      * također se služimo konstrktorom i getFileName metodi kako bi nam pozivanje
      * unutar koda izgledalo čisto i pregledno.
      */
+    UPDATECATEGORY("UpdateCategory.fxml"),
+    ADDCATEGORY("AddCategory.fxml"),
+    LISTCATEGORY("ListCategory.fxml"),
     ADDWAREHOUSE("AddWarehouse.fxml"),
     LOGIN("Login.fxml"),
     WELCOME("Welcome.fxml"),

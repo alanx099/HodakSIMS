@@ -146,6 +146,31 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
     }
 
     /**
+     * Metoda kojom brišemo Skladišta i kapacitete iz skladišta
+     *
+     * @param entity
+     * @throws RepositoryAccessException
+     */
+    @Override
+    public void delete(T entity) throws RepositoryAccessException {
+        try(Connection connection = DbConUtil.getConnection();
+            PreparedStatement capStmt = connection.prepareStatement("DELETE FROM WAREHOUSE_CAPACITY WHERE WAREHOUSE_ID = ? ")) {
+            capStmt.setLong(1, entity.getId());
+            capStmt.executeUpdate();
+        }catch (SQLException e){
+            throw new RepositoryAccessException(e.getMessage());
+        }
+        try(Connection connection = DbConUtil.getConnection();
+            PreparedStatement stmt =connection.prepareStatement("DELETE " +  "FROM WAREHOUSE  WHERE ID =?" );){
+            stmt.setLong(1, entity.getId());
+            stmt.executeUpdate();
+
+        }catch (SQLException e){
+            throw new RepositoryAccessException(e.getMessage());
+        }
+    }
+
+    /**
      * Metoda extracWarehouseFromResultSet je pomoćna metoda za instanciranje
      * objekat iz podataka dobivenih result setom
      * @param resultSet

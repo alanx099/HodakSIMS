@@ -24,6 +24,12 @@
             <MenuItem mnemonicParsing="false" text="Lista ugovora" />
       </items>
     </Menu>
+      <Menu mnemonicParsing="false" text="Kategorija">
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#switchToSceneAddCategory" text="Nova kategorija" />
+            <MenuItem mnemonicParsing="false" onAction="#switchToSceneListCategory" text="Lista Kategorija" />
+         </items>
+      </Menu>
       <Menu mnemonicParsing="false" onAction="#logout" text="Odjava" />
       <Menu fx:id="user" mnemonicParsing="false" text="Welcome User!" />
   </menus>

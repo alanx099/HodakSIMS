@@ -19,7 +19,6 @@ public sealed interface Authenticable permits CurrentUser, User {
     UsersRepository<User> userRep = new UsersRepository<>();
     default void authenticate(User usrAuth) throws BadCredentialsException {
         try{
-            log.info("Kikiriki7");
             List<User> currUsers = userRep.findAll();
 
             User userCur = currUsers.stream().filter(user -> user.getPassword().equals(usrAuth.getPassword())&&user.getUsername().equals(usrAuth.getUsername())).findFirst().orElseThrow(()-> new BadCredentialsException("Incorrect username or password"));

@@ -77,8 +77,8 @@ public class CategoryRepository<T extends Category> extends AbstractRepository<T
                 PreparedStatement stmt = connection.prepareStatement("INSERT INTO CATEGORY(NAME, DESCRIPTION) VALUES(?,?)")
             ){
                 stmt.setString(1,saveRes.getName());
-                stmt.setString(2,saveRes.getDescription());
-                stmt.executeQuery();
+                stmt.setString(2,saveRes.getDescription( ));
+                stmt.executeUpdate();
             }catch (SQLException e){
                 throw new RepositoryAccessException(e.getMessage());
             }
@@ -97,6 +97,24 @@ public class CategoryRepository<T extends Category> extends AbstractRepository<T
             stmt.setString(1,saveRes.getName());
             stmt.setString(2,saveRes.getDescription());
             stmt.setLong(3,saveRes.getId());
+            stmt.executeUpdate();
+        }catch (SQLException e){
+            throw new RepositoryAccessException(e.getMessage());
+        }
+    }
+
+    /**
+     * Metoda kojom brišemo instance Kategorije iz spremišta
+     *
+     * @param delRes
+     * @throws RepositoryAccessException
+     */
+    @Override
+    public void delete(T delRes) throws RepositoryAccessException {
+        try(Connection connection = DbConUtil.getConnection();
+            PreparedStatement stmt = connection.prepareStatement("DELETE FROM CATEGORY WHERE ID=?")
+        ){
+            stmt.setLong(1,delRes.getId());
             stmt.executeQuery();
         }catch (SQLException e){
             throw new RepositoryAccessException(e.getMessage());
