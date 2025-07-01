@@ -15,6 +15,7 @@ module sims.hodaksims {
     requires java.sql;
     requires com.fasterxml.jackson.databind;
     requires ch.qos.logback.classic;
+    requires java.management;
 
     opens sims.hodaksims to javafx.fxml;
     exports sims.hodaksims;
@@ -24,4 +25,6 @@ module sims.hodaksims {
     opens sims.hodaksims.model to javafx.fxml;
     exports sims.hodaksims.main;
     opens sims.hodaksims.main to javafx.fxml;
+    exports sims.hodaksims.interfaces;
+
 }

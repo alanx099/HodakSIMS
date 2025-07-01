@@ -85,29 +85,8 @@ public non-sealed class User extends Entity implements Serializable, Authenticab
                 '}';
     }
 
-    /**
-     * Metoda za spremanje listu korisnika u binarnu datoteku koja sadrži naše korisnike
-     * @param users
-     * @throws IOException
-     */
-    public static void saveUsers(List<User> users) throws IOException {
-        try(FileOutputStream fileOut = new FileOutputStream("users.ser");
-        ObjectOutputStream out = new ObjectOutputStream(fileOut)){
-        out.writeObject(users);
-        }
-    }
 
-    /**
-     * Metoda koja učitava korisnike u statičnu varijablu user ali također i vraća tu istu listu korisnika
-     * @return List<User>
-     * @throws IOException
-     */
-    public static List<User> loadUsers()throws IOException {
-        UsersRepository<User> userRep = new UsersRepository<>();
-            User.userList = userRep.findAll();
 
-        return User.userList;
-    }
 
 
     /**

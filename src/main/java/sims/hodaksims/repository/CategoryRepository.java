@@ -3,6 +3,8 @@ package sims.hodaksims.repository;
 import sims.hodaksims.exceptions.EmptyRepositoryResultException;
 import sims.hodaksims.exceptions.RepositoryAccessException;
 import sims.hodaksims.model.Category;
+import sims.hodaksims.model.ChangeLog;
+import sims.hodaksims.model.CurrentUser;
 import sims.hodaksims.model.Entity;
 import sims.hodaksims.utils.DbConUtil;
 
@@ -10,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
@@ -29,8 +32,10 @@ public class CategoryRepository<T extends Category> extends AbstractRepository<T
      */
     @Override
     public T findById(Long id) throws RepositoryAccessException {
-        try(Connection connection = DbConUtil.getConnection()){
-            PreparedStatement stmt = connection.prepareStatement("SELECT CATEGORY.* FROM CATEGORY WHERE ID = ?");
+
+        try(Connection connection = DbConUtil.getConnection();
+                    PreparedStatement stmt = connection.prepareStatement("SELECT CATEGORY.* FROM CATEGORY WHERE ID = ?");){
+
             stmt.setLong(1,id);
             ResultSet result = stmt.executeQuery();
             if(!result.next()){
@@ -79,6 +84,9 @@ public class CategoryRepository<T extends Category> extends AbstractRepository<T
                 stmt.setString(1,saveRes.getName());
                 stmt.setString(2,saveRes.getDescription( ));
                 stmt.executeUpdate();
+                ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), saveRes.toString(), LocalDateTime.now());
+                unosLog.newEntry("category");
+
             }catch (SQLException e){
                 throw new RepositoryAccessException(e.getMessage());
             }
@@ -94,10 +102,14 @@ public class CategoryRepository<T extends Category> extends AbstractRepository<T
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt = connection.prepareStatement("UPDATE CATEGORY SET NAME = ?,DESCRIPTION=? WHERE ID=?  ")
         ){
+            T oldItem = this.findById(saveRes.getId());
             stmt.setString(1,saveRes.getName());
             stmt.setString(2,saveRes.getDescription());
             stmt.setLong(3,saveRes.getId());
             stmt.executeUpdate();
+            T newItem = this.findById(saveRes.getId());
+            ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), saveRes.toString(), LocalDateTime.now());
+            unosLog.updateEntry(oldItem,newItem, "category");
         }catch (SQLException e){
             throw new RepositoryAccessException(e.getMessage());
         }
@@ -115,10 +127,13 @@ public class CategoryRepository<T extends Category> extends AbstractRepository<T
             PreparedStatement stmt = connection.prepareStatement("DELETE FROM CATEGORY WHERE ID=?")
         ){
             stmt.setLong(1,delRes.getId());
-            stmt.executeQuery();
+            stmt.executeUpdate();
         }catch (SQLException e){
             throw new RepositoryAccessException(e.getMessage());
         }
+        ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), delRes.toString(), LocalDateTime.now());
+        unosLog.delEntry("categoy");
+
     }
 
     /**

@@ -1,0 +1,102 @@
+package sims.hodaksims.controller;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import sims.hodaksims.model.Category;
+import sims.hodaksims.model.ChangeLog;
+import sims.hodaksims.model.UserRoles;
+import sims.hodaksims.model.View;
+import sims.hodaksims.repository.CategoryRepository;
+
+import javax.management.relation.Role;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class ListChanges {
+    @FXML
+    Button resetFilter;
+    @FXML
+    Button filterChanges;
+    @FXML
+    DatePicker dateFrom;
+    @FXML
+    DatePicker dateTo;
+    @FXML
+    TextField changeText;
+    @FXML
+    ComboBox<UserRoles> rolePicker;
+    @FXML
+    private TextArea changeExpanded;
+    @FXML
+    private TableView<ChangeLog> changesTable;
+    @FXML
+    private TableColumn<ChangeLog, String> roleColumn;
+    @FXML
+    private TableColumn<ChangeLog, String> changesColumn;
+    @FXML
+    private TableColumn<ChangeLog, String> timeChangedColumn;
+
+
+    private final List<ChangeLog> loadedChanges = ChangeLog.loadChangeLog();
+    private final ObservableList<ChangeLog> obvChanges = FXCollections.observableArrayList();
+    private final ObservableList<UserRoles> roles =FXCollections.observableArrayList();
+    public void initialize(){
+        obvChanges.addAll(loadedChanges);
+        roles.addAll(UserRoles.values());
+        changesTable.getItems().addAll(obvChanges);
+        roleColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getRoleNew().getName()));
+        changesColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getPromjena()));
+        timeChangedColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getDateLog().format(DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm:ss"))));
+        timeChangedColumn.setSortType(TableColumn.SortType.DESCENDING);
+        changesTable.getSortOrder().add(timeChangedColumn);
+        changesTable.sort();
+        rolePicker.setItems(roles);
+    }
+    @FXML
+    public void setBigDescription(){
+        changeExpanded.setText(changesTable.getSelectionModel().getSelectedItem().getPromjena());
+    }
+    @FXML
+    public void resetFilters(){
+        rolePicker.getSelectionModel().clearSelection();
+        dateFrom.setValue(null);
+        dateTo.setValue(null);
+        changeText.setText(null);
+        obvChanges.clear();
+        obvChanges.addAll(loadedChanges);
+        changesTable.getItems().clear();
+        changesTable.getItems().addAll(obvChanges);
+    }
+    @FXML
+    public void applyFilters(){
+        Optional<String> changes = Optional.ofNullable(changeText.getText());
+        Optional<UserRoles> roles = Optional.ofNullable(rolePicker.getSelectionModel().getSelectedItem());
+        Optional<LocalDate> from = Optional.ofNullable(dateFrom.getValue());
+        Optional<LocalDate> to = Optional.ofNullable(dateTo.getValue());
+        Stream<ChangeLog> filteri = loadedChanges.stream();
+        if(changes.isPresent()){
+            filteri = filteri.filter(x -> x.getPromjena().contains(changeText.getText()));
+        }
+        if(roles.isPresent()){
+            filteri = filteri.filter(x-> x.getRoleNew() == rolePicker.getSelectionModel().getSelectedItem());
+        }
+        if(from.isPresent()){
+            filteri = filteri.filter(x-> x.getDateLog().toLocalDate().isAfter(dateFrom.getValue()));
+        }
+        if(to.isPresent()){
+            filteri = filteri.filter(x-> x.getDateLog().toLocalDate().isBefore(dateTo.getValue()));
+        }
+        final List<ChangeLog> filtered = filteri.toList();
+        obvChanges.clear();
+        obvChanges.addAll(filtered);
+        changesTable.getItems().clear();
+        changesTable.getItems().addAll(obvChanges);
+    }
+}

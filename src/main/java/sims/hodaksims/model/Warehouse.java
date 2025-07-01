@@ -1,5 +1,9 @@
 package sims.hodaksims.model;
 
+import sims.hodaksims.interfaces.Logable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -7,7 +11,7 @@ import java.util.List;
  * te unutar seve sadrži liste kapaciteta i proizvoda unutar
  * skladišta
  */
-public class Warehouse extends Entity{
+public class Warehouse extends Entity implements Logable {
     private String name;
     private String city;
     private String postalCode;
@@ -24,6 +28,7 @@ public class Warehouse extends Entity{
         this.streetNumber = streetNumber;
         this.country = country;
         this.streetName = streetName;
+        this.capacity = new ArrayList<>();
     }
     public Warehouse(String name, String city, String postalCode, String streetNumber, String country, String streetName, List<WareCapacity> capacity) {
         this.name = name;
@@ -56,6 +61,9 @@ public class Warehouse extends Entity{
 
     public void setCapacity(List<WareCapacity> capacity) {
         this.capacity = capacity;
+    }
+    public void addCapacity(WareCapacity capacity) {
+        this.capacity.add(capacity);
     }
 
     public String getCity() {
@@ -100,15 +108,30 @@ public class Warehouse extends Entity{
 
     @Override
     public String toString() {
-        return "Warehouse{" +
+        return
                 "name='" + name + '\'' +
                 ", city='" + city + '\'' +
                 ", postalCode='" + postalCode + '\'' +
                 ", streetNumber='" + streetNumber + '\'' +
                 ", country='" + country + '\'' +
                 ", streetName='" + streetName + '\'' +
-                ", capacity=" + capacity +
-                ", inventar=" + inventar +
-                '}';
+                ", capacity=" + capacity.toString() +
+                ", inventar=" + inventar ;
+    }
+
+    @Override
+    public String[] changesToString() {
+        StringBuilder props = new StringBuilder();
+        props.append("name='").append(name).append('\'')
+                .append(", city='").append(city).append('\'')
+                .append(", postalCode='").append(postalCode).append('\'')
+                .append(", streetNumber='").append(streetNumber).append('\'')
+                .append(", country='").append(country).append('\'')
+                .append(", streetName='").append(streetName).append('\'')
+                .append(", inventar=").append(inventar);
+        for(WareCapacity cap : capacity){
+            props.append(Arrays.toString(cap.changesToString()));
+        }
+        return props.toString().split(",");
     }
 }

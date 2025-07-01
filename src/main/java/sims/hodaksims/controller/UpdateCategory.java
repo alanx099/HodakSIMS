@@ -32,7 +32,6 @@ public class UpdateCategory<T extends Category> extends AbstractUpdateController
 
     @FXML
     public void updateInDb(){
-        log.info("tu sam unod");
         Category nCat = new Category(name.getText(), description.getText());
         nCat.setId(Long.parseLong(title.getText()));
         cRep.update(nCat);

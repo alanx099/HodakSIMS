@@ -13,9 +13,6 @@ public class Supplier extends Entity{
     private Integer minOrder;
     private Integer deliveryTime;
     private LocalDateTime joined;
-    private List<SupplierContact> contact;
-    //private Set<Contract> contracts;
-    private Set<Warehouse> warehouses;
 
     public String getName() {
         return name;

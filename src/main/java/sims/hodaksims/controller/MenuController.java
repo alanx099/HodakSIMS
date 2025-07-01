@@ -10,6 +10,11 @@ public class MenuController {
     Menu user;
 
     @FXML
+    protected void switchToSceneListSkaldiste(){
+        ScreenManagerController.switchTo(View.LISTWAREHOUSE);
+    }
+
+    @FXML
     protected void switchToSceneAddSkaldiste() {
         ScreenManagerController.switchTo(View.ADDWAREHOUSE);
     }
@@ -23,7 +28,11 @@ public class MenuController {
     }
     @FXML
     protected void logout() {
-        ScreenManagerController.switchTo(View.LOGIN);
+        ScreenManagerController.switchTo(View.LISTCHANGES);
+    }
+    @FXML
+    protected void switchToSceneChanges() {
+        ScreenManagerController.switchTo(View.LISTCHANGES);
     }
     public void initialize(){
         user.setText("Welcome "+ CurrentUser.getInstance().getUserCur().getUsername() + "!");

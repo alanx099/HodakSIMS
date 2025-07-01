@@ -3,10 +3,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sims.hodaksims.exceptions.EmptyRepositoryResultException;
 import sims.hodaksims.exceptions.RepositoryAccessException;
-import sims.hodaksims.model.WareCapacity;
-import sims.hodaksims.model.Warehouse;
+import sims.hodaksims.model.*;
 import sims.hodaksims.utils.DbConUtil;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +24,7 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
      * @return
      */
     public T findById(Long id){
+        T warehouse;
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("SELECT WAREHOUSE.* FROM WAREHOUSE WHERE ID = ?");
         ){
@@ -32,12 +33,22 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
             if(!resultSet.next()){
                 throw new EmptyRepositoryResultException("Not found");
             }else {
-                return this.extracWarehouseFromResultSet(resultSet);
+                warehouse = this.extracWarehouseFromResultSet(resultSet);
             }
         } catch (SQLException e) {
             throw new RepositoryAccessException(e.getMessage());
         }
+        try(Connection connection = DbConUtil.getConnection();
+            PreparedStatement stmt =connection.prepareStatement("SELECT WAREHOUSE_CAPACITY .* FROM WAREHOUSE_CAPACITY  WHERE ID = ?");
+        ){
+            stmt.setLong(1,id);
+            ResultSet resultSet = stmt.executeQuery();
+            warehouse.setCapacity(this.extractCapacatyList(resultSet));
 
+        } catch (SQLException e) {
+            throw new RepositoryAccessException(e.getMessage());
+        }
+        return warehouse;
     }
 
     /**
@@ -47,12 +58,20 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
      */
     public List<T>findAll() throws RepositoryAccessException{
             List<T> warehouses = new ArrayList<>();
-            try(Connection connection = DbConUtil.getConnection()) {
-                Statement stmt =connection.createStatement();
-                ResultSet resultSet = stmt.executeQuery("SELECT WAREHOUSE.* FROM WAREHOUSE");
 
+            try(Connection connection = DbConUtil.getConnection();
+                Statement stmt = connection.createStatement();) {
+
+                ResultSet resultSet = stmt.executeQuery("SELECT WAREHOUSE.* FROM WAREHOUSE");
                     while(resultSet.next()){
                         Warehouse warehouse = this.extracWarehouseFromResultSet(resultSet);
+                        try(PreparedStatement stmtCap =connection.prepareStatement("SELECT WAREHOUSE_CAPACITY .* FROM WAREHOUSE_CAPACITY  WHERE WAREHOUSE_ID = ?")){
+                            stmtCap.setLong(1,resultSet.getLong(1));
+                            ResultSet resultSetCap = stmtCap.executeQuery();
+                            warehouse.setCapacity(this.extractCapacatyList(resultSetCap));
+                        } catch (SQLException e) {
+                            throw new RepositoryAccessException(e.getMessage());
+                        }
                         warehouses.add((T)warehouse);
                     }
                 return warehouses;
@@ -67,23 +86,22 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
      * @param entity
      */
     public void save(T entity){
+        System.out.println(entity.getCapacity());
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("INSERT INTO " +
                     "WAREHOUSE(NAME, CITY, COUNTRY, POSTAL_CODE, STREET_NUMBER, STREET_NAME) VALUES (?,?,?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS
         );){
             connection.setAutoCommit(false);
-            stmt.setString(1, entity.getName());
-            stmt.setString(2, entity.getCity());
-            stmt.setString(3,entity.getCountry());
-            stmt.setString(4, entity.getPostalCode());
-            stmt.setString(5, entity.getStreetNumber());
-            stmt.setString(6, entity.getStreetName());
+            warehoseFields(entity, stmt);
 
             int rowsAffected = stmt.executeUpdate();
             if(rowsAffected == 0){
                 throw new SQLException("Failed to insert new warehouser");
             }
+            connection.commit();
+            ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.toString(), LocalDateTime.now());
+            unosLog.newEntry("warehouse");
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if(generatedKeys.next()){
                     for (WareCapacity cap : entity.getCapacity()){
@@ -92,6 +110,7 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
                             capStmt.setLong(2, generatedKeys.getLong(1));
                             capStmt.setLong(3, cap.getCategory().getId());
                             capStmt.executeUpdate();
+                            connection.commit();
                         }
                     }
                 }else{
@@ -105,6 +124,15 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
         }
     }
 
+    private void warehoseFields(T entity, PreparedStatement stmt) throws SQLException {
+        stmt.setString(1, entity.getName());
+        stmt.setString(2, entity.getCity());
+        stmt.setString(3,entity.getCountry());
+        stmt.setString(4, entity.getPostalCode());
+        stmt.setString(5, entity.getStreetNumber());
+        stmt.setString(6, entity.getStreetName());
+    }
+
     /**
      * Metoda update postavlja nove vrijednosti za postojeće skladište
      * Izmjena briše sve unose za kapaciteta u bazi i piše nove
@@ -113,15 +141,11 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
     public void update(T entity){
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("UPDATE " +
-                            "WAREHOUSE SET NAME=?, CITY=?, COUNTRY=?, POSTAL_CODE=?, STREET_NUMBER=?, STREET_NAME=? WHERE ID =?",
+                    "WAREHOUSE SET NAME=?, CITY=?, COUNTRY=?, POSTAL_CODE=?, STREET_NUMBER=?, STREET_NAME=? WHERE ID =?",
                     Statement.RETURN_GENERATED_KEYS
             );){
-            stmt.setString(1, entity.getName());
-            stmt.setString(2, entity.getCity());
-            stmt.setString(3,entity.getCountry());
-            stmt.setString(4, entity.getPostalCode());
-            stmt.setString(5, entity.getStreetNumber());
-            stmt.setString(6, entity.getStreetName());
+            T oldItem = this.findById(entity.getId());
+            warehoseFields(entity, stmt);
             stmt.setLong(7, entity.getId());
             stmt.executeUpdate();
 
@@ -140,6 +164,9 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
                     log.error(e.getMessage());
                 }
             }
+            T newItem = this.findById(entity.getId());
+            ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.toString(), LocalDateTime.now());
+            unosLog.updateEntry(oldItem,newItem, "warehouse");
         }catch (SQLException e){
             throw new RepositoryAccessException(e.getMessage());
         }
@@ -188,6 +215,18 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
         Warehouse warehouse = new Warehouse(name, city, postalCode, country, streetName, streetNumber);
         warehouse.setId(id);
         return (T)warehouse;
+    }
+    private List<WareCapacity> extractCapacatyList(ResultSet rez){
+        List<WareCapacity> result = new ArrayList<>();
+        CategoryRepository<Category> cRep = new CategoryRepository<>();
+        try {while(rez.next()){
+            Long catId = rez.getLong("category_id");
+            Integer cap = rez.getInt("capacity");
+            result.add(new WareCapacity(cRep.findById(catId),cap));
+        }}catch(SQLException e){
+            log.error(e.getMessage());
+        }
+        return result;
     }
 
 }

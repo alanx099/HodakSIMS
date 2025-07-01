@@ -43,7 +43,7 @@ public class LoginController {
 
         CurrentUser curUsr = CurrentUser.getInstance();
         curUsr.authenticate(currUser);
-        ScreenManagerController.switchTo(View.WELCOME);
+        ScreenManagerController.switchTo(View.LISTCHANGES);
         }catch(BadCredentialsException _){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Pogreška");
@@ -57,7 +57,7 @@ public class LoginController {
 
     }
     public void goToRegister(){
-        ScreenManagerController.switchTo(View.REGISTER);
+        ScreenManagerController.switchTo(View.LISTCHANGES);
     }
 
 }

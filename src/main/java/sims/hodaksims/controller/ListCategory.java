@@ -16,6 +16,7 @@ import sims.hodaksims.repository.WarehouseRepository;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ListCategory {
@@ -36,8 +37,18 @@ public class ListCategory {
         descroptionColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getDescription()));
     }
     public void deleteSelectedCategory(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Brisanje kategorije");
+        alert.setHeaderText("Brisanje označene kategorije");
+        alert.setContentText("Jeste li sigurno da želire obrisati kategoriju: " + categoryTable.getSelectionModel().getSelectedItem().getName());
+        Optional<ButtonType> answer= alert.showAndWait();
+        if(answer.isPresent()){
+            if(answer.get()== ButtonType.OK){
+                allCategories.delete(categoryTable.getSelectionModel().getSelectedItem());
+                categoryTable.getItems().remove((categoryTable.getSelectionModel().getSelectedItem()));
 
-        categoryTable.getItems().removeAll((categoryTable.getSelectionModel().getSelectedItem()));
+            }
+        }
 
     }
     @FXML

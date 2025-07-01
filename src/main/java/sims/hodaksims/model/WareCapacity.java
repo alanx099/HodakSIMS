@@ -1,10 +1,12 @@
 package sims.hodaksims.model;
 
+import sims.hodaksims.interfaces.Logable;
+
 /**
  * Klasa WareCApacity opisuje sklatište na način da se zna koju kategoriju
  * stvari podržava i koliko je trenutno iskorišteno
  */
-public class WareCapacity extends Entity{
+public class WareCapacity extends Entity implements Logable {
     private Integer capacity;
     private Integer filled;
     private Category category;
@@ -44,5 +46,15 @@ public class WareCapacity extends Entity{
                 "capacity=" + capacity +
                 ", category=" + category +
                 '}';
+    }
+
+    @Override
+    public String[] changesToString() {
+        String props=
+                " category=" + category +
+                "capacity=" + capacity +
+                ',';
+
+        return props.split(",");
     }
 }
