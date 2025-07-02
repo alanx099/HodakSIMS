@@ -1,10 +1,11 @@
-package sims.hodaksims.controller;
+package sims.hodaksims.controller.add;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import sims.hodaksims.controller.ScreenManagerController;
 import sims.hodaksims.model.Category;
 import sims.hodaksims.model.View;
 import sims.hodaksims.model.WareCapacity;
@@ -15,7 +16,7 @@ import sims.hodaksims.repository.WarehouseRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddWarehouseController {
+public class AddWarehouse {
     @FXML
     private TextField name;
     @FXML
@@ -40,7 +41,7 @@ public class AddWarehouseController {
     private TextField setAmmount;
 
     private final CategoryRepository<Category> allCategories = new CategoryRepository<>();
-    private final List<Category> loadedCategories = allCategories.findAll();
+    private  ObservableList<Category> loadedCategories = FXCollections.observableArrayList(allCategories.findAll());
     private final ObservableList<WareCapacity> currCapacity = FXCollections.observableArrayList();
     private final List<WareCapacity> insertList = new ArrayList<>();
     private final WarehouseRepository<Warehouse> wareRepo = new WarehouseRepository<>();
@@ -67,6 +68,9 @@ public class AddWarehouseController {
         Category curCat = categories.getValue();
         Integer ammount = Integer.parseInt(setAmmount.getText());
         WareCapacity capacityToPush = new WareCapacity(curCat, ammount);
+        loadedCategories.remove(categories.getValue());
+
+        categories.setItems(loadedCategories);
         insertList.add(capacityToPush);
         currCapacity.clear();
         currCapacity.addAll(insertList);
@@ -74,11 +78,12 @@ public class AddWarehouseController {
 
     }
     public void deleteSelectedCapacity(){
+        loadedCategories.add(capacityTable.getSelectionModel().getSelectedItem().getCategory());
+        categories.setItems(loadedCategories);
         insertList.remove(capacityTable.getSelectionModel().getSelectedItem());
-        currCapacity.clear();
-        currCapacity.addAll(insertList);
+        currCapacity.setAll(insertList);
         capacityTable.setItems(currCapacity);
-        //capacityTable.getItems().removeAll((capacityTable.getSelectionModel().getSelectedItem()));
+
     }
     public void insertToDb(){
             String wName = name.getText();

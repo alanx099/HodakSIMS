@@ -1,22 +1,17 @@
-package sims.hodaksims.controller;
+package sims.hodaksims.controller.list;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import sims.hodaksims.model.Category;
 import sims.hodaksims.model.ChangeLog;
 import sims.hodaksims.model.UserRoles;
-import sims.hodaksims.model.View;
-import sims.hodaksims.repository.CategoryRepository;
 
-import javax.management.relation.Role;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ListChanges {
@@ -61,18 +56,27 @@ public class ListChanges {
     }
     @FXML
     public void setBigDescription(){
-        changeExpanded.setText(changesTable.getSelectionModel().getSelectedItem().getPromjena());
+
+        Optional<ChangeLog> row = Optional.ofNullable(changesTable.getSelectionModel().getSelectedItem());
+        if(row.isPresent()){
+            changeExpanded.setText(row.get().getPromjena());
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Problem s prikazom");
+            alert.setHeaderText("Nema odabira");
+            alert.setContentText("Molimo odaberite promjenu");
+            alert.showAndWait();
+        }
+
     }
     @FXML
     public void resetFilters(){
         rolePicker.getSelectionModel().clearSelection();
         dateFrom.setValue(null);
         dateTo.setValue(null);
-        changeText.setText(null);
-        obvChanges.clear();
-        obvChanges.addAll(loadedChanges);
-        changesTable.getItems().clear();
-        changesTable.getItems().addAll(obvChanges);
+        changeText.clear();
+        obvChanges.setAll(loadedChanges);
+        changesTable.setItems(obvChanges);
     }
     @FXML
     public void applyFilters(){
@@ -82,7 +86,7 @@ public class ListChanges {
         Optional<LocalDate> to = Optional.ofNullable(dateTo.getValue());
         Stream<ChangeLog> filteri = loadedChanges.stream();
         if(changes.isPresent()){
-            filteri = filteri.filter(x -> x.getPromjena().contains(changeText.getText()));
+            filteri = filteri.filter(x -> x.getPromjena().toUpperCase().contains(changeText.getText().toUpperCase()));
         }
         if(roles.isPresent()){
             filteri = filteri.filter(x-> x.getRoleNew() == rolePicker.getSelectionModel().getSelectedItem());
@@ -94,9 +98,7 @@ public class ListChanges {
             filteri = filteri.filter(x-> x.getDateLog().toLocalDate().isBefore(dateTo.getValue()));
         }
         final List<ChangeLog> filtered = filteri.toList();
-        obvChanges.clear();
-        obvChanges.addAll(filtered);
-        changesTable.getItems().clear();
-        changesTable.getItems().addAll(obvChanges);
+        obvChanges.setAll(filtered);
+        changesTable.setItems(obvChanges);
     }
 }

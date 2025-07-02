@@ -39,7 +39,7 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
             throw new RepositoryAccessException(e.getMessage());
         }
         try(Connection connection = DbConUtil.getConnection();
-            PreparedStatement stmt =connection.prepareStatement("SELECT WAREHOUSE_CAPACITY .* FROM WAREHOUSE_CAPACITY  WHERE ID = ?");
+            PreparedStatement stmt =connection.prepareStatement("SELECT WAREHOUSE_CAPACITY .* FROM WAREHOUSE_CAPACITY  WHERE WAREHOUSE_ID = ?");
         ){
             stmt.setLong(1,id);
             ResultSet resultSet = stmt.executeQuery();
@@ -86,7 +86,6 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
      * @param entity
      */
     public void save(T entity){
-        System.out.println(entity.getCapacity());
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("INSERT INTO " +
                     "WAREHOUSE(NAME, CITY, COUNTRY, POSTAL_CODE, STREET_NUMBER, STREET_NAME) VALUES (?,?,?,?,?,?)",
@@ -165,7 +164,7 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
                 }
             }
             T newItem = this.findById(entity.getId());
-            ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.toString(), LocalDateTime.now());
+            ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.getName(), LocalDateTime.now());
             unosLog.updateEntry(oldItem,newItem, "warehouse");
         }catch (SQLException e){
             throw new RepositoryAccessException(e.getMessage());
@@ -191,7 +190,8 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
             PreparedStatement stmt =connection.prepareStatement("DELETE " +  "FROM WAREHOUSE  WHERE ID =?" );){
             stmt.setLong(1, entity.getId());
             stmt.executeUpdate();
-
+            ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.toString(), LocalDateTime.now());
+            unosLog.delEntry("warehouse");
         }catch (SQLException e){
             throw new RepositoryAccessException(e.getMessage());
         }
@@ -212,7 +212,7 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
         String country = resultSet.getString("country");
         String streetName = resultSet.getString("street_name");
         String streetNumber = resultSet.getString("street_number");
-        Warehouse warehouse = new Warehouse(name, city, postalCode, country, streetName, streetNumber);
+        Warehouse warehouse = new Warehouse(name, city, postalCode, streetNumber, country ,streetName);
         warehouse.setId(id);
         return (T)warehouse;
     }

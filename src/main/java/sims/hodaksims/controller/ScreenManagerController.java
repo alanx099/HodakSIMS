@@ -5,7 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sims.hodaksims.model.Category;
+import sims.hodaksims.controller.update.AbstractUpdateController;
 import sims.hodaksims.model.Entity;
 import sims.hodaksims.model.View;
 

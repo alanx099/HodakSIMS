@@ -1,9 +1,10 @@
-package sims.hodaksims.controller;
+package sims.hodaksims.controller.add;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sims.hodaksims.controller.ScreenManagerController;
 import sims.hodaksims.model.Category;
 import sims.hodaksims.model.View;
 import sims.hodaksims.repository.CategoryRepository;

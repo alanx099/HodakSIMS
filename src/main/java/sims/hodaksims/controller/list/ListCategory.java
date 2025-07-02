@@ -1,31 +1,31 @@
-package sims.hodaksims.controller;
+package sims.hodaksims.controller.list;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.StringConverter;
+import sims.hodaksims.controller.ScreenManagerController;
 import sims.hodaksims.model.Category;
 import sims.hodaksims.model.View;
-import sims.hodaksims.model.WareCapacity;
-import sims.hodaksims.model.Warehouse;
 import sims.hodaksims.repository.CategoryRepository;
-import sims.hodaksims.repository.WarehouseRepository;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ListCategory {
+    @FXML
+    TextField nameFilter;
+    @FXML
+    TextField descriptionFilter;
     @FXML
     private TableView<Category> categoryTable;
     @FXML
     private TableColumn<Category, String> nameColumn;
     @FXML
     private TableColumn<Category, String> descroptionColumn;
+
 
     private final CategoryRepository<Category> allCategories = new CategoryRepository<>();
     private final List<Category> loadedCategories = allCategories.findAll();
@@ -59,5 +59,28 @@ public class ListCategory {
     protected void switchToSceneUpdateCategory() {
         ScreenManagerController.switchToWithData(View.UPDATECATEGORY, categoryTable.getSelectionModel().getSelectedItem());
     }
+    @FXML
+    protected void filterAll(){
+        Optional<String> nameF = Optional.ofNullable(nameFilter.getText());
+        Optional<String> descF = Optional.ofNullable(descriptionFilter.getText());
+        Stream<Category> theStream = loadedCategories.stream();
+        if(nameF.isPresent()){
+            theStream = theStream.filter(x -> x.getName().toUpperCase().contains(nameF.get().toUpperCase()));
+        }
+        if(descF.isPresent()){
+            theStream = theStream.filter(x -> x.getDescription().toUpperCase().contains(descF.get().toUpperCase()));
+        }
 
+        obvCategories.clear();
+        obvCategories.addAll(theStream.toList());
+        categoryTable.getItems().clear();
+        categoryTable.getItems().addAll(obvCategories);
+    }
+    @FXML
+    protected void resetFilter(){
+        nameFilter.clear();
+        descriptionFilter.clear();
+        obvCategories.setAll(loadedCategories);
+        categoryTable.setItems(obvCategories);
+    }
 }
