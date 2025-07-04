@@ -2,9 +2,7 @@ package sims.hodaksims.model;
 
 import sims.hodaksims.interfaces.Logable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Warehouse klasa utjelovljuje entitete naših skladišta
@@ -19,7 +17,7 @@ public class Warehouse extends Entity implements Logable {
     private String country;
     private String streetName;
     private List<WareCapacity> capacity;
-    private List<Product> inventar;
+    private Set<Product> inventar;
 
     public Warehouse(String name, String city, String postalCode, String streetNumber, String country, String streetName) {
         this.name = name;
@@ -29,6 +27,7 @@ public class Warehouse extends Entity implements Logable {
         this.country = country;
         this.streetName = streetName;
         this.capacity = new ArrayList<>();
+        this.inventar = new HashSet<>();
     }
     public Warehouse(String name, String city, String postalCode, String streetNumber, String country, String streetName, List<WareCapacity> capacity) {
         this.name = name;
@@ -39,11 +38,11 @@ public class Warehouse extends Entity implements Logable {
         this.streetName = streetName;
         this.capacity = capacity;
     }
-        public List<Product> getInventar() {
+        public Set<Product> getInventar() {
         return inventar;
     }
 
-    public void setInventar(List<Product> inventar) {
+    public void setInventar(Set<Product> inventar) {
         this.inventar = inventar;
     }
 
