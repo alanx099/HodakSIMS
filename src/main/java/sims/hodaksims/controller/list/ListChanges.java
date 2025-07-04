@@ -100,5 +100,7 @@ public class ListChanges {
         final List<ChangeLog> filtered = filteri.toList();
         obvChanges.setAll(filtered);
         changesTable.setItems(obvChanges);
+        changesTable.getSortOrder().add(timeChangedColumn);
+        changesTable.sort();
     }
 }

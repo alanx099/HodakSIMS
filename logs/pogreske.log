@@ -1,1 +1,2 @@
 2025-07-02 21:54:29,275 ERROR [JavaFX Application Thread] s.h.e.EmptyRepositoryResultException [EmptyRepositoryResultException.java:11] Not found
+2025-07-04 12:38:21,481 ERROR [main] s.h.e.RepositoryAccessException [RepositoryAccessException.java:12] Column "oib" not found [42122-232]

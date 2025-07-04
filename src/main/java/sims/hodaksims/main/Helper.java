@@ -1,7 +1,9 @@
 package sims.hodaksims.main;
 
+import sims.hodaksims.model.Supplier;
 import sims.hodaksims.model.Warehouse;
 import sims.hodaksims.repository.AbstractRepository;
+import sims.hodaksims.repository.SupplierRepository;
 import sims.hodaksims.repository.WarehouseRepository;
 
 import java.util.Arrays;
@@ -10,7 +12,13 @@ import java.util.List;
 public class Helper {
 
     public static void main(String[] args) {
-        AbstractRepository<Warehouse> warehouse = new WarehouseRepository<>();
+
+        SupplierRepository<Supplier> supplierRep = new SupplierRepository<>();
+        List<Supplier> suppliersTest = supplierRep.findAll();
+        System.out.println(suppliersTest);
+
+
+        /*AbstractRepository<Warehouse> warehouse = new WarehouseRepository<>();
         List<Warehouse> warehousesTest = warehouse.findAll();
         Warehouse newGuy = warehousesTest.get(0);
         String[] oldValue = newGuy.toString().split(",");
@@ -24,7 +32,7 @@ public class Helper {
             }
         }
 
-        System.out.println(changes);
+        System.out.println(changes);*/
 
     }
 

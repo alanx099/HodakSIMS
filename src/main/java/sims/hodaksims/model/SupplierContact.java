@@ -14,6 +14,13 @@ public class SupplierContact extends Entity {
         return name;
     }
 
+    public SupplierContact(String name, String email, String phone, String address) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

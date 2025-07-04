@@ -34,6 +34,10 @@ public class MenuController {
     protected void switchToSceneChanges() {
         ScreenManagerController.switchTo(View.LISTCHANGES);
     }
+    @FXML
+    protected void switchToSceneAddSupplier() {
+        ScreenManagerController.switchTo(View.ADDSUPPLIER);
+    }
     public void initialize(){
         user.setText("Welcome "+ CurrentUser.getInstance().getUserCur().getUsername() + "!");
     }

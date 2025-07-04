@@ -93,7 +93,7 @@ public class AddWarehouse {
             String wStreet = street.getText();
             String wStreetNb = streetNb.getText();
 
-            Warehouse curWare = new Warehouse(wName, wCountry, wCity, wPostal, wStreet, wStreetNb, insertList);
+            Warehouse curWare = new Warehouse(wName, wCity, wPostal, wStreetNb, wCountry ,wStreet,insertList);
             wareRepo.save(curWare);
             switchToSceneAddSkaldiste();
     }

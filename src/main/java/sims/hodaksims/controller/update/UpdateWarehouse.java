@@ -131,7 +131,7 @@ public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateControll
             String wStreet = street.getText();
             String wStreetNb = streetNb.getText();
 
-            Warehouse curWare = new Warehouse(wName, wCountry, wCity, wPostal, wStreet, wStreetNb, insertList);
+            Warehouse curWare = new Warehouse(wName, wCity, wPostal, wStreetNb, wCountry ,wStreet,insertList);
             curWare.setId(ID);
             wareRepo.update(curWare);
             switchToSceneListSkaldiste();

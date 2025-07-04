@@ -76,18 +76,30 @@ public class ChangeLog implements Serializable {
         try{
             String[] oldValue = oldObject.changesToString();
             String[] printNew = newObject.changesToString();
+            Long  diffrence = Arrays.stream(printNew).count() - Arrays.stream(oldValue).count();
+            System.out.println(diffrence);
             this.setPromjena("Promjene nad objektom "+ desc+ " ID= " +oldObject.getId()+"\n");
 
-            for(int i = 0; i< Arrays.stream(oldValue).count(); i++){
-                if(oldValue[i].compareTo(printNew[i]) != 0){
-                    this.setPromjena( this.getPromjena() + oldValue[i]+"->"+printNew[i]+","+"\n" );
+            for(int i = 0; i< Arrays.stream(oldValue).count() ; i++){
+                if( i< Arrays.stream(printNew).count()){
+                    if(oldValue[i].compareTo(printNew[i]) != 0)  this.setPromjena( this.getPromjena() + oldValue[i]+"->"+printNew[i]+","+"\n" );
+                }
+                else{
+                    this.setPromjena( this.getPromjena() + oldValue[i]+"-> deleted"+"\n" );
                 }
             }
+            if(diffrence.intValue() > 0){
+            for(int i = Math.toIntExact(Arrays.stream(printNew).count())-1; i > diffrence.intValue()+1 ; i--){
+                this.setPromjena( this.getPromjena() + printNew[i]+"-> added"+"\n" );
+            }}
+
+
             this.saveChangeLog();
         }catch(IOException e){
             log.error(e.getMessage());
         }
     }
+
     public void newEntry(String desc){
             this.setPromjena("Undesen novi "+desc+" objekt:"+this.getPromjena());
             try{

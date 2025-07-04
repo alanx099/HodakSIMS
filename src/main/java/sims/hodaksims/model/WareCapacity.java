@@ -51,10 +51,10 @@ public class WareCapacity extends Entity implements Logable {
     @Override
     public String[] changesToString() {
         String props=
-                " category=" + category +
-                "capacity=" + capacity +
-                ',';
+                ",category=" + category +
+                " capacity=" + capacity
+                ;
 
-        return props.split(",");
+        return new String[]{props};
     }
 }

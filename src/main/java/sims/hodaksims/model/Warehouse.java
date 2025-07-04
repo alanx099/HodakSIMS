@@ -127,10 +127,11 @@ public class Warehouse extends Entity implements Logable {
                 .append(", postalCode='").append(postalCode).append('\'')
                 .append(", streetNumber='").append(streetNumber).append('\'')
                 .append(", country='").append(country).append('\'')
-                .append(", streetName='").append(streetName).append('\'')
-                .append(", inventar=").append(inventar);
+                .append(", streetName='").append(streetName).append('\'');
+              //  .append(", inventar=").append(inventar);
         for(WareCapacity cap : capacity){
-            props.append(Arrays.toString(cap.changesToString()));
+            props.append(cap.changesToString()[0]);
+
         }
         return props.toString().split(",");
     }

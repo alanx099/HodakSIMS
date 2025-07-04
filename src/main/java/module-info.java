@@ -16,6 +16,7 @@ module sims.hodaksims {
     requires com.fasterxml.jackson.databind;
     requires ch.qos.logback.classic;
     requires java.management;
+    requires java.desktop;
 
     opens sims.hodaksims to javafx.fxml;
     exports sims.hodaksims;

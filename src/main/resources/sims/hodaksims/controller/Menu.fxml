@@ -14,7 +14,7 @@
     </Menu>
     <Menu mnemonicParsing="false" text="Dobavljač">
       <items>
-        <MenuItem mnemonicParsing="false" text="Novi Dobavljač" />
+        <MenuItem mnemonicParsing="false" onAction="#switchToSceneAddSupplier" text="Novi Dobavljač" />
             <MenuItem mnemonicParsing="false" text="Lista Dobavljača" />
       </items>
     </Menu>

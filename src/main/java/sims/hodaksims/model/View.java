@@ -7,6 +7,16 @@ public enum View {
      * također se služimo konstrktorom i getFileName metodi kako bi nam pozivanje
      * unutar koda izgledalo čisto i pregledno.
      */
+    ADDPRODUCT("AddProduct.fxml"),
+    UPDATEPRODUCT("UpdateProduct.fxml"),
+    LISTPRODUCT("ListProduct.fxml"),
+    ADDSUPPLIER("AddSupplier.fxml"),
+    UPDATESUPPLIER("UpdateSupplier.fxml"),
+    LISTSUPPLIER("ListSupplier.fxml"),
+    ADDUSER("AddUser.fxml"),
+    UPDATEUSER("UpdateUser.fxml"),
+    LISTUSER("ListUser.fxml"),
+    ADDROLE("AddRole.fxml"),
     UPADTEWAREHOUSE("UpdateWarehouse.fxml"),
     LISTWAREHOUSE("ListWarehouse.fxml"),
     LISTCHANGES("ListChanges.fxml"),
