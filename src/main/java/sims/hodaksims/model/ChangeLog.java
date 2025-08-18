@@ -101,7 +101,7 @@ public class ChangeLog implements Serializable {
     }
 
     public void newEntry(String desc){
-            this.setPromjena("Undesen novi "+desc+" objekt:"+this.getPromjena());
+            this.setPromjena("Stvoren novi "+desc+" objekt:"+this.getPromjena());
             try{
                 this.saveChangeLog();
             }catch(IOException e){
