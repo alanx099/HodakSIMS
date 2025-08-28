@@ -3,6 +3,7 @@ package sims.hodaksims.model;
 import sims.hodaksims.interfaces.Logable;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -83,15 +84,21 @@ public class Supplier extends Entity implements Logable {
 
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Supplier supplier = (Supplier) o;
+        return Objects.equals(name, supplier.name) && Objects.equals(oib, supplier.oib) && Objects.equals(minOrder, supplier.minOrder) && Objects.equals(deliveryTime, supplier.deliveryTime) && Objects.equals(joined, supplier.joined) && Objects.equals(contacts, supplier.contacts);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, oib, minOrder, deliveryTime, joined, contacts);
+    }
+
+    @Override
     public String toString() {
-        return "Supplier{" +
-                "name='" + name + '\'' +
-                ", oib='" + oib + '\'' +
-                ", minOrder=" + minOrder +
-                ", deliveryTime=" + deliveryTime +
-                ", joined=" + joined +
-                ", contacts=" + contacts +
-                '}';
+        return name;
     }
 
     @Override

@@ -101,7 +101,7 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
 
             int rowsAffected = stmt.executeUpdate();
             if(rowsAffected == 0){
-                throw new SQLException("Failed to insert new warehouser");
+                throw new SQLException("Failed to insert new supplier");
             }
             connection.commit();
             ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.toString(), LocalDateTime.now());
@@ -139,7 +139,7 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
     }
 
     /**
-     * Metoda update postavlja nove vrijednosti za postojeće skladište
+     * Metoda update postavlja nove vrijednosti za postojeće dobavljače
      * Izmjena briše sve unose za kapaciteta u bazi i piše nove
      * @param entity
      */
@@ -167,7 +167,8 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
                     capStmt.setString(4, cap.getAddress());
                     capStmt.setLong(5, entity.getId() );
                     capStmt.executeUpdate();
-                    connection.commit();
+                }catch (SQLException e) {
+                    log.error(e.getMessage());
                 }
             }
             T newItem = this.findById(entity.getId());

@@ -1,6 +1,7 @@
 package sims.hodaksims.controller.update;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.slf4j.Logger;
@@ -13,6 +14,10 @@ import sims.hodaksims.repository.CategoryRepository;
 public class UpdateCategory<T extends Category> extends AbstractUpdateController<T> {
     static final Logger log = LoggerFactory.getLogger(UpdateCategory.class);
     private final CategoryRepository<Category> cRep = new CategoryRepository<>();
+    @FXML
+    DatePicker contractStart;
+    @FXML
+    DatePicker contractEnd;
     @FXML
     Label title;
     @FXML
@@ -31,7 +36,7 @@ public class UpdateCategory<T extends Category> extends AbstractUpdateController
     }
 
     @FXML
-    public void updateInDb(){
+    public void insertDb(){
         Category nCat = new Category(name.getText(), description.getText());
         nCat.setId(Long.parseLong(title.getText()));
         cRep.update(nCat);

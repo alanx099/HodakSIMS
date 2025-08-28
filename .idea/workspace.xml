@@ -4,7 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4471e722-e8a0-4346-a13e-98506052ee56" name="Changes" comment="Ground Zero" />
+    <list default="true" id="4471e722-e8a0-4346-a13e-98506052ee56" name="Changes" comment="Ground Zero">
+      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/add/AddContract.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListContracts.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListSupplier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/update/UpdateContract.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/update/UpdateSupplier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/ListContract.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/UpdateContract.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/UpdateSupplier.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changes.ser" beforeDir="false" afterPath="$PROJECT_DIR$/changes.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/pogreske.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/pogreske.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/add/AddSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/add/AddSupplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListWarehouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/update/UpdateCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/update/UpdateCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Supplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Warehouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/SupplierRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/SupplierRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/AddContract.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/AddContract.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/ListSupplier.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/ListSupplier.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/Menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/Menu.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,7 +98,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Marko/.FAKS/JAVA/SIMS PROJEKT/HodakSIMS&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Marko/.FAKS/JAVA/SIMS PROJEKT/HodakSIMS/src/main/resources/sims/hodaksims/controller&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -95,6 +118,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Marko\.FAKS\JAVA\SIMS PROJEKT\HodakSIMS\src\main\resources\sims\hodaksims\controller" />
       <recent name="D:\SIMS\HodakSIMS\src\main\resources\sims\hodaksims\controller" />
       <recent name="D:\SIMS\HodakSIMS\src\main\resources\sims\hodaksims\main" />
       <recent name="D:\SIMS\HodakSIMS\src\main\resources" />
@@ -115,9 +139,10 @@
       <recent name="sims.hodaksims.controller" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="sims.hodaksims.repository" />
-      <recent name="sims.hodaksims.controller.add" />
       <recent name="sims.hodaksims.controller.update" />
+      <recent name="sims.hodaksims.controller.list" />
+      <recent name="sims.hodaksims.controller.add" />
+      <recent name="sims.hodaksims.repository" />
       <recent name="sims.hodaksims.controller" />
     </key>
   </component>
@@ -189,7 +214,12 @@
       <workItem from="1751622204690" duration="14655000" />
       <workItem from="1751650327364" duration="309000" />
       <workItem from="1754922189909" duration="107000" />
-      <workItem from="1755531289348" duration="434000" />
+      <workItem from="1755531289348" duration="4898000" />
+      <workItem from="1755703589326" duration="12733000" />
+      <workItem from="1755719245155" duration="4052000" />
+      <workItem from="1755789566928" duration="305000" />
+      <workItem from="1755789964296" duration="7574000" />
+      <workItem from="1755797624594" duration="5529000" />
     </task>
     <servers />
   </component>

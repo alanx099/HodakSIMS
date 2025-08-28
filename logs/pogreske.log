@@ -1,2 +1,15 @@
-2025-07-02 21:54:29,275 ERROR [JavaFX Application Thread] s.h.e.EmptyRepositoryResultException [EmptyRepositoryResultException.java:11] Not found
-2025-07-04 12:38:21,481 ERROR [main] s.h.e.RepositoryAccessException [RepositoryAccessException.java:12] Column "oib" not found [42122-232]
+2025-08-21 19:47:27,562 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] 
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/ListContract.fxml:16
+
+2025-08-21 19:47:30,004 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] 
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/ListContract.fxml:16
+
+2025-08-21 19:48:07,544 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] 
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/ListContract.fxml:16
+
+2025-08-21 20:51:44,127 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:71] 
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/UpdateContract.fxml:14
+
+2025-08-21 20:51:51,880 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:71] 
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/UpdateContract.fxml:14
+

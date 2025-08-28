@@ -107,15 +107,7 @@ public class Warehouse extends Entity implements Logable {
 
     @Override
     public String toString() {
-        return
-                "name='" + name + '\'' +
-                ", city='" + city + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", streetNumber='" + streetNumber + '\'' +
-                ", country='" + country + '\'' +
-                ", streetName='" + streetName + '\'' +
-                ", capacity=" + capacity.toString() +
-                ", inventar=" + inventar ;
+        return name;
     }
 
     @Override

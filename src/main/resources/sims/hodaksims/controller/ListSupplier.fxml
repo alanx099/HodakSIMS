@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1016.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sims.hodaksims.controller.list.ListWarehouse">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1016.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sims.hodaksims.controller.list.ListSupplier">
 <top>
 <fx:include source="Menu.fxml" />
 </top>
@@ -69,17 +69,17 @@
                         <Insets />
                      </opaqueInsets>
                   </TextField>
-                  <TextField fx:id="country" promptText="Do" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                  <TextField fx:id="minOrderTo" promptText="Do" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <opaqueInsets>
                         <Insets right="10.0" />
                      </opaqueInsets>
                   </TextField>
-                  <TextField fx:id="city" promptText="00228269289" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="oib" promptText="00228269289" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <opaqueInsets>
                         <Insets right="10.0" />
                      </opaqueInsets>
                   </TextField>
-                  <TextField fx:id="postalNb" promptText="Vrijeme do" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextField fx:id="orderTimeStart" promptText="Vrijeme do" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <opaqueInsets>
                         <Insets right="10.0" />
                      </opaqueInsets>
@@ -109,18 +109,18 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="country1" promptText="Od" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="minOrderFrom" promptText="Od" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <opaqueInsets>
                         <Insets right="10.0" />
                      </opaqueInsets>
                   </TextField>
-                  <TextField fx:id="postalNb1" promptText="Vrijeme do " GridPane.columnIndex="3" GridPane.rowIndex="3">
+                  <TextField fx:id="orderTimeEnd" promptText="Vrijeme do " GridPane.columnIndex="3" GridPane.rowIndex="3">
                      <opaqueInsets>
                         <Insets right="10.0" />
                      </opaqueInsets>
                   </TextField>
-                  <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <DatePicker GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <DatePicker fx:id="dateJoinedStart" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <DatePicker fx:id="dateJoinedEnd" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                </children>
                <GridPane.margin>
                   <Insets right="10.0" />
@@ -131,12 +131,12 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TableView fx:id="capacityTable" maxHeight="300.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="11" GridPane.rowSpan="2">
+            <TableView fx:id="contactsTable" maxHeight="300.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="11" GridPane.rowSpan="2">
               <columns>
-                <TableColumn fx:id="categoryColumn" prefWidth="70.0" resizable="false" text="Ime" />
-                <TableColumn fx:id="ammountColumn" prefWidth="85.0" text="Email" />
-                  <TableColumn prefWidth="228.0" text="Tel." />
-                  <TableColumn prefWidth="75.0" text="Adresa" />
+                <TableColumn fx:id="nameColumn" prefWidth="70.0" text="Ime" />
+                <TableColumn fx:id="emailColumn" prefWidth="85.0" text="Email" />
+                  <TableColumn fx:id="telColumn" prefWidth="228.0" text="Tel." />
+                  <TableColumn fx:id="addresColumn" prefWidth="75.0" text="Adresa" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -145,13 +145,13 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </TableView>
-            <TableView fx:id="wareTable" prefHeight="606.0" prefWidth="543.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="12">
+            <TableView fx:id="supplierTable" prefHeight="606.0" prefWidth="543.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="12">
               <columns>
-                <TableColumn fx:id="tableName" prefWidth="75.0" text="Ime" />
-                <TableColumn fx:id="tableCountry" prefWidth="75.0" text="OIB" />
-                  <TableColumn fx:id="tableCity" prefWidth="75.0" text="Min. naruđba" />
-                  <TableColumn fx:id="tablePostal" prefWidth="75.0" text="Vrijeme dostave" />
-                  <TableColumn fx:id="tableStreet" prefWidth="75.0" text="Pridruženje" />
+                <TableColumn fx:id="supplierName" prefWidth="63.99996793270111" text="Ime" />
+                <TableColumn fx:id="supplierOIB" prefWidth="84.8000259399414" text="OIB" />
+                  <TableColumn fx:id="supplierMinOrder" prefWidth="96.79998779296875" text="Min. naruđba" />
+                  <TableColumn fx:id="supplierDeliveryTime" prefWidth="84.79998779296875" text="Vrijeme dostave" />
+                  <TableColumn fx:id="supplierJoined" prefWidth="80.800048828125" text="Pridruženje" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -165,10 +165,10 @@
                   <Insets right="30.0" />
                </GridPane.margin>
                <children>
-                  <Button mnemonicParsing="false" onAction="#updateWareHouse" text="Uredi" />
-                  <Button mnemonicParsing="false" onAction="#deleteSelectedWareHouse" text="Obriši" />
-                  <Button mnemonicParsing="false" onAction="#addNewWarehouse" text="Dodaj" />
-                  <Button mnemonicParsing="false" onAction="#showCapacity" text="Pregledaj kontakte" />
+                  <Button mnemonicParsing="false" onAction="#updateSupplierNow" text="Uredi" />
+                  <Button mnemonicParsing="false" onAction="#deleteSelectedSupplier" text="Obriši" />
+                  <Button mnemonicParsing="false" onAction="#addNewSupplier" text="Dodaj" />
+                  <Button mnemonicParsing="false" onAction="#showContacts" text="Pregledaj kontakte" />
                </children>
                <opaqueInsets>
                   <Insets />

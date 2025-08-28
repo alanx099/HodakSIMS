@@ -105,7 +105,6 @@ public class ListWarehouse {
         WareCapacity capacityToPush = new WareCapacity(curCat, ammount);
         currCapacity.add(capacityToPush);
         capacityTable.setItems(currCapacity);
-
     }
     public void deleteSelectedCapacity(){
         capacityTable.getItems().removeAll((capacityTable.getSelectionModel().getSelectedItem()));
@@ -121,8 +120,6 @@ public class ListWarehouse {
                 wareRepo.delete(wareTable.getSelectionModel().getSelectedItem());
                 wareTable.getItems().remove((wareTable.getSelectionModel().getSelectedItem()));
             }
-
-
     }
     @FXML
     protected void filterAll(){

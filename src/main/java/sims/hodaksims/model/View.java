@@ -7,6 +7,9 @@ public enum View {
      * također se služimo konstrktorom i getFileName metodi kako bi nam pozivanje
      * unutar koda izgledalo čisto i pregledno.
      */
+    UPDATECONTRACT("UpdateContract.fxml"),
+    LISTCONTRACT("ListContract.fxml"),
+    ADDCONTRACT("AddContract.fxml"),
     ADDPRODUCT("AddProduct.fxml"),
     UPDATEPRODUCT("UpdateProduct.fxml"),
     LISTPRODUCT("ListProduct.fxml"),

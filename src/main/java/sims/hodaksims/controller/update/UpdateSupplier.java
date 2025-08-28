@@ -1,20 +1,24 @@
-package sims.hodaksims.controller.add;
+package sims.hodaksims.controller.update;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sims.hodaksims.controller.ScreenManagerController;
-import sims.hodaksims.model.*;
+import sims.hodaksims.controller.list.ListSupplier;
+import sims.hodaksims.model.Supplier;
+import sims.hodaksims.model.SupplierContact;
+import sims.hodaksims.model.View;
+import sims.hodaksims.model.WareCapacity;
 import sims.hodaksims.repository.SupplierRepository;
 import sims.hodaksims.utils.InputVerifyUtil;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public class AddSupplier {
+public class UpdateSupplier<T extends Supplier> extends AbstractUpdateController<T> {
     @FXML
     private TextField name;
     @FXML
@@ -41,16 +45,35 @@ public class AddSupplier {
     private TableColumn<SupplierContact, String> colTel;
     @FXML
     private TableColumn<SupplierContact, String> colAddress;
+    @FXML
+    private Label naslov;
+    @FXML
+    private Label idPromjene;
 
+    private static Logger log = LoggerFactory.getLogger(UpdateSupplier.class);
 
     SupplierRepository<Supplier> supplierRep = new SupplierRepository<>();
     Set<SupplierContact> contacts = new HashSet<>();
     ObservableList<SupplierContact> obvContacts = FXCollections.observableArrayList(contacts);
+    private final List<SupplierContact> insertList = new ArrayList<>();
     public void initialize(){
     colName.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getName()));
     colEmail.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getEmail()));
     colTel.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getPhone()));
     colAddress.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getAddress()));
+    }
+
+    @Override
+    public void setFields(T item) {
+        name.setText(item.getName());
+        oib.setText(item.getOib());
+        minOrder.setText(item.getMinOrder().toString());
+        orderTime.setText(item.getDeliveryTime().toString());
+        contacts.addAll(item.getContacts());
+        obvContacts.setAll(contacts);
+        contactTable.setItems(obvContacts);
+        naslov.setText("Ažuriranje dobavljača: " + item.getName());
+        idPromjene.setText(item.getId().toString());
     }
 
     public void pushToTable(){
@@ -86,19 +109,27 @@ public class AddSupplier {
 
     }
     public void insertToDb(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Ažuriranje dobavljača");
+        alert.setHeaderText("Ažuriranje dobavljača");
+        alert.setContentText("Jeste li sigurni da ažurirati dobavljača: " + name.getText());
+        Optional<ButtonType> answer= alert.showAndWait();
+        if(answer.isPresent() && answer.get()== ButtonType.OK) {
+            Long ids = Long.parseLong(idPromjene.getText());
+            String nameNew = this.name.getText();
+            String oibNew = this.oib.getText();
+            Integer minOrderNew = Integer.parseInt(this.minOrder.getText());
+            Integer orderTimeNew = Integer.parseInt(this.orderTime.getText());
 
-        String nameNew = this.name.getText();
-        String oibNew = this.oib.getText();
-        Integer minOrderNew = Integer.parseInt(this.minOrder.getText());
-        Integer orderTimeNew = Integer.parseInt(this.orderTime.getText());
-
-        Supplier curSup = new Supplier(contacts, nameNew, oibNew, minOrderNew, orderTimeNew);
-        supplierRep.save(curSup);
-        switchToSceneAddSkaldiste();
+            Supplier curSup = new Supplier(contacts, nameNew, oibNew, minOrderNew, orderTimeNew);
+            curSup.setId(ids);
+            supplierRep.update(curSup);
+            switchToSceneListSkaldiste();
+        }
     }
     @FXML
-    protected void switchToSceneAddSkaldiste() {
-        ScreenManagerController.switchTo(View.LISTCHANGES);
+    protected void switchToSceneListSkaldiste() {
+        ScreenManagerController.switchTo(View.LISTSUPPLIER);
     }
 
 }

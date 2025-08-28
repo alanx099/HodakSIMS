@@ -38,6 +38,17 @@ public class MenuController {
     protected void switchToSceneAddSupplier() {
         ScreenManagerController.switchTo(View.ADDSUPPLIER);
     }
+    @FXML
+    protected void switchToSceneListSupplier() {
+        ScreenManagerController.switchTo(View.LISTSUPPLIER);
+    }
+    @FXML
+    protected void switchToSceneAddContract() {
+        ScreenManagerController.switchTo(View.ADDCONTRACT);
+    }
+    @FXML
+    protected void switchToSceneListContract() { ScreenManagerController.switchTo(View.LISTCONTRACT);}
+
     public void initialize(){
         user.setText("Welcome "+ CurrentUser.getInstance().getUserCur().getUsername() + "!");
     }
