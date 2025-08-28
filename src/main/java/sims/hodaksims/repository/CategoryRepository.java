@@ -151,6 +151,5 @@ public class CategoryRepository<T extends Category> extends AbstractRepository<T
         Category resCat = new Category(name,description);
         resCat.setId(id);
         return (T)resCat;
-
     }
 }

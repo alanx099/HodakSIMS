@@ -6,10 +6,16 @@
 
 <MenuBar xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sims.hodaksims.controller.MenuController">
   <menus>
+      <Menu mnemonicParsing="false" text="Proizvod">
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#switchToSceneAddProduct" text="Novi Proizvod" />
+            <MenuItem mnemonicParsing="false" onAction="#switchToSceneListProduct" text="Lista Proizvoda" />
+         </items>
+      </Menu>
     <Menu mnemonicParsing="false" text="Skladište">
       <items>
-            <MenuItem mnemonicParsing="false" onAction="#switchToSceneListSkaldiste" text="Sva Skladišta" />
         <MenuItem mnemonicParsing="false" onAction="#switchToSceneAddSkaldiste" text="Novo Skladište" />
+            <MenuItem mnemonicParsing="false" onAction="#switchToSceneListSkaldiste" text="Lista Skladišta" />
       </items>
     </Menu>
     <Menu mnemonicParsing="false" text="Dobavljač">

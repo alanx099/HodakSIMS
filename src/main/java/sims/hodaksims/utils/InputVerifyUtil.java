@@ -1,5 +1,6 @@
 package sims.hodaksims.utils;
 
+import com.fasterxml.jackson.core.io.BigDecimalParser;
 import javafx.scene.control.Alert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,25 @@ public class InputVerifyUtil {
                     }catch(NumberFormatException _) {
                     return true;
                      }}
+        ).toList();
+        if(!result.isEmpty()){
+            alertNumber(result);
+        }
+        return result.isEmpty();
+    }
+    public static Boolean checkForDecimal(Map<String, String> checkThese){
+        final Logger log = LoggerFactory.getLogger(InputVerifyUtil.class);
+
+        List<String> result = checkThese.keySet().stream().filter(
+                x->{ try{
+                    if(checkThese.get(x).isEmpty()) {
+                        return false;
+                    }
+                    BigDecimalParser.parse(checkThese.get(x));
+                    return false;
+                }catch(NumberFormatException _) {
+                    return true;
+                }}
         ).toList();
         if(!result.isEmpty()){
             alertNumber(result);

@@ -56,7 +56,6 @@ public class AddWarehouse {
                     setText(null);
                     }else{
                         setText(category.getName());
-
                     }
                 }
             });

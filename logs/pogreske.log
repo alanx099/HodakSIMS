@@ -42,3 +42,22 @@
 
 2025-08-28 18:47:45,533 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:12] Referential integrity constraint violation: "CONSTRAINT_BE: PUBLIC.WAREHOUSE_CAPACITY FOREIGN KEY(CATEGORY_ID) REFERENCES PUBLIC.CATEGORY(ID) (100)"; SQL statement:
 DELETE FROM CATEGORY WHERE ID=? [23503-232]
+2025-08-28 19:46:47,769 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] 
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/AddProduct.fxml
+
+2025-08-28 19:46:52,886 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] 
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/AddProduct.fxml
+
+2025-08-28 19:49:21,468 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] 
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/AddProduct.fxml
+
+2025-08-28 22:23:33,215 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] Column count does not match; SQL statement:
+INSERT INTO PRODUCT(SKU, NAME, PRICE) VALUES (?,?,?,?) [21002-232]
+2025-08-28 22:26:12,939 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] Column count does not match; SQL statement:
+INSERT INTO PRODUCT(SKU, NAME, PRICE, CATEGORY_ID) VALUES (?,?,?) [21002-232]
+2025-08-28 23:29:03,840 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] Error resolving onAction='#updateWareHouse', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/ListProduct.fxml:127
+
+2025-08-28 23:29:35,123 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] Error resolving onAction='#addNewWarehouse', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/ListProduct.fxml:129
+
