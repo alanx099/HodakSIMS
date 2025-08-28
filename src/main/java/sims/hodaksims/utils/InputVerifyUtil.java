@@ -1,7 +1,9 @@
 package sims.hodaksims.utils;
 
-import com.almasb.fxgl.pathfinding.astar.CacheKey;
 import javafx.scene.control.Alert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sims.hodaksims.controller.update.UpdateContract;
 
 import javax.swing.*;
 import javax.swing.text.StyledEditorKit;
@@ -14,8 +16,14 @@ import static java.util.stream.Collectors.toList;
 
 public class InputVerifyUtil {
     public static Boolean checkForNumber(Map<String, String> checkThese){
+         final Logger log = LoggerFactory.getLogger(InputVerifyUtil.class);
+
         List<String> result = checkThese.keySet().stream().filter(
                 x->{ try{
+                    if(checkThese.get(x).isEmpty()) {
+                        return false;
+
+                    }
                     Integer.parseInt(checkThese.get(x));
                     return false;
                     }catch(NumberFormatException _) {

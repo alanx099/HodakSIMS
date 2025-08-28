@@ -8,6 +8,10 @@ import sims.hodaksims.controller.ScreenManagerController;
 import sims.hodaksims.model.Category;
 import sims.hodaksims.model.View;
 import sims.hodaksims.repository.CategoryRepository;
+import sims.hodaksims.utils.InputVerifyUtil;
+
+import java.util.Map;
+import java.util.Objects;
 
 public class AddCategory {
     static final Logger log = LoggerFactory.getLogger(AddCategory.class);
@@ -32,4 +36,12 @@ public class AddCategory {
         cRep.save(cat);
         this.switchToSceneListCategory();
     }
+    public void beforeInsert(){
+        Map<String, String> required = Map.of("Ime",  name.getText(), "Opis", description.getText());
+        Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
+        if (Boolean.TRUE.equals(requiredCheck)) {
+            insertToDb();
+        }
+    }
 }
+

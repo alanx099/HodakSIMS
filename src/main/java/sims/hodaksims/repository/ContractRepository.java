@@ -35,7 +35,7 @@ public class ContractRepository<T extends Contract> extends AbstractRepository<T
             stmt.setLong(1,id);
             ResultSet result = stmt.executeQuery();
             if(!result.next()){
-                throw new EmptyRepositoryResultException("Contract NOT found");
+                throw new EmptyRepositoryResultException("Contract NOT found id:" + id.intValue());
             }else{
                 return this.extractContractFromResultSet(result);
             }
@@ -106,7 +106,7 @@ public class ContractRepository<T extends Contract> extends AbstractRepository<T
             stmt.setLong(2,saveRes.getWarehouse().getId());
             stmt.setDate(3, Date.valueOf(saveRes.getStartDate()));
             stmt.setDate(4, Date.valueOf(saveRes.getEndDate()));
-            stmt.setLong(3,saveRes.getId());
+            stmt.setLong(5,saveRes.getId());
             stmt.executeUpdate();
             T newItem = this.findById(saveRes.getId());
             ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), saveRes.toString(), LocalDateTime.now());

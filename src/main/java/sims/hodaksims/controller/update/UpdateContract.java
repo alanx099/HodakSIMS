@@ -42,6 +42,7 @@ public class UpdateContract<T extends Contract> extends AbstractUpdateController
     private final WarehouseRepository<Warehouse> wRep = new WarehouseRepository<>();
     private final List<Supplier> SuppList = sRep.findAll();
     private final List<Warehouse> WarehouseList = wRep.findAll();
+    private Long itemId;
     @FXML
     public void initialize() {
         supplierCombo.getItems().addAll(SuppList);
@@ -52,6 +53,7 @@ public class UpdateContract<T extends Contract> extends AbstractUpdateController
 
     @Override
     public void setFields(T item) {
+        itemId = item.getId();
         title.setText("Izmijeni ugovor id:" + item.getId());
         supplierCombo.setValue(item.getSupplier());
         warehouseCombo.setValue(item.getWarehouse());
@@ -66,7 +68,8 @@ public class UpdateContract<T extends Contract> extends AbstractUpdateController
     @FXML
     public void insertToDb(){
         Contract cont = new Contract(supplierCombo.getValue(), warehouseCombo.getValue(), contractStart.getValue(), contractEnd.getValue());
-        cRep.save(cont);
+        cont.setId(itemId);
+        cRep.update(cont);
         this.switchToSceneListContract();
     }
     public void beforeInsert() {

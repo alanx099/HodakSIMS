@@ -13,3 +13,32 @@
 2025-08-21 20:51:51,880 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:71] 
 /C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/UpdateContract.fxml:14
 
+2025-08-28 18:10:30,399 INFO [JavaFX Application Thread] s.h.u.InputVerifyUtil [InputVerifyUtil.java:24] emptdx
+2025-08-28 18:10:30,403 INFO [JavaFX Application Thread] s.h.u.InputVerifyUtil [InputVerifyUtil.java:24] emptdx
+2025-08-28 18:14:42,347 ERROR [JavaFX Application Thread] s.h.e.EmptyRepositoryResultException [EmptyRepositoryResultException.java:11] Contract NOT found
+2025-08-28 18:14:48,212 ERROR [JavaFX Application Thread] s.h.e.EmptyRepositoryResultException [EmptyRepositoryResultException.java:11] Contract NOT found
+2025-08-28 18:16:57,788 ERROR [JavaFX Application Thread] s.h.e.EmptyRepositoryResultException [EmptyRepositoryResultException.java:11] Contract NOT found
+2025-08-28 18:19:17,286 ERROR [JavaFX Application Thread] s.h.e.EmptyRepositoryResultException [EmptyRepositoryResultException.java:11] Contract NOT found id:-1877989984
+2025-08-28 18:20:39,579 ERROR [JavaFX Application Thread] s.h.e.EmptyRepositoryResultException [EmptyRepositoryResultException.java:11] Contract NOT found id:68
+2025-08-28 18:28:25,810 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:12] Parameter "#5" is not set [90012-232]
+2025-08-28 18:41:01,928 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] 
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/Menu.fxml
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/ListChanges.fxml:21
+
+2025-08-28 18:42:46,098 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:71] Error resolving onAction='#updateInDb', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/UpdateCategory.fxml:57
+
+2025-08-28 18:42:48,887 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:71] Error resolving onAction='#updateInDb', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/UpdateCategory.fxml:57
+
+2025-08-28 18:42:56,693 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:71] Error resolving onAction='#updateInDb', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/UpdateCategory.fxml:57
+
+2025-08-28 18:42:58,537 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:71] Error resolving onAction='#updateInDb', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/UpdateCategory.fxml:57
+
+2025-08-28 18:43:54,411 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:71] Error resolving onAction='#updateInDb', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/UpdateCategory.fxml:57
+
+2025-08-28 18:47:45,533 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:12] Referential integrity constraint violation: "CONSTRAINT_BE: PUBLIC.WAREHOUSE_CAPACITY FOREIGN KEY(CATEGORY_ID) REFERENCES PUBLIC.CATEGORY(ID) (100)"; SQL statement:
+DELETE FROM CATEGORY WHERE ID=? [23503-232]

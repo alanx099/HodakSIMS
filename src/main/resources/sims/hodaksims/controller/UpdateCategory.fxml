@@ -15,7 +15,7 @@
 <fx:include source="Menu.fxml" />
 </top>
    <center>
-      <GridPane onDragDetected="#updateInDb" prefHeight="517.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="517.0" prefWidth="700.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="211.0" />
             <ColumnConstraints hgrow="NEVER" maxWidth="215.0" minWidth="10.0" />
@@ -54,7 +54,7 @@
                </GridPane.margin>
             </Label>
             <TextField fx:id="description" promptText="Hrvatska" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-            <Button mnemonicParsing="false" onAction="#updateInDb" text="Ažuriraj" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+            <Button mnemonicParsing="false" onAction="#beforeInsert" text="Ažuriraj" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="TOP" />
             <Button mnemonicParsing="false" onAction="#switchToSceneListCategory" text="Otkaži" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP" />
             <Label contentDisplay="BOTTOM" text="Trenutno ažuriramo ID:" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>

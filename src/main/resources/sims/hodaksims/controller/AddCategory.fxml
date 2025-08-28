@@ -53,7 +53,7 @@
                </GridPane.margin>
             </Label>
             <TextField fx:id="description" promptText="Hrvatska" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-            <Button mnemonicParsing="false" onAction="#insertToDb" text="Dodaj " GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Button mnemonicParsing="false" onAction="#beforeInsert" text="Dodaj " GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP" />
             <Button mnemonicParsing="false" onAction="#switchToSceneListCategory" text="Natrag" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP" />
          </children>
       </GridPane>

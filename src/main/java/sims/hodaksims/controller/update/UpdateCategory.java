@@ -10,6 +10,9 @@ import sims.hodaksims.controller.ScreenManagerController;
 import sims.hodaksims.model.Category;
 import sims.hodaksims.model.View;
 import sims.hodaksims.repository.CategoryRepository;
+import sims.hodaksims.utils.InputVerifyUtil;
+
+import java.util.Map;
 
 public class UpdateCategory<T extends Category> extends AbstractUpdateController<T> {
     static final Logger log = LoggerFactory.getLogger(UpdateCategory.class);
@@ -36,12 +39,18 @@ public class UpdateCategory<T extends Category> extends AbstractUpdateController
     }
 
     @FXML
-    public void insertDb(){
+    public void insertToDb(){
         Category nCat = new Category(name.getText(), description.getText());
         nCat.setId(Long.parseLong(title.getText()));
         cRep.update(nCat);
         this.switchToSceneListCategory();
     }
-
+    public void beforeInsert(){
+        Map<String, String> required = Map.of("Ime",  name.getText(), "Opis", description.getText());
+        Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
+        if (Boolean.TRUE.equals(requiredCheck)) {
+            insertToDb();
+        }
+    }
 
 }

@@ -62,22 +62,30 @@ public class AddSupplier {
     contacts.add(contact);
     obvContacts.addAll(contact);
     contactTable.setItems(obvContacts);
-    this.contName.clear();
-    this.contEmail.clear();
-    this.contTel.clear();
-    this.contAddress.clear();
+    contName.clear();
+    contEmail.clear();
+    contTel.clear();
+    contAddress.clear();
     }
     public void deleteSelectedCapacity(){
     contacts.remove(contactTable.getSelectionModel().getSelectedItem());
     obvContacts.remove(contactTable.getSelectionModel().getSelectedItem());
     contactTable.setItems(obvContacts);
     }
+    public void beforePushToTable(){
+        Map<String, String> required = Map.of("Ime", this.contName.getText(), "Email", this.contEmail.getText(),"Adresa", this.contAddress.getText());
+        Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
+        if (Boolean.TRUE.equals(requiredCheck)){
+            this.pushToTable();
+        }
+
+    }
     public void beforeInsert(){
         Map<String, String> required = Map.of("Ime", this.name.getText(), "OIB", this.oib.getText(),"Minimalna naruđba", this.minOrder.getText(), "Vrijeme naruđbe", this.orderTime.getText());
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
+        Map<String, String> numbersMap = Map.of("Minimalna naruđba", this.minOrder.getText(), "Vrijeme naruđbe", this.orderTime.getText());
+        Boolean numbers = InputVerifyUtil.checkForNumber(numbersMap);
         if (Boolean.TRUE.equals(requiredCheck)){
-            Map<String, String> numbersMap = Map.of("Minimalna naruđba", this.minOrder.getText(), "Vrijeme naruđbe", this.orderTime.getText());
-            Boolean numbers = InputVerifyUtil.checkForNumber(numbersMap);
             if(Boolean.TRUE.equals(numbers)){
                  insertToDb();
             }

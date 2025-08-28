@@ -130,6 +130,7 @@ public class CategoryRepository<T extends Category> extends AbstractRepository<T
             stmt.executeUpdate();
         }catch (SQLException e){
             throw new RepositoryAccessException(e.getMessage());
+
         }
         ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), delRes.toString(), LocalDateTime.now());
         unosLog.delEntry("categoy");

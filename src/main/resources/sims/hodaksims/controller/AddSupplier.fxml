@@ -75,7 +75,7 @@
             </Label>
             <TableView fx:id="contactTable" maxHeight="300.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="8" GridPane.rowSpan="2">
               <columns>
-                <TableColumn fx:id="colName" prefWidth="118.0" resizable="false" text="Ime" />
+                <TableColumn fx:id="colName" prefWidth="118.0" text="Ime" />
                 <TableColumn fx:id="colEmail" prefWidth="107.0" text="Email" />
                   <TableColumn fx:id="colTel" prefWidth="95.0" text="Tel." />
                   <TableColumn fx:id="colAddress" prefWidth="122.0" text="Adresa" />
@@ -119,10 +119,10 @@
                      </font>
                   </Label>
                   <TextField fx:id="contName" promptText="Coca Cola d.d" GridPane.columnIndex="1" />
-                  <TextField fx:id="contEmail" promptText="Coca Cola d.d" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="contTel" promptText="Coca Cola d.d" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="contAddress" promptText="Coca Cola d.d" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Button fx:id="addCap" mnemonicParsing="false" onAction="#pushToTable" text="Dodaj " GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+                  <TextField fx:id="contEmail" promptText="davor@coca-cola.hr" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="contTel" promptText="+385 123 5566" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="contAddress" promptText="Trg bana Jelačića 5" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button fx:id="addCap" mnemonicParsing="false" onAction="#beforePushToTable" text="Dodaj " GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
                   <Button mnemonicParsing="false" onAction="#deleteSelectedCapacity" text="Obriši" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <FlowPane alignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="5">
                      <children>

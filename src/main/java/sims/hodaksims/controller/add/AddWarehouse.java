@@ -85,6 +85,7 @@ public class AddWarehouse {
         capacityTable.setItems(currCapacity);
 
     }
+
     public void insertToDb(){
             String wName = name.getText();
             String wCountry = country.getText();
