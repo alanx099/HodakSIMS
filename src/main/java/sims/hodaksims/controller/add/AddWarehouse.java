@@ -12,9 +12,12 @@ import sims.hodaksims.model.WareCapacity;
 import sims.hodaksims.model.Warehouse;
 import sims.hodaksims.repository.CategoryRepository;
 import sims.hodaksims.repository.WarehouseRepository;
+import sims.hodaksims.utils.InputVerifyUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class AddWarehouse {
     @FXML
@@ -46,8 +49,8 @@ public class AddWarehouse {
     private final List<WareCapacity> insertList = new ArrayList<>();
     private final WarehouseRepository<Warehouse> wareRepo = new WarehouseRepository<>();
     public void initialize(){
-            capacityTable.getItems().addAll(currCapacity);
-            categories.getItems().addAll(loadedCategories);
+            capacityTable.setItems(currCapacity);
+            categories.setItems(loadedCategories);
             categories.setCellFactory(cellData-> new ListCell<>(){
                 @Override
                 protected void updateItem(Category category, boolean b) {
@@ -62,29 +65,34 @@ public class AddWarehouse {
             categoryColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getCategory().getName()));
             ammountColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getCapacity().toString()));
     }
-
-    public void pushToTable(){
+        public void beforePushToTable() {
+            Map<String, String> required = Map.of("Kategorija", Objects.toString(this.categories.getSelectionModel().getSelectedItem(), ""),"Količina", this.setAmmount.getText());
+            Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
+            Map<String, String> numbersMap = Map.of("Kolicina", this.setAmmount.getText());
+            Boolean numbers = InputVerifyUtil.checkForNumber(numbersMap);
+            if (Boolean.TRUE.equals(requiredCheck) && Boolean.TRUE.equals(numbers)) {
+                pushToTable();
+            }
+        }
+        public void pushToTable(){
         Category curCat = categories.getValue();
         Integer ammount = Integer.parseInt(setAmmount.getText());
         WareCapacity capacityToPush = new WareCapacity(curCat, ammount);
-        loadedCategories.remove(categories.getValue());
-
-        categories.setItems(loadedCategories);
-        insertList.add(capacityToPush);
-        currCapacity.clear();
-        currCapacity.addAll(insertList);
-        capacityTable.setItems(currCapacity);
-
+        loadedCategories.remove(categories.getSelectionModel().getSelectedItem());
+        currCapacity.add(capacityToPush);
     }
     public void deleteSelectedCapacity(){
-        loadedCategories.add(capacityTable.getSelectionModel().getSelectedItem().getCategory());
-        categories.setItems(loadedCategories);
-        insertList.remove(capacityTable.getSelectionModel().getSelectedItem());
-        currCapacity.setAll(insertList);
-        capacityTable.setItems(currCapacity);
-
+        WareCapacity cap = capacityTable.getSelectionModel().getSelectedItem();
+        loadedCategories.add(cap.getCategory());
+        currCapacity.remove(cap);
     }
-
+    public void beforeInsert(){
+        Map<String, String> required = Map.of("Ime",name.getText(),"Država",country.getText(), "Grad",city.getText(),"Poštanski broj", postalNb.getText(),"Ulica",street.getText(),"Kučni broj", streetNb.getText(), "Kapacitet", currCapacity.isEmpty()?"":"true" );
+        Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
+        if (Boolean.TRUE.equals(requiredCheck)){
+            insertToDb();
+        }
+    }
     public void insertToDb(){
             String wName = name.getText();
             String wCountry = country.getText();

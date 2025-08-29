@@ -40,15 +40,13 @@ public class UpdateContract<T extends Contract> extends AbstractUpdateController
     private final ContractRepository<Contract> cRep = new ContractRepository<>();
     private final SupplierRepository<Supplier> sRep = new SupplierRepository<>();
     private final WarehouseRepository<Warehouse> wRep = new WarehouseRepository<>();
-    private final List<Supplier> SuppList = sRep.findAll();
-    private final List<Warehouse> WarehouseList = wRep.findAll();
+    private final List<Supplier> suppList = sRep.findAll();
+    private final List<Warehouse> warehouseList = wRep.findAll();
     private Long itemId;
     @FXML
     public void initialize() {
-        supplierCombo.getItems().addAll(SuppList);
-
-        warehouseCombo.getItems().addAll(WarehouseList);
-
+        supplierCombo.getItems().addAll(suppList);
+        warehouseCombo.getItems().addAll(warehouseList);
     }
 
     @Override

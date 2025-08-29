@@ -81,14 +81,14 @@ public class ListChanges {
     @FXML
     public void applyFilters(){
         Optional<String> changes = Optional.ofNullable(changeText.getText());
-        Optional<UserRoles> roles = Optional.ofNullable(rolePicker.getSelectionModel().getSelectedItem());
+        Optional<UserRoles> rolesF = Optional.ofNullable(rolePicker.getSelectionModel().getSelectedItem());
         Optional<LocalDate> from = Optional.ofNullable(dateFrom.getValue());
         Optional<LocalDate> to = Optional.ofNullable(dateTo.getValue());
         Stream<ChangeLog> filteri = loadedChanges.stream();
         if(changes.isPresent()){
             filteri = filteri.filter(x -> x.getPromjena().toUpperCase().contains(changeText.getText().toUpperCase()));
         }
-        if(roles.isPresent()){
+        if(rolesF.isPresent()){
             filteri = filteri.filter(x-> x.getRoleNew() == rolePicker.getSelectionModel().getSelectedItem());
         }
         if(from.isPresent()){

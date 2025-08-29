@@ -45,7 +45,6 @@ public class AddProduct {
     private ComboBox<Supplier> supplierDropdown;
 
     private final CategoryRepository<Category> allCategories = new CategoryRepository<>();
-    private  ObservableList<Category> loadedCategories = FXCollections.observableArrayList(allCategories.findAll());
     private final SupplierRepository<Supplier> suppRepo = new SupplierRepository<>();
     private final ObservableList<Supplier> suppliers = FXCollections.observableArrayList();
     private final ObservableList<Supplier> suppliersList = FXCollections.observableArrayList(suppRepo.findAll());
@@ -78,12 +77,12 @@ public class AddProduct {
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
         Map<String, String> numbersMap = Map.of("Cijena", this.price.getText());
         Boolean numbers = InputVerifyUtil.checkForDecimal(numbersMap);
-        if (Boolean.TRUE.equals(requiredCheck)) {
+        if (Boolean.TRUE.equals(requiredCheck) && Boolean.TRUE.equals(numbers)) {
             insertToDb();
         }
     }
     public void insertToDb(){
-        ProductRepository<Product> prodRepo = new ProductRepository();
+        ProductRepository<Product> prodRepo = new ProductRepository<>();
         Product finalItem = new Product(this.sku.getText(), this.name.getText(), BigDecimalParser.parse(price.getText()),category.getSelectionModel().getSelectedItem(), suppliers);
         prodRepo.save(finalItem);
     }

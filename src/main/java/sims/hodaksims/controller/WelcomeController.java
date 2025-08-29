@@ -13,10 +13,8 @@ import java.util.List;
 public class WelcomeController {
     @FXML
     Label motd;
-    private AbstractRepository<Warehouse>warehouse = new WarehouseRepository<>();
-    private List<Warehouse> warehousesTest = warehouse.findAll();
     public void initialize(){
-        // TODO document why this method is empty
+        //this is empty curr
     }
 
    @FXML

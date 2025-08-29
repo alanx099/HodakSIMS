@@ -10,20 +10,17 @@ import sims.hodaksims.controller.ScreenManagerController;
 import sims.hodaksims.model.*;
 import sims.hodaksims.repository.CategoryRepository;
 import sims.hodaksims.repository.ProductRepository;
-import sims.hodaksims.repository.SupplierRepository;
-import sims.hodaksims.repository.WarehouseRepository;
 import sims.hodaksims.utils.InputVerifyUtil;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ListProduct {
     @FXML
-    private TextField SKU;
+    private TextField sku;
     @FXML
     private TextField name;
     @FXML
@@ -119,7 +116,7 @@ public class ListProduct {
     @FXML
     protected void filterAll(){
         Optional<String> nameF = Optional.ofNullable(name.getText());
-        Optional<String> SKUF = Optional.ofNullable(SKU.getText());
+        Optional<String> skuF = Optional.ofNullable(sku.getText());
         Optional<BigDecimal> priceFromF = Optional.ofNullable(priceFrom.getText().isEmpty() ? null : BigDecimalParser.parse(priceFrom.getText()));
         Optional<BigDecimal> priceToF = Optional.ofNullable(priceTo.getText().isEmpty() ? null :BigDecimalParser.parse(priceTo.getText()));
         Optional<Category> categoriesF = Optional.ofNullable(categories.getSelectionModel().getSelectedItem());
@@ -128,8 +125,8 @@ public class ListProduct {
         if(nameF.isPresent()){
             filteri = filteri.filter(x -> x.getName().toUpperCase().contains(name.getText().toUpperCase()));
         }
-        if(SKUF.isPresent()){
-            filteri = filteri.filter(x -> x.getSku().toUpperCase().contains(SKU.getText().toUpperCase()));
+        if(skuF.isPresent()){
+            filteri = filteri.filter(x -> x.getSku().toUpperCase().contains(sku.getText().toUpperCase()));
         }
         if(categoriesF.isPresent()){
             filteri = filteri.filter(x -> x.getCategory().getName().equals(categoriesF.get().getName()));
@@ -148,7 +145,7 @@ public class ListProduct {
     @FXML
     protected void filterReset(){
         name.clear();
-        SKU.clear();
+        sku.clear();
         priceFrom.clear();
         priceTo.clear();
         categories.getSelectionModel().clearSelection();

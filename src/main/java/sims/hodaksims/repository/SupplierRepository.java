@@ -22,13 +22,13 @@ import java.util.Set;
  */
 public class SupplierRepository<T extends Supplier> extends AbstractRepository<T>{
     private static Logger log = LoggerFactory.getLogger(SupplierRepository.class);
-
+    private static final String DESC =  "supplier";
     /**
      *Metoda find by id potražuje klasu skladište u bazipodadataka te nam vraća objekt
      * @param id
      * @return
      */
-    public T findById(Long id){
+    public T findById(Long id) throws RepositoryAccessException {
         T supplier;
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("SELECT SUPPLIER.* FROM SUPPLIER WHERE ID = ?");
@@ -43,16 +43,7 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
         } catch (SQLException e) {
             throw new RepositoryAccessException(e.getMessage());
         }
-        try(Connection connection = DbConUtil.getConnection();
-            PreparedStatement stmt =connection.prepareStatement("SELECT SUPPLIER_CONTACT.* FROM SUPPLIER_CONTACT  WHERE SUPPLIER_ID = ?");
-        ){
-            stmt.setLong(1,id);
-            ResultSet resultSet = stmt.executeQuery();
-            supplier.setContacts(this.extractContactList(resultSet));
-
-        } catch (SQLException e) {
-            throw new RepositoryAccessException(e.getMessage());
-        }
+        supplier.setContacts(this.extractContactList(supplier));
         return supplier;
     }
 
@@ -70,13 +61,7 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
                 ResultSet resultSet = stmt.executeQuery("SELECT SUPPLIER.* FROM SUPPLIER");
                     while(resultSet.next()){
                         Supplier supplier = this.extracSupplierFromResultSet(resultSet);
-                        try(PreparedStatement stmtCap =connection.prepareStatement("SELECT supplier_contact.* FROM supplier_contact  WHERE supplier_id = ?")){
-                            stmtCap.setLong(1,resultSet.getLong(1));
-                            ResultSet resultSetCap = stmtCap.executeQuery();
-                            supplier.setContacts(this.extractContactList(resultSetCap));
-                        } catch (SQLException e) {
-                            throw new RepositoryAccessException(e.getMessage());
-                        }
+                        supplier.setContacts(this.extractContactList(supplier));
                         suppliers.add((T)supplier);
                     }
                 return suppliers;
@@ -90,7 +75,7 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
      * tablicu skladište te uz to i u odvojenu tablicu njen kapacitet
      * @param entity
      */
-    public void save(T entity){
+    public void save(T entity) throws RepositoryAccessException {
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("INSERT INTO " +
                     "SUPPLIER(NAME, OIB, MIN_ORDER, DELIVERY_TIME, JOINED) VALUES ( ?,?,?,?,?)",
@@ -105,7 +90,7 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
             }
             connection.commit();
             ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.toString(), LocalDateTime.now());
-            unosLog.newEntry("supplier");
+            unosLog.newEntry( DESC);
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if(generatedKeys.next()){
                     for (SupplierContact cap : entity.getContacts()){
@@ -143,7 +128,7 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
      * Izmjena briše sve unose za kapaciteta u bazi i piše nove
      * @param entity
      */
-    public void update(T entity){
+    public void update(T entity) throws RepositoryAccessException {
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("UPDATE " +
                     "supplier SET NAME=?, OIB=?, MIN_ORDER=?, DELIVERY_TIME=? WHERE ID =?",
@@ -159,21 +144,10 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
                 capStmt.executeUpdate();
             }
 
-            for (SupplierContact cap : entity.getContacts()){
-                try(PreparedStatement capStmt = connection.prepareStatement("INSERT INTO SUPPLIER_CONTACT(NAME, EMAIL, PHONE, ADDRESS, SUPPLIER_ID) VALUES ( ?,?,?,?,?)");) {
-                    capStmt.setString(1, cap.getName());
-                    capStmt.setString(2, cap.getEmail());
-                    capStmt.setString(3, cap.getPhone());
-                    capStmt.setString(4, cap.getAddress());
-                    capStmt.setLong(5, entity.getId() );
-                    capStmt.executeUpdate();
-                }catch (SQLException e) {
-                    log.error(e.getMessage());
-                }
-            }
+            this.insertContracts(entity);
             T newItem = this.findById(entity.getId());
             ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.getName(), LocalDateTime.now());
-            unosLog.updateEntry(oldItem,newItem, "supplier");
+            unosLog.updateEntry(oldItem,newItem,  DESC);
         }catch (SQLException e){
             throw new RepositoryAccessException(e.getMessage());
         }
@@ -199,7 +173,7 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
             stmt.setLong(1, entity.getId());
             stmt.executeUpdate();
             ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.toString(), LocalDateTime.now());
-            unosLog.delEntry("supplier");
+            unosLog.delEntry( DESC);
         }catch (SQLException e){
             throw new RepositoryAccessException(e.getMessage());
         }
@@ -223,20 +197,39 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
         supplier.setId(id);
         return (T)supplier;
     }
-    private Set<SupplierContact> extractContactList(ResultSet rez){
+    private Set<SupplierContact> extractContactList(Supplier rez){
         Set<SupplierContact> result = new HashSet<>();
-
-        try {while(rez.next()){
-            String name = rez.getString("name");
-            String email = rez.getString("email");
-            String phone = rez.getString("phone");
-            String address = rez.getString("address");
-
-            result.add(new SupplierContact(name, email, phone, address));
-        }}catch(SQLException e){
-            log.error(e.getMessage());
+        try(Connection connection = DbConUtil.getConnection();
+            PreparedStatement stmtCap = connection.prepareStatement("SELECT supplier_contact.* FROM supplier_contact  WHERE supplier_id = ?")){
+            stmtCap.setLong(1,rez.getId());
+            ResultSet resultSetCap = stmtCap.executeQuery();
+            while(resultSetCap.next()){
+                String name = resultSetCap.getString("name");
+                String email = resultSetCap.getString("email");
+                String phone = resultSetCap.getString("phone");
+                String address = resultSetCap.getString("address");
+                result.add(new SupplierContact(name, email, phone, address));
+             }
+        }catch (SQLException e) {
+            throw new RepositoryAccessException(e.getMessage());
         }
+
         return result;
+    }
+    private void insertContracts(T entity){
+        for (SupplierContact cap : entity.getContacts()){
+            try(    Connection connection = DbConUtil.getConnection();
+                    PreparedStatement capStmt = connection.prepareStatement("INSERT INTO SUPPLIER_CONTACT(NAME, EMAIL, PHONE, ADDRESS, SUPPLIER_ID) VALUES ( ?,?,?,?,?)");) {
+                capStmt.setString(1, cap.getName());
+                capStmt.setString(2, cap.getEmail());
+                capStmt.setString(3, cap.getPhone());
+                capStmt.setString(4, cap.getAddress());
+                capStmt.setLong(5, entity.getId() );
+                capStmt.executeUpdate();
+            }catch (SQLException e) {
+                log.error(e.getMessage());
+            }
+        }
     }
 
 }

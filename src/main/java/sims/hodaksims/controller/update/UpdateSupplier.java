@@ -55,7 +55,6 @@ public class UpdateSupplier<T extends Supplier> extends AbstractUpdateController
     SupplierRepository<Supplier> supplierRep = new SupplierRepository<>();
     Set<SupplierContact> contacts = new HashSet<>();
     ObservableList<SupplierContact> obvContacts = FXCollections.observableArrayList(contacts);
-    private final List<SupplierContact> insertList = new ArrayList<>();
     public void initialize(){
     colName.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getName()));
     colEmail.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getEmail()));
@@ -104,6 +103,8 @@ public class UpdateSupplier<T extends Supplier> extends AbstractUpdateController
             if(Boolean.TRUE.equals(numbers)){
                  insertToDb();
             }
+        }else {
+            log.info("Krivi unos");
         }
 
 

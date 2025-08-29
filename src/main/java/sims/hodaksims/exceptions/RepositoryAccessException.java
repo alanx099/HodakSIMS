@@ -11,13 +11,7 @@ public class RepositoryAccessException extends RuntimeException {
     public RepositoryAccessException(String message) {
         super(message);
         log.error(message);
-        if(message.contains("Referential integrity constraint violation")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Pogreška");
-            alert.setHeaderText("Željenu stavku nije moguće obrisati\n");
-            alert.setContentText("Stavku nije moguće obrisati jer postoji stavka koja nju koristi");
-            alert.showAndWait();
-        }
+
     }
 
 }

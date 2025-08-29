@@ -16,17 +16,17 @@ import java.util.List;
  * @param <T>
  */
 public class WarehouseRepository<T extends Warehouse> extends AbstractRepository<T>{
-    private static Logger log = LoggerFactory.getLogger(WarehouseRepository.class);
-
+    private static final Logger log = LoggerFactory.getLogger(WarehouseRepository.class);
+    private static final String DESC = "Warehouse";
     /**
      *Metoda find by id potražuje klasu skladište u bazipodadataka te nam vraća objekt
-     * @param id
-     * @return
+     * @param id identifikator
+     * @return pa vracamo
      */
-    public T findById(Long id){
+    public T findById(Long id)   {
         T warehouse;
         try(Connection connection = DbConUtil.getConnection();
-            PreparedStatement stmt =connection.prepareStatement("SELECT WAREHOUSE.* FROM WAREHOUSE WHERE ID = ?");
+            PreparedStatement stmt =connection.prepareStatement("SELECT WAREHOUSE.* FROM WAREHOUSE WHERE ID = ?")
         ){
             stmt.setLong(1,id);
             ResultSet resultSet = stmt.executeQuery();
@@ -34,17 +34,8 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
                 throw new EmptyRepositoryResultException("Not found");
             }else {
                 warehouse = this.extracWarehouseFromResultSet(resultSet);
+                warehouse.setCapacity(this.extractCapacatyList(id));
             }
-        } catch (SQLException e) {
-            throw new RepositoryAccessException(e.getMessage());
-        }
-        try(Connection connection = DbConUtil.getConnection();
-            PreparedStatement stmt =connection.prepareStatement("SELECT WAREHOUSE_CAPACITY .* FROM WAREHOUSE_CAPACITY  WHERE WAREHOUSE_ID = ?");
-        ){
-            stmt.setLong(1,id);
-            ResultSet resultSet = stmt.executeQuery();
-            warehouse.setCapacity(this.extractCapacatyList(resultSet));
-
         } catch (SQLException e) {
             throw new RepositoryAccessException(e.getMessage());
         }
@@ -53,39 +44,31 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
 
     /**
      * Metoda find all nam vraća sva skladišta unutar baze
-     * @return
-     * @throws RepositoryAccessException
+     * @return vraca
+     * @  baca
      */
-    public List<T>findAll() throws RepositoryAccessException{
+    public List<T>findAll()  {
             List<T> warehouses = new ArrayList<>();
-
             try(Connection connection = DbConUtil.getConnection();
-                Statement stmt = connection.createStatement();) {
-
+                Statement stmt = connection.createStatement()) {
                 ResultSet resultSet = stmt.executeQuery("SELECT WAREHOUSE.* FROM WAREHOUSE");
                     while(resultSet.next()){
                         Warehouse warehouse = this.extracWarehouseFromResultSet(resultSet);
-                        try(PreparedStatement stmtCap =connection.prepareStatement("SELECT WAREHOUSE_CAPACITY .* FROM WAREHOUSE_CAPACITY  WHERE WAREHOUSE_ID = ?")){
-                            stmtCap.setLong(1,resultSet.getLong(1));
-                            ResultSet resultSetCap = stmtCap.executeQuery();
-                            warehouse.setCapacity(this.extractCapacatyList(resultSetCap));
-                        } catch (SQLException e) {
-                            throw new RepositoryAccessException(e.getMessage());
-                        }
-                        warehouses.add((T)warehouse);
+                        warehouse.setCapacity(this.extractCapacatyList(warehouse.getId()));
+                        //noinspection unchecked
+                        warehouses.add((T) warehouse);
                     }
                 return warehouses;
             }catch(SQLException e) {
                 throw new RepositoryAccessException(e.getMessage());
             }
     }
-
     /**
      * Metoda save u sklopu Warehouse radi transakciju koja sprema u odgovarajuću
      * tablicu skladište te uz to i u odvojenu tablicu njen kapacitet
-     * @param entity
+     * @param entity ulaz
      */
-    public void save(T entity){
+    public void save(T entity)   {
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("INSERT INTO " +
                     "WAREHOUSE(NAME, CITY, COUNTRY, POSTAL_CODE, STREET_NUMBER, STREET_NAME) VALUES (?,?,?,?,?,?)",
@@ -96,11 +79,11 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
 
             int rowsAffected = stmt.executeUpdate();
             if(rowsAffected == 0){
-                throw new SQLException("Failed to insert new warehouser");
+                throw new SQLException("Failed to insert new warehouse");
             }
             connection.commit();
             ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.toString(), LocalDateTime.now());
-            unosLog.newEntry("warehouse");
+            unosLog.newEntry(DESC);
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if(generatedKeys.next()){
                     for (WareCapacity cap : entity.getCapacity()){
@@ -115,7 +98,6 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
                 }else{
                     throw new SQLException("No id retrived!");
                 }
-
             }
             connection.setAutoCommit(true);
         }catch (SQLException e){
@@ -137,7 +119,7 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
      * Izmjena briše sve unose za kapaciteta u bazi i piše nove
      * @param entity
      */
-    public void update(T entity){
+    public void update(T entity)   {
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("UPDATE " +
                     "WAREHOUSE SET NAME=?, CITY=?, COUNTRY=?, POSTAL_CODE=?, STREET_NUMBER=?, STREET_NAME=? WHERE ID =?",
@@ -147,38 +129,26 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
             warehoseFields(entity, stmt);
             stmt.setLong(7, entity.getId());
             stmt.executeUpdate();
-
             try(PreparedStatement capStmt = connection.prepareStatement("DELETE FROM WAREHOUSE_CAPACITY WHERE WAREHOUSE_ID = ? ")) {
                 capStmt.setLong(1, entity.getId());
                 capStmt.executeUpdate();
             }
-
-            for (WareCapacity cap : entity.getCapacity()) {
-                try (PreparedStatement capStmt = connection.prepareStatement("INSERT INTO WAREHOUSE_CAPACITY(CAPACITY, WAREHOUSE_ID, CATEGORY_ID) VALUES(?,?,?)")) {
-                    capStmt.setInt(1, cap.getCapacity());
-                    capStmt.setLong(2, entity.getId());
-                    capStmt.setLong(3, cap.getCategory().getId());
-                    capStmt.executeUpdate();
-                } catch (SQLException e) {
-                    log.error(e.getMessage());
-                }
-            }
+            this.insertCapacity(entity);
             T newItem = this.findById(entity.getId());
             ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.getName(), LocalDateTime.now());
-            unosLog.updateEntry(oldItem,newItem, "warehouse");
+            unosLog.updateEntry(oldItem,newItem, DESC);
         }catch (SQLException e){
             throw new RepositoryAccessException(e.getMessage());
         }
     }
-
     /**
      * Metoda kojom brišemo Skladišta i kapacitete iz skladišta
      *
-     * @param entity
-     * @throws RepositoryAccessException
+     * @param entity to je skladište
+     * @  to je greška za obraditi
      */
     @Override
-    public void delete(T entity) throws RepositoryAccessException {
+    public void delete(T entity)   {
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement capStmt = connection.prepareStatement("DELETE FROM WAREHOUSE_CAPACITY WHERE WAREHOUSE_ID = ? ")) {
             capStmt.setLong(1, entity.getId());
@@ -191,18 +161,17 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
             stmt.setLong(1, entity.getId());
             stmt.executeUpdate();
             ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.toString(), LocalDateTime.now());
-            unosLog.delEntry("warehouse");
+            unosLog.delEntry(DESC);
         }catch (SQLException e){
             throw new RepositoryAccessException(e.getMessage());
         }
     }
-
     /**
      * Metoda extracWarehouseFromResultSet je pomoćna metoda za instanciranje
      * objekat iz podataka dobivenih result setom
-     * @param resultSet
-     * @return
-     * @throws SQLException
+     * @param resultSet ulaz
+     * @return izlaz
+     * @throws SQLException greška
      */
     private T extracWarehouseFromResultSet(ResultSet resultSet) throws SQLException{
         Long id =resultSet.getLong("id");
@@ -216,17 +185,37 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
         warehouse.setId(id);
         return (T)warehouse;
     }
-    private List<WareCapacity> extractCapacatyList(ResultSet rez){
+
+    private void insertCapacity(Warehouse entity) {
+        for (WareCapacity cap : entity.getCapacity()) {
+            try (Connection connection = DbConUtil.getConnection();
+                 PreparedStatement capStmt = connection.prepareStatement("INSERT INTO WAREHOUSE_CAPACITY(CAPACITY, WAREHOUSE_ID, CATEGORY_ID) VALUES(?,?,?)")) {
+                capStmt.setInt(1, cap.getCapacity());
+                capStmt.setLong(2, entity.getId());
+                capStmt.setLong(3, cap.getCategory().getId());
+                capStmt.executeUpdate();
+            } catch (SQLException e) {
+                log.error(e.getMessage());
+            }
+        }
+    }
+
+
+    private List<WareCapacity> extractCapacatyList(Long rez)   {
         List<WareCapacity> result = new ArrayList<>();
         CategoryRepository<Category> cRep = new CategoryRepository<>();
-        try {while(rez.next()){
-            Long catId = rez.getLong("category_id");
-            Integer cap = rez.getInt("capacity");
-            result.add(new WareCapacity(cRep.findById(catId),cap));
-        }}catch(SQLException e){
-            log.error(e.getMessage());
+        try(Connection connection = DbConUtil.getConnection();
+            PreparedStatement stmtCap = connection.prepareStatement("SELECT WAREHOUSE_CAPACITY .* FROM WAREHOUSE_CAPACITY  WHERE WAREHOUSE_ID = ?")){
+            stmtCap.setLong(1,rez);
+            ResultSet resultSetCap = stmtCap.executeQuery();
+               while(resultSetCap.next()){
+                        Long catId = resultSetCap.getLong("category_id");
+                        Integer cap = resultSetCap.getInt("capacity");
+                        result.add(new WareCapacity(cRep.findById(catId),cap));
+                }
+        } catch (SQLException e) {
+            throw new RepositoryAccessException(e.getMessage());
         }
         return result;
     }
-
 }

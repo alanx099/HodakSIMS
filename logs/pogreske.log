@@ -61,3 +61,18 @@ INSERT INTO PRODUCT(SKU, NAME, PRICE, CATEGORY_ID) VALUES (?,?,?) [21002-232]
 2025-08-28 23:29:35,123 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] Error resolving onAction='#addNewWarehouse', either the event handler is not in the Namespace or there is an error in the script.
 /C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/ListProduct.fxml:129
 
+2025-08-29 10:21:33,886 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] Connection is broken: "java.net.ConnectException: Connection refused: getsockopt: localhost" [90067-232]
+2025-08-29 10:21:33,905 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] 
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/AddProduct.fxml:16
+
+2025-08-29 10:24:15,850 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] Referential integrity constraint violation: "CONSTRAINT_BE: PUBLIC.WAREHOUSE_CAPACITY FOREIGN KEY(CATEGORY_ID) REFERENCES PUBLIC.CATEGORY(ID) (69)"; SQL statement:
+DELETE FROM CATEGORY WHERE ID=? [23503-232]
+2025-08-29 10:51:42,657 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] Referential integrity constraint violation: "CONSTRAINT_BE: PUBLIC.WAREHOUSE_CAPACITY FOREIGN KEY(CATEGORY_ID) REFERENCES PUBLIC.CATEGORY(ID) (69)"; SQL statement:
+DELETE FROM CATEGORY WHERE ID=? [23503-232]
+2025-08-29 10:51:47,060 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] Referential integrity constraint violation: "CONSTRAINT_BE: PUBLIC.WAREHOUSE_CAPACITY FOREIGN KEY(CATEGORY_ID) REFERENCES PUBLIC.CATEGORY(ID) (67)"; SQL statement:
+DELETE FROM CATEGORY WHERE ID=? [23503-232]
+2025-08-29 18:10:04,112 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 18:38:37,647 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 18:39:56,818 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 18:42:24,307 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 18:44:22,105 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started

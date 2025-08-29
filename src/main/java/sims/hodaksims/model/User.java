@@ -23,11 +23,9 @@ public non-sealed class User extends Entity implements Serializable, Authenticab
      *     prijave
      * </p>
      */
-    private static final Logger log = LoggerFactory.getLogger(User.class);
     private String username;
     private String password;
     private UserRoles role;
-    private static List<User> userList;
 
     /**
      * Privatni konstrukor koji se poziva u podklasi
@@ -92,11 +90,11 @@ public non-sealed class User extends Entity implements Serializable, Authenticab
     /**
      * Javno dostupna klasa za buildanje user klase
      */
-    public static class UserBuilder{
+    public static class UserBuilder extends Entity{
         private final String username;
         private String password;
         private UserRoles role;
-        private Long id;
+
         public  UserBuilder(String user){
             this.username = user;
         }
@@ -108,11 +106,10 @@ public non-sealed class User extends Entity implements Serializable, Authenticab
              this.role = roleSet;
              return this;
         }
-        public UserBuilder setId(Long uId){
-            this.id = uId;
+        public UserBuilder settId(Long uId){
+            this.setId(uId);
             return this;
         }
-
         /**
          * završna metoda za instanciranje user objekta
          * @return

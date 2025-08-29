@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import sims.hodaksims.interfaces.Logable;
 
 import java.io.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,7 +52,7 @@ public class ChangeLog implements Serializable {
      * @throws IOException
      */
     public void saveChangeLog() throws IOException {
-        List<ChangeLog> changes = new ArrayList<>(this.loadChangeLog());
+        List<ChangeLog> changes = loadChangeLog();
 
         try(FileOutputStream fileOut = new FileOutputStream("changes.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut)){
@@ -77,7 +76,6 @@ public class ChangeLog implements Serializable {
             String[] oldValue = oldObject.changesToString();
             String[] printNew = newObject.changesToString();
             Long  diffrence = Arrays.stream(printNew).count() - Arrays.stream(oldValue).count();
-            System.out.println(diffrence);
             this.setPromjena("Promjene nad objektom "+ desc+ " ID= " +oldObject.getId()+"\n");
 
             for(int i = 0; i< Arrays.stream(oldValue).count() ; i++){

@@ -31,7 +31,7 @@ public class UsersRepository<T extends User>{
      * @return
      * @throws RepositoryAccessException
      */
-    public T findById(Long var1) throws RepositoryAccessException {
+    public T findById(Long var1){
         return null;
     }
 
@@ -52,7 +52,7 @@ public class UsersRepository<T extends User>{
                 String username =  fileRows.get(userNumber * ROWS_PER_USER+1);
                 String password = fileRows.get(userNumber * ROWS_PER_USER+2);
                 String role = fileRows.get(userNumber * ROWS_PER_USER+3);
-                User user =  new User.UserBuilder(username).setPassword(password).setRole(UserRoles.valueOf(role)).setId(id).build();
+                User user =  new User.UserBuilder(username).setPassword(password).setRole(UserRoles.valueOf(role)).settId(id).build();
                 users.add((T)user);
                 }
         }catch(IOException _){
@@ -67,7 +67,7 @@ public class UsersRepository<T extends User>{
      * @param users
      * @throws RepositoryAccessException
      */
-    public void save(List<T> users) throws RepositoryAccessException{
+    public void save(List<T> users){
             try(PrintWriter writer = new PrintWriter(USERS_FILE_PATH)){
                 for(T user : users){
                     writer.println(user.getId());
@@ -85,7 +85,7 @@ public class UsersRepository<T extends User>{
      * @param users
      * @throws RepositoryAccessException
      */
-    public void update(List<T> users) throws RepositoryAccessException{
+    public void update(List<T> users){
             this.save(users);
     }
 

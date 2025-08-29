@@ -26,7 +26,7 @@ public class ProductRepository<T extends Product> extends AbstractRepository<T>{
      * @param id
      * @return
      */
-    public T findById(Long id){
+    public T findById(Long id) throws RepositoryAccessException{
         T product;
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("SELECT PRODUCT.* FROM PRODUCT WHERE ID = ?");
@@ -73,7 +73,7 @@ public class ProductRepository<T extends Product> extends AbstractRepository<T>{
      * tablicu skladište te uz to i u odvojenu tablicu njen kapacitet
      * @param entity
      */
-    public void save(T entity){
+    public void save(T entity) throws RepositoryAccessException{
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("INSERT INTO " +
                     "PRODUCT(SKU, NAME, PRICE, CATEGORY_ID) VALUES (?,?,?,?)",
@@ -120,7 +120,7 @@ public class ProductRepository<T extends Product> extends AbstractRepository<T>{
      * Izmjena briše sve unose za kapaciteta u bazi i piše nove
      * @param entity
      */
-    public void update(T entity){
+    public void update(T entity) throws RepositoryAccessException{
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("UPDATE " +
                     "PRODUCT SET SKU=?, NAME=?, PRICE=?, CATEGORY_ID=? WHERE ID =?",
@@ -186,18 +186,19 @@ public class ProductRepository<T extends Product> extends AbstractRepository<T>{
      * @return
      * @throws SQLException
      */
-    private T extracProductFromResultSet(ResultSet resultSet) throws SQLException{
+    private T extracProductFromResultSet(ResultSet resultSet) throws SQLException, RepositoryAccessException {
         CategoryRepository categoryRepository = new CategoryRepository();
         Long id =resultSet.getLong("id");
         String sku = resultSet.getString("sku");
         String name = resultSet.getString("name");
         BigDecimal price = resultSet.getBigDecimal("price");
         Long categoryId = resultSet.getLong("category_id");
+
         Product product = new Product(sku, name, price, categoryRepository.findById(categoryId));
         product.setId(id);
         return (T)product;
     }
-    private List<Supplier> getSupplierList(Long id){
+    private List<Supplier> getSupplierList(Long id) throws RepositoryAccessException {
         List<Supplier> result = new ArrayList<>();
         SupplierRepository<Supplier> sRep = new SupplierRepository<>();
         try(Connection connection = DbConUtil.getConnection();

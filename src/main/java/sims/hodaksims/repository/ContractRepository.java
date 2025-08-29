@@ -54,8 +54,9 @@ public class ContractRepository<T extends Contract> extends AbstractRepository<T
     @Override
     public List<T> findAll() throws RepositoryAccessException {
         List<T> allContracts = new ArrayList<>();
-        try(Connection connection = DbConUtil.getConnection()){
+        try(Connection connection = DbConUtil.getConnection();
             Statement stmt = connection.createStatement();
+        ){
             ResultSet result = stmt.executeQuery("SELECT CONTRACT.* FROM CONTRACT");
             while(result.next()){
                 Contract contRes = this.extractContractFromResultSet(result);
@@ -146,7 +147,7 @@ public class ContractRepository<T extends Contract> extends AbstractRepository<T
      * @return
      * @throws SQLException
      */
-    private T extractContractFromResultSet(ResultSet result) throws SQLException{
+    private T extractContractFromResultSet(ResultSet result) throws SQLException, RepositoryAccessException {
         SupplierRepository<Supplier> supplierRepository = new SupplierRepository<>();
         WarehouseRepository<Warehouse> warehouseRepository = new WarehouseRepository<>();
         Long id = result.getLong("ID");

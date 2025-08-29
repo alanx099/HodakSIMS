@@ -2,7 +2,6 @@ package sims.hodaksims.model;
 
 import sims.hodaksims.interfaces.Logable;
 
-import java.util.List;
 
 /**
  * Klasa Category služi za kategoriziranje naših proizvoda u sustavu
@@ -44,7 +43,7 @@ public class Category extends Entity implements Logable{
      */
     @Override
     public String[] changesToString() {
-        String props = new String("name='" + name + '\'' +  ",description='" + description + '\'');
+        String props = "name='" + name + '\'' +  ",description='" + description + '\'';
 
        return props.split(",");
     }

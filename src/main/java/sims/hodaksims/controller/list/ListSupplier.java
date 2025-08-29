@@ -85,7 +85,7 @@ public class ListSupplier {
     }
     @FXML
     protected void showContacts(){
-        Optional<Set<SupplierContact>> selectedContacts = Optional.ofNullable(supplierTable.getSelectionModel().getSelectedItem().getContacts()).filter(contacts -> !contacts.isEmpty());;
+        Optional<Set<SupplierContact>> selectedContacts = Optional.ofNullable(supplierTable.getSelectionModel().getSelectedItem().getContacts()).filter(contacts -> !contacts.isEmpty());
 
         if(selectedContacts.isPresent()){
             currContacts.clear();
@@ -97,6 +97,7 @@ public class ListSupplier {
             alert.setHeaderText("Nije unesen kontakt");
             alert.setContentText("Naveden dobavljač nema kontakte");
             alert.showAndWait();
+            log.info("Nema kontakte");
         }
     }
 

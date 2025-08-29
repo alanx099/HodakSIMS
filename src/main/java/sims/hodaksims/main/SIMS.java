@@ -26,6 +26,7 @@ public class SIMS extends Application {
         stage.setTitle("SIMS");
         stage.setScene(scene);
         stage.show();
+        log.info("SIMS started");
     }
 
     public static void main(String[] args) {

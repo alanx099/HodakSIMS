@@ -5,16 +5,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import sims.hodaksims.controller.ScreenManagerController;
 import sims.hodaksims.model.*;
-import sims.hodaksims.repository.CategoryRepository;
 import sims.hodaksims.repository.ContractRepository;
 import sims.hodaksims.repository.SupplierRepository;
 import sims.hodaksims.repository.WarehouseRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -43,18 +40,18 @@ public class ListContracts {
     @FXML
     private DatePicker endFilter;
 
-    private final ContractRepository<Contract> contractRepository = new ContractRepository();
+    private final ContractRepository<Contract> contractRepository = new ContractRepository<>();
     private final List<Contract> contracts = contractRepository.findAll();
     private final ObservableList<Contract> contractObservableList = FXCollections.observableArrayList(contracts);
 
     private final SupplierRepository<Supplier> sRep = new SupplierRepository<>();
     private final WarehouseRepository<Warehouse> wRep = new WarehouseRepository<>();
-    private final List<Supplier> SuppList = sRep.findAll();
-    private final List<Warehouse> WarehouseList = wRep.findAll();
+    private final List<Supplier> suppList = sRep.findAll();
+    private final List<Warehouse> warehouseList = wRep.findAll();
     public void initialize(){
         contractTable.setItems(contractObservableList);
-        supplierFilter.getItems().setAll(SuppList);
-        warehouseFilter.getItems().setAll(WarehouseList);
+        supplierFilter.getItems().setAll(suppList);
+        warehouseFilter.getItems().setAll(warehouseList);
         supplier.setCellValueFactory(cellData-> new SimpleStringProperty(cellData.getValue().getSupplier().getName()));
         warehouse.setCellValueFactory(cellData-> new SimpleStringProperty(cellData.getValue().getWarehouse().getName()));
         start.setCellValueFactory(cellData-> new SimpleStringProperty(cellData.getValue().getStartDate().toString()));

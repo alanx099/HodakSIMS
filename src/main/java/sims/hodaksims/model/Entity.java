@@ -14,7 +14,7 @@ public abstract class Entity {
      */
     private Long id;
 
-    public Entity(){
+    protected Entity(){
         this.id = new Random().nextLong();
     }
     public Long getId(){

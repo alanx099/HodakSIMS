@@ -54,7 +54,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="SKU" promptText="978645312" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <TextField fx:id="sku" promptText="978645312" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

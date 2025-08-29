@@ -14,7 +14,6 @@ public class Product extends Entity  implements Logable {
     private BigDecimal price;
     private Category category;
     private List<Supplier> suppliers;
-    //todo napraviti da je Big decimal price u bazi
 
 
     public Product(String sku, String name, BigDecimal price, Category category) {

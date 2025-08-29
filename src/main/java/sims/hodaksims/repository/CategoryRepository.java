@@ -5,7 +5,6 @@ import sims.hodaksims.exceptions.RepositoryAccessException;
 import sims.hodaksims.model.Category;
 import sims.hodaksims.model.ChangeLog;
 import sims.hodaksims.model.CurrentUser;
-import sims.hodaksims.model.Entity;
 import sims.hodaksims.utils.DbConUtil;
 
 import java.sql.Connection;
@@ -16,7 +15,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
-import java.util.Optional;
 
 /**
  * CategoryRepository klasa nasljeđuje abstraktnu klasu {@link AbstractRepository}
@@ -58,8 +56,9 @@ public class CategoryRepository<T extends Category> extends AbstractRepository<T
     @Override
     public List<T> findAll() throws RepositoryAccessException {
         List<T> allCategories = new ArrayList<>();
-        try(Connection connection = DbConUtil.getConnection()){
-            Statement stmt = connection.createStatement();
+        try(Connection connection = DbConUtil.getConnection();
+            Statement stmt = connection.createStatement();){
+
             ResultSet result = stmt.executeQuery("SELECT CATEGORY.* FROM CATEGORY");
             while(result.next()){
                 Category catRes = this.extractCategoryFromResultSet(result);

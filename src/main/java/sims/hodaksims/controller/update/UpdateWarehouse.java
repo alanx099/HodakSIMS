@@ -123,7 +123,7 @@ public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateControll
         Optional<ButtonType> answer= alert.showAndWait();
 
         if(answer.isPresent() && answer.get()== ButtonType.OK){
-            Long ID = Long.parseLong(idPromjene.getText());
+            Long id = Long.parseLong(idPromjene.getText());
             String wName = name.getText();
             String wCountry = country.getText();
             String wCity = city.getText();
@@ -132,7 +132,7 @@ public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateControll
             String wStreetNb = streetNb.getText();
 
             Warehouse curWare = new Warehouse(wName, wCity, wPostal, wStreetNb, wCountry ,wStreet,insertList);
-            curWare.setId(ID);
+            curWare.setId(id);
             wareRepo.update(curWare);
             switchToSceneListSkaldiste();
         }

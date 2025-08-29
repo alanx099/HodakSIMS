@@ -67,6 +67,7 @@ public class AddSupplier {
     contTel.clear();
     contAddress.clear();
     }
+
     public void deleteSelectedCapacity(){
     contacts.remove(contactTable.getSelectionModel().getSelectedItem());
     obvContacts.remove(contactTable.getSelectionModel().getSelectedItem());
@@ -85,16 +86,12 @@ public class AddSupplier {
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
         Map<String, String> numbersMap = Map.of("Minimalna naruđba", this.minOrder.getText(), "Vrijeme naruđbe", this.orderTime.getText());
         Boolean numbers = InputVerifyUtil.checkForNumber(numbersMap);
-        if (Boolean.TRUE.equals(requiredCheck)){
-            if(Boolean.TRUE.equals(numbers)){
+        if (Boolean.TRUE.equals(requiredCheck)&& Boolean.TRUE.equals(numbers)){
                  insertToDb();
-            }
         }
-
 
     }
     public void insertToDb(){
-
         String nameNew = this.name.getText();
         String oibNew = this.oib.getText();
         Integer minOrderNew = Integer.parseInt(this.minOrder.getText());

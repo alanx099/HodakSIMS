@@ -16,14 +16,15 @@ import static java.util.stream.Collectors.maxBy;
 import static java.util.stream.Collectors.toList;
 
 public class InputVerifyUtil {
+    private InputVerifyUtil() {
+    }
+    final Logger log = LoggerFactory.getLogger(InputVerifyUtil.class);
     public static Boolean checkForNumber(Map<String, String> checkThese){
-         final Logger log = LoggerFactory.getLogger(InputVerifyUtil.class);
 
         List<String> result = checkThese.keySet().stream().filter(
                 x->{ try{
                     if(checkThese.get(x).isEmpty()) {
                         return false;
-
                     }
                     Integer.parseInt(checkThese.get(x));
                     return false;
@@ -37,7 +38,6 @@ public class InputVerifyUtil {
         return result.isEmpty();
     }
     public static Boolean checkForDecimal(Map<String, String> checkThese){
-        final Logger log = LoggerFactory.getLogger(InputVerifyUtil.class);
 
         List<String> result = checkThese.keySet().stream().filter(
                 x->{ try{

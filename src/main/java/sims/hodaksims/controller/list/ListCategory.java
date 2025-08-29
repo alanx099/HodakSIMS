@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import sims.hodaksims.controller.ScreenManagerController;
+import sims.hodaksims.exceptions.RepositoryAccessException;
 import sims.hodaksims.model.Category;
 import sims.hodaksims.model.View;
 import sims.hodaksims.repository.CategoryRepository;
@@ -42,12 +43,19 @@ public class ListCategory {
         alert.setHeaderText("Brisanje označene kategorije");
         alert.setContentText("Jeste li sigurno da želire obrisati kategoriju: " + categoryTable.getSelectionModel().getSelectedItem().getName());
         Optional<ButtonType> answer= alert.showAndWait();
-        if(answer.isPresent()){
-            if(answer.get()== ButtonType.OK){
-                allCategories.delete(categoryTable.getSelectionModel().getSelectedItem());
+        if(answer.isPresent() && answer.get()== ButtonType.OK){
+                try {
+                    allCategories.delete(categoryTable.getSelectionModel().getSelectedItem());
+                } catch (RepositoryAccessException e) {
+                    if(e.getMessage().contains("Referential integrity constraint violation")){
+                        Alert alertRF = new Alert(Alert.AlertType.ERROR);
+                        alertRF.setTitle("Pogreška");
+                        alertRF.setHeaderText("Željenu stavku nije moguće obrisati\n");
+                        alertRF.setContentText("Stavku nije moguće obrisati jer postoji stavka koja nju koristi");
+                        alertRF.showAndWait();
+                    }
+                }
                 categoryTable.getItems().remove((categoryTable.getSelectionModel().getSelectedItem()));
-
-            }
         }
 
     }
