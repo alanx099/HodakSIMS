@@ -44,9 +44,9 @@ public class AddSupplier {
 
 
     SupplierRepository<Supplier> supplierRep = new SupplierRepository<>();
-    Set<SupplierContact> contacts = new HashSet<>();
-    ObservableList<SupplierContact> obvContacts = FXCollections.observableArrayList(contacts);
+    ObservableList<SupplierContact> obvContacts = FXCollections.observableArrayList();
     public void initialize(){
+    contactTable.setItems(obvContacts);
     colName.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getName()));
     colEmail.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getEmail()));
     colTel.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getPhone()));
@@ -59,8 +59,7 @@ public class AddSupplier {
     String tel = this.contTel.getText();
     String address = this.contAddress.getText();
     SupplierContact contact = new SupplierContact(nameC, email, tel, address);
-    contacts.add(contact);
-    obvContacts.addAll(contact);
+    obvContacts.add(contact);
     contactTable.setItems(obvContacts);
     contName.clear();
     contEmail.clear();
@@ -69,9 +68,7 @@ public class AddSupplier {
     }
 
     public void deleteSelectedCapacity(){
-    contacts.remove(contactTable.getSelectionModel().getSelectedItem());
     obvContacts.remove(contactTable.getSelectionModel().getSelectedItem());
-    contactTable.setItems(obvContacts);
     }
     public void beforePushToTable(){
         Map<String, String> required = Map.of("Ime", this.contName.getText(), "Email", this.contEmail.getText(),"Adresa", this.contAddress.getText());
@@ -79,10 +76,9 @@ public class AddSupplier {
         if (Boolean.TRUE.equals(requiredCheck)){
             this.pushToTable();
         }
-
     }
     public void beforeInsert(){
-        Map<String, String> required = Map.of("Ime", this.name.getText(), "OIB", this.oib.getText(),"Minimalna naruđba", this.minOrder.getText(), "Vrijeme naruđbe", this.orderTime.getText());
+        Map<String, String> required = Map.of("Ime", this.name.getText(), "OIB", this.oib.getText(),"Minimalna naruđba", this.minOrder.getText(), "Vrijeme naruđbe", this.orderTime.getText(),"Osoba za kontakt",obvContacts.isEmpty()?"":"true" );
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
         Map<String, String> numbersMap = Map.of("Minimalna naruđba", this.minOrder.getText(), "Vrijeme naruđbe", this.orderTime.getText());
         Boolean numbers = InputVerifyUtil.checkForNumber(numbersMap);
@@ -92,17 +88,17 @@ public class AddSupplier {
 
     }
     public void insertToDb(){
+        Set<SupplierContact> contactSet = new HashSet<>(obvContacts);
         String nameNew = this.name.getText();
         String oibNew = this.oib.getText();
         Integer minOrderNew = Integer.parseInt(this.minOrder.getText());
         Integer orderTimeNew = Integer.parseInt(this.orderTime.getText());
-
-        Supplier curSup = new Supplier(contacts, nameNew, oibNew, minOrderNew, orderTimeNew);
+        Supplier curSup = new Supplier(contactSet, nameNew, oibNew, minOrderNew, orderTimeNew);
         supplierRep.save(curSup);
-        switchToSceneAddSkaldiste();
+        switchToSceneAddWarehouse();
     }
     @FXML
-    protected void switchToSceneAddSkaldiste() {
+    protected void switchToSceneAddWarehouse() {
         ScreenManagerController.switchTo(View.LISTCHANGES);
     }
 

@@ -12,11 +12,9 @@ import sims.hodaksims.model.WareCapacity;
 import sims.hodaksims.model.Warehouse;
 import sims.hodaksims.repository.CategoryRepository;
 import sims.hodaksims.repository.WarehouseRepository;
+import sims.hodaksims.utils.InputVerifyUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateController<T> {
@@ -49,27 +47,24 @@ public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateControll
 
     private final CategoryRepository<Category> allCategories = new CategoryRepository<>();
     private  ObservableList<Category> loadedCategories = FXCollections.observableArrayList(allCategories.findAll());
-
     private final ObservableList<WareCapacity> currCapacity = FXCollections.observableArrayList();
-    private final List<WareCapacity> insertList = new ArrayList<>();
     private final WarehouseRepository<Warehouse> wareRepo = new WarehouseRepository<>();
     public void initialize(){
-            capacityTable.getItems().addAll(currCapacity);
-            categories.getItems().addAll(loadedCategories);
-            categories.setCellFactory(cellData-> new ListCell<>(){
-                @Override
-                protected void updateItem(Category category, boolean b) {
-                    super.updateItem(category, b);
-                    if(b || category==null){
+        capacityTable.setItems(currCapacity);
+        categories.setItems(loadedCategories);
+        categories.setCellFactory(cellData-> new ListCell<>(){
+            @Override
+            protected void updateItem(Category category, boolean b) {
+                super.updateItem(category, b);
+                if(b || category==null){
                     setText(null);
-                    }else{
-                        setText(category.getName());
-
-                    }
+                }else{
+                    setText(category.getName());
                 }
-            });
-            categoryColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getCategory().getName()));
-            ammountColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getCapacity().toString()));
+            }
+        });
+        categoryColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getCategory().getName()));
+        ammountColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getCapacity().toString()));
     }
 
     @Override
@@ -80,40 +75,47 @@ public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateControll
         postalNb.setText(item.getPostalCode());
         street.setText(item.getStreetName());
         streetNb.setText(item.getStreetNumber());
-        insertList.addAll(item.getCapacity());
-        currCapacity.setAll(insertList);
+        currCapacity.addAll(item.getCapacity());
         capacityTable.setItems(currCapacity);
         naslov.setText("Ažuriranje skladišta: " + item.getName());
         idPromjene.setText(item.getId().toString());
-        Set<String> kategorijeString = insertList.stream().map(x->x.getCategory().getName()).collect(Collectors.toSet());
-
+        Set<String> kategorijeString =  currCapacity.stream().map(x->x.getCategory().getName()).collect(Collectors.toSet());
             loadedCategories = FXCollections.observableArrayList(loadedCategories.stream()
                     .filter(x -> !kategorijeString.contains(x.getName())).toList());
 
         categories.setItems(loadedCategories);
 
     }
-
+    @FXML
+    public void beforePushToTable() {
+        Map<String, String> required = Map.of("Kategorija", Objects.toString(this.categories.getSelectionModel().getSelectedItem(), ""),"Količina", this.setAmmount.getText());
+        Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
+        Map<String, String> numbersMap = Map.of("Kolicina", this.setAmmount.getText());
+        Boolean numbers = InputVerifyUtil.checkForNumber(numbersMap);
+        if (Boolean.TRUE.equals(requiredCheck) && Boolean.TRUE.equals(numbers)) {
+            pushToTable();
+        }
+    }
     public void pushToTable(){
         Category curCat = categories.getValue();
         Integer ammount = Integer.parseInt(setAmmount.getText());
         WareCapacity capacityToPush = new WareCapacity(curCat, ammount);
-        loadedCategories.remove(categories.getValue());
-
-        categories.setItems(loadedCategories);
-        insertList.add(capacityToPush);
-        currCapacity.clear();
-        currCapacity.addAll(insertList);
-        capacityTable.setItems(currCapacity);
-
+        loadedCategories.remove(categories.getSelectionModel().getSelectedItem());
+        currCapacity.add(capacityToPush);
     }
     public void deleteSelectedCapacity(){
-        loadedCategories.add(capacityTable.getSelectionModel().getSelectedItem().getCategory());
-        categories.setItems(loadedCategories);
-        insertList.remove(capacityTable.getSelectionModel().getSelectedItem());
-        currCapacity.setAll(insertList);
-        capacityTable.setItems(currCapacity);
-
+        if(capacityTable.getSelectionModel().getSelectedItem()==null)return;
+        WareCapacity cap = capacityTable.getSelectionModel().getSelectedItem();
+        loadedCategories.add(cap.getCategory());
+        currCapacity.remove(cap);
+    }
+    @FXML
+    public void beforeInsert(){
+        Map<String, String> required = Map.of("Ime",name.getText(),"Država",country.getText(), "Grad",city.getText(),"Poštanski broj", postalNb.getText(),"Ulica",street.getText(),"Kučni broj", streetNb.getText(), "Kapacitet", currCapacity.isEmpty()?"":"true" );
+        Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
+        if (Boolean.TRUE.equals(requiredCheck)){
+            insertToDb();
+        }
     }
     public void insertToDb(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -131,12 +133,11 @@ public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateControll
             String wStreet = street.getText();
             String wStreetNb = streetNb.getText();
 
-            Warehouse curWare = new Warehouse(wName, wCity, wPostal, wStreetNb, wCountry ,wStreet,insertList);
+            Warehouse curWare = new Warehouse(wName, wCity, wPostal, wStreetNb, wCountry ,wStreet, currCapacity);
             curWare.setId(id);
             wareRepo.update(curWare);
             switchToSceneListSkaldiste();
         }
-
     }
     @FXML
     protected void switchToSceneListSkaldiste() {

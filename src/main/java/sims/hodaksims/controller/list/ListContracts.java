@@ -74,6 +74,7 @@ public class ListContracts {
     }
     @FXML
     protected void switchToSceneUpdateContract() {
+        if(contractTable.getSelectionModel().getSelectedItem() == null) return;
         ScreenManagerController.switchToWithData(View.UPDATECONTRACT, contractTable.getSelectionModel().getSelectedItem());
     }
     @FXML

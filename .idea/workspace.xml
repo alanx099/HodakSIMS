@@ -5,38 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4471e722-e8a0-4346-a13e-98506052ee56" name="Changes" comment="Ground Zero">
+      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/update/UpdateProduct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/UpdateProduct.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/changes.ser" beforeDir="false" afterPath="$PROJECT_DIR$/changes.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/pogreske.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/pogreske.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/WelcomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/WelcomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/add/AddContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/add/AddContract.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/add/AddProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/add/AddProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/add/AddSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/add/AddSupplier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/add/AddWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/add/AddWarehouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListChanges.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListChanges.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListContracts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListContracts.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListSupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/update/UpdateContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/update/UpdateContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListWarehouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/update/UpdateSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/update/UpdateSupplier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/update/UpdateWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/update/UpdateWarehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/exceptions/RepositoryAccessException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/exceptions/RepositoryAccessException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/main/SIMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/main/SIMS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/ChangeLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/ChangeLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/CategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/ContractRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/ContractRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Warehouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/SupplierRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/SupplierRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/UsersRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/WarehouseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/WarehouseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/utils/InputVerifyUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/utils/InputVerifyUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/AddWarehouse.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/AddWarehouse.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/AddProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/AddProduct.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/ListProduct.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/ListProduct.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/ListSupplier.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/ListSupplier.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/ListWarehouse.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/ListWarehouse.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/UpdateSupplier.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/UpdateSupplier.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/UpdateWarehouse.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/UpdateWarehouse.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,38 +87,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.HelloApplication.executor": "Run",
-    "Application.Helper.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.Start.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Marko/.FAKS/JAVA/SIMS PROJEKT/HodakSIMS/src/main/resources/sims/hodaksims/controller",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.editor",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Helper.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Start.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Marko/.FAKS/JAVA/SIMS PROJEKT/HodakSIMS/src/main/resources/sims/hodaksims/controller&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "h2"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;h2&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Marko\.FAKS\JAVA\SIMS PROJEKT\HodakSIMS\src\main\resources\sims\hodaksims\controller" />
@@ -149,10 +142,10 @@
       <recent name="sims.hodaksims.controller" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="sims.hodaksims.controller.update" />
       <recent name="sims.hodaksims.controller.list" />
       <recent name="sims.hodaksims.repository" />
       <recent name="sims.hodaksims.controller.add" />
-      <recent name="sims.hodaksims.controller.update" />
       <recent name="sims.hodaksims.controller" />
     </key>
   </component>
@@ -233,7 +226,8 @@
       <workItem from="1756394479120" duration="6906000" />
       <workItem from="1756402867167" duration="10671000" />
       <workItem from="1756414990263" duration="2176000" />
-      <workItem from="1756455644038" duration="13686000" />
+      <workItem from="1756455644038" duration="27405000" />
+      <workItem from="1756540975222" duration="3887000" />
     </task>
     <servers />
   </component>

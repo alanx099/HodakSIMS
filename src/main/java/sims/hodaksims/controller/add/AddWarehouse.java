@@ -46,7 +46,6 @@ public class AddWarehouse {
     private final CategoryRepository<Category> allCategories = new CategoryRepository<>();
     private  ObservableList<Category> loadedCategories = FXCollections.observableArrayList(allCategories.findAll());
     private final ObservableList<WareCapacity> currCapacity = FXCollections.observableArrayList();
-    private final List<WareCapacity> insertList = new ArrayList<>();
     private final WarehouseRepository<Warehouse> wareRepo = new WarehouseRepository<>();
     public void initialize(){
             capacityTable.setItems(currCapacity);
@@ -82,6 +81,7 @@ public class AddWarehouse {
         currCapacity.add(capacityToPush);
     }
     public void deleteSelectedCapacity(){
+        if(capacityTable.getSelectionModel().getSelectedItem()==null)return;
         WareCapacity cap = capacityTable.getSelectionModel().getSelectedItem();
         loadedCategories.add(cap.getCategory());
         currCapacity.remove(cap);
@@ -101,7 +101,7 @@ public class AddWarehouse {
             String wStreet = street.getText();
             String wStreetNb = streetNb.getText();
 
-            Warehouse curWare = new Warehouse(wName, wCity, wPostal, wStreetNb, wCountry ,wStreet,insertList);
+            Warehouse curWare = new Warehouse(wName, wCity, wPostal, wStreetNb, wCountry ,wStreet,currCapacity);
             wareRepo.save(curWare);
             switchToSceneAddSkaldiste();
     }

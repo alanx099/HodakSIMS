@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ProductRepository<T extends Product> extends AbstractRepository<T>{
     private static Logger log = LoggerFactory.getLogger(ProductRepository.class);
-
+    private static final String DESC = "product";
     /**
      *Metoda find by id potražuje klasu skladište u bazipodadataka te nam vraća objekt
      * @param id
@@ -88,7 +88,7 @@ public class ProductRepository<T extends Product> extends AbstractRepository<T>{
             }
             connection.commit();
             ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.toString(), LocalDateTime.now());
-            unosLog.newEntry("product");
+            unosLog.newEntry(DESC);
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if(generatedKeys.next()){
                     for (Supplier sup : entity.getSuppliers()){
@@ -147,7 +147,7 @@ public class ProductRepository<T extends Product> extends AbstractRepository<T>{
             }
             T newItem = this.findById(entity.getId());
             ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.getName(), LocalDateTime.now());
-            unosLog.updateEntry(oldItem,newItem, "product");
+            unosLog.updateEntry(oldItem,newItem, DESC);
         }catch (SQLException e){
             throw new RepositoryAccessException(e.getMessage());
         }
@@ -173,7 +173,7 @@ public class ProductRepository<T extends Product> extends AbstractRepository<T>{
             stmt.setLong(1, entity.getId());
             stmt.executeUpdate();
             ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.toString(), LocalDateTime.now());
-            unosLog.delEntry("product");
+            unosLog.delEntry(DESC);
         }catch (SQLException e){
             throw new RepositoryAccessException(e.getMessage());
         }
@@ -187,7 +187,7 @@ public class ProductRepository<T extends Product> extends AbstractRepository<T>{
      * @throws SQLException
      */
     private T extracProductFromResultSet(ResultSet resultSet) throws SQLException, RepositoryAccessException {
-        CategoryRepository categoryRepository = new CategoryRepository();
+        CategoryRepository<Category> categoryRepository = new CategoryRepository<>();
         Long id =resultSet.getLong("id");
         String sku = resultSet.getString("sku");
         String name = resultSet.getString("name");

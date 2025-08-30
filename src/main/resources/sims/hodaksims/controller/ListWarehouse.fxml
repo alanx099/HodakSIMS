@@ -134,9 +134,9 @@
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
-               <padding>
+               <GridPane.margin>
                   <Insets right="10.0" />
-               </padding>
+               </GridPane.margin>
             </TableView>
             <ComboBox fx:id="categories" prefWidth="220.0" promptText="Odaberi Kategoriju " GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" />
             <TextField fx:id="setAmmount" promptText="Minimalni kapacitet" GridPane.columnIndex="3" GridPane.rowIndex="8">
@@ -184,7 +184,7 @@
                   <Insets right="10.0" />
                </padding>
                <children>
-                  <Button mnemonicParsing="false" onAction="#filterAll" text="Filtriraj" />
+                  <Button mnemonicParsing="false" onAction="#beforeFilter" text="Filtriraj" />
                   <Button mnemonicParsing="false" onAction="#filterReset" text="Resetiraj filter" />
                </children>
             </FlowPane>

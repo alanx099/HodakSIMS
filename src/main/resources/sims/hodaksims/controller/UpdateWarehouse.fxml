@@ -84,7 +84,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Button fx:id="addCap" mnemonicParsing="false" onAction="#pushToTable" text="Dodaj " GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
+            <Button fx:id="addCap" mnemonicParsing="false" onAction="#beforePushToTable" text="Dodaj " GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
             <Button mnemonicParsing="false" onAction="#deleteSelectedCapacity" text="Obriši" GridPane.columnIndex="2" GridPane.rowIndex="12" />
             <TableView fx:id="capacityTable" maxHeight="300.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="8" GridPane.rowSpan="3">
               <columns>
@@ -113,7 +113,7 @@
             </VBox>
             <FlowPane alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="13">
                <children>
-                  <Button alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#insertToDb" text="Ažuriraj" />
+                  <Button alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#beforeInsert" text="Ažuriraj" />
                   <Button mnemonicParsing="false" onAction="#switchToSceneListSkaldiste" text="Odustani" />
                </children>
             </FlowPane>

@@ -77,6 +77,7 @@ public class ListProduct {
 
     }
     public void showSuppliers(){
+        if(productsTable.getSelectionModel().getSelectedItem() == null) return;
         Optional<List<Supplier>> selectedCategories = Optional.ofNullable(productsTable.getSelectionModel().getSelectedItem().getSuppliers());
 
         if(selectedCategories.isPresent()){
@@ -137,10 +138,8 @@ public class ListProduct {
         if(priceToF.isPresent()){
             filteri = filteri.filter(x -> x.getPrice().compareTo(priceToF.get()) <= 0);
         }
-
         prodObv.setAll(filteri.toList());
         productsTable.setItems(prodObv);
-
     }
     @FXML
     protected void filterReset(){
@@ -156,7 +155,11 @@ public class ListProduct {
     protected void addNewProduct(){
         ScreenManagerController.switchTo(View.ADDPRODUCT);
     }
-
+    @FXML
+    protected void updateProductNow(){
+        if(productsTable.getSelectionModel().getSelectedItem() == null) return;
+        ScreenManagerController.switchToWithData(View.UPDATEPRODUCT, productsTable.getSelectionModel().getSelectedItem());
+    }
 
 
 }

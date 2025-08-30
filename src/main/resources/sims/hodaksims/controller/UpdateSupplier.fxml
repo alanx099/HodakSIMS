@@ -123,12 +123,12 @@
                   <TextField fx:id="contEmail" promptText="Coca Cola d.d" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="contTel" promptText="Coca Cola d.d" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="contAddress" promptText="Coca Cola d.d" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Button fx:id="addCap" mnemonicParsing="false" onAction="#pushToTable" text="Dodaj " GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+                  <Button fx:id="addCap" mnemonicParsing="false" onAction="#beforePushToTable" text="Dodaj " GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
                   <Button mnemonicParsing="false" onAction="#deleteSelectedCapacity" text="Obriši" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <FlowPane alignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="5">
                      <children>
                         <Button mnemonicParsing="false" onAction="#beforeInsert" text="Unesi dobavljača" />
-                        <Button mnemonicParsing="false" onAction="#switchToSceneListSkaldiste" text="Natrag" />
+                        <Button mnemonicParsing="false" onAction="#switchToSceneListWarehouse" text="Natrag" />
                      </children>
                   </FlowPane>
                </children>

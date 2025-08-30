@@ -76,3 +76,90 @@ DELETE FROM CATEGORY WHERE ID=? [23503-232]
 2025-08-29 18:39:56,818 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
 2025-08-29 18:42:24,307 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
 2025-08-29 18:44:22,105 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 18:45:24,852 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 19:01:36,185 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 19:02:22,716 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 19:09:05,893 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 19:09:46,790 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 19:09:52,119 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] Error resolving onAction='#beforeFilter', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/ListSupplier.fxml:185
+
+2025-08-29 19:09:53,460 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] Error resolving onAction='#beforeFilter', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/ListSupplier.fxml:185
+
+2025-08-29 19:09:55,232 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] Error resolving onAction='#beforeFilter', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/ListSupplier.fxml:185
+
+2025-08-29 19:09:57,260 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] Error resolving onAction='#beforeFilter', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/ListSupplier.fxml:185
+
+2025-08-29 19:10:44,778 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 19:11:00,163 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] Error resolving onAction='#beforeFilter', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/ListSupplier.fxml:185
+
+2025-08-29 19:11:43,283 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 19:18:40,270 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 19:25:01,525 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 19:29:24,136 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:08:28,423 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:11:56,002 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:12:01,524 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] Error resolving onAction='#switchToSceneListProducts', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/AddProduct.fxml:107
+
+2025-08-29 20:12:03,983 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] Error resolving onAction='#switchToSceneListProducts', either the event handler is not in the Namespace or there is an error in the script.
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/AddProduct.fxml:107
+
+2025-08-29 20:12:35,645 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:13:08,088 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:15:40,978 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:19:13,851 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:20:44,854 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:21:22,369 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:25:30,990 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:28:45,585 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:30:02,765 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:32:51,974 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:36:46,626 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 20:44:10,504 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 21:02:52,448 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 21:04:47,011 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 21:06:28,677 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 21:07:47,011 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 21:24:36,386 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 21:42:19,532 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 21:45:03,239 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 21:45:18,554 INFO [JavaFX Application Thread] s.h.c.l.ListSupplier [ListSupplier.java:99] Nema kontakte
+2025-08-29 21:45:27,917 INFO [JavaFX Application Thread] s.h.c.u.UpdateSupplier [UpdateSupplier.java:107] Krivi unos
+2025-08-29 21:46:00,030 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 21:48:21,655 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 21:48:34,012 INFO [JavaFX Application Thread] s.h.c.u.UpdateSupplier [UpdateSupplier.java:106] Krivi unos
+2025-08-29 21:49:15,939 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 21:50:05,160 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 21:51:06,830 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 21:53:52,173 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:33:52,486 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:41:12,521 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:41:31,184 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:42:29,388 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:71] 
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/UpdateProduct.fxml:44
+
+2025-08-29 22:43:34,528 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:46:02,094 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:47:46,149 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:49:05,828 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:50:55,732 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:51:53,065 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:52:20,210 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:52:22,162 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:53:01,318 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:55:41,588 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 22:59:33,468 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 23:01:02,410 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-29 23:01:34,301 ERROR [JavaFX Application Thread] s.h.e.EmptyRepositoryResultException [EmptyRepositoryResultException.java:11] Not found
+2025-08-29 23:03:23,712 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-30 10:03:30,587 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started
+2025-08-30 10:04:22,127 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] Connection is broken: "java.net.ConnectException: Connection refused: getsockopt: localhost" [90067-232]
+2025-08-30 10:04:22,129 ERROR [JavaFX Application Thread] s.h.c.ScreenManagerController [ScreenManagerController.java:54] 
+/C:/Users/Marko/.FAKS/JAVA/SIMS%20PROJEKT/HodakSIMS/target/classes/sims/hodaksims/controller/ListProduct.fxml:17
+
+2025-08-30 10:18:53,585 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:29] SIMS started

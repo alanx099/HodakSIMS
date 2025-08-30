@@ -124,7 +124,7 @@
                   <Insets right="30.0" />
                </GridPane.margin>
                <children>
-                  <Button mnemonicParsing="false" text="Uredi" />
+                  <Button mnemonicParsing="false" onAction="#updateProductNow" text="Uredi" />
                   <Button mnemonicParsing="false" onAction="#deleteSelectedProduct" text="Obriši" />
                   <Button mnemonicParsing="false" onAction="#addNewProduct" text="Dodaj" />
                   <Button mnemonicParsing="false" onAction="#showSuppliers" text="Pogledaj dobavljače" />

@@ -182,7 +182,7 @@
                   <Insets right="10.0" top="3.0" />
                </padding>
                <children>
-                  <Button mnemonicParsing="false" onAction="#filterAll" text="Filtriraj" />
+                  <Button mnemonicParsing="false" onAction="#beforeFilter" text="Filtriraj" />
                   <Button mnemonicParsing="false" onAction="#filterReset" text="Resetiraj filter" />
                </children>
             </FlowPane>

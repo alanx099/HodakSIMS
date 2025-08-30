@@ -87,8 +87,8 @@ public class Product extends Entity  implements Logable {
         StringBuilder props = new StringBuilder();
         props.append("sku='").append(sku).append('\'')
                 .append(", name='").append(name).append('\'')
-                .append(", price=").append(price)
-                .append(", category=").append(category);
+                .append(", price=").append(price).append('\'')
+                .append(", category=").append(category).append('\'');
         for(Supplier supplier : suppliers) {
             props.append(supplier.changesToString()[0]);
         }

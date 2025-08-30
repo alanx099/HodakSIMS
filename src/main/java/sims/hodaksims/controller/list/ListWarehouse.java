@@ -9,9 +9,11 @@ import sims.hodaksims.controller.ScreenManagerController;
 import sims.hodaksims.model.*;
 import sims.hodaksims.repository.CategoryRepository;
 import sims.hodaksims.repository.WarehouseRepository;
+import sims.hodaksims.utils.InputVerifyUtil;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -85,6 +87,7 @@ public class ListWarehouse {
             tableStreetNumber.setCellValueFactory(cellData -> new SimpleStringProperty((cellData.getValue()).getStreetNumber()));
     }
     public void showCapacity(){
+        if(wareTable.getSelectionModel().getSelectedItem() == null) return;
         Optional<List<WareCapacity>> selectedCategories = Optional.ofNullable(wareTable.getSelectionModel().getSelectedItem().getCapacity());
 
         if(selectedCategories.isPresent()){
@@ -99,12 +102,13 @@ public class ListWarehouse {
             alert.showAndWait();
         }
     }
-    public void pushToTable(){
-        Category curCat = categories.getValue();
-        Integer ammount = Integer.parseInt(setAmmount.getText());
-        WareCapacity capacityToPush = new WareCapacity(curCat, ammount);
-        currCapacity.add(capacityToPush);
-        capacityTable.setItems(currCapacity);
+    public void beforeFilter() {
+        Map<String, String> numbersMap = Map.of("Količina", this.setAmmount.getText());
+        Boolean numbers = InputVerifyUtil.checkForNumber(numbersMap);
+        String category = Objects.toString(this.categories.getSelectionModel().getSelectedItem());
+        if (Boolean.TRUE.equals(numbers)){
+            filterAll();
+        }
     }
     public void deleteSelectedCapacity(){
         capacityTable.getItems().removeAll((capacityTable.getSelectionModel().getSelectedItem()));
@@ -187,6 +191,7 @@ public class ListWarehouse {
     }
     @FXML
     protected void updateWareHouse(){
+        if(wareTable.getSelectionModel().getSelectedItem() == null) return;
         ScreenManagerController.switchToWithData(View.UPADTEWAREHOUSE, wareTable.getSelectionModel().getSelectedItem());
     }
 

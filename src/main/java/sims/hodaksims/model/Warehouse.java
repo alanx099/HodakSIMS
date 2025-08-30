@@ -122,7 +122,6 @@ public class Warehouse extends Entity implements Logable {
               //  .append(", inventar=").append(inventar);
         for(WareCapacity cap : capacity){
             props.append(cap.changesToString()[0]);
-
         }
         return props.toString().split(",");
     }

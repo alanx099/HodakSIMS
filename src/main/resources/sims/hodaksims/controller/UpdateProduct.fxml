@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sims.hodaksims.controller.add.AddProduct">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sims.hodaksims.controller.update.UpdateProduct">
 <top>
 <fx:include source="Menu.fxml" />
 </top>
@@ -41,7 +41,7 @@
             <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Novi proizvod" textOverrun="CLIP" wrapText="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label fx:id="title" text="Trenutno ažuriramo:" textOverrun="CLIP" wrapText="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="22.0" />
                </font>
@@ -103,7 +103,7 @@
                   </Label>
                   <FlowPane alignment="CENTER" GridPane.columnSpan="3" GridPane.rowIndex="1">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#beforeInsert" text="Unesi proizvod" />
+                        <Button mnemonicParsing="false" onAction="#beforeInsert" text="Ažuriraj proizvod" />
                         <Button mnemonicParsing="false" onAction="#switchToSceneListProducts" text="Natrag" />
                      </children>
                   </FlowPane>

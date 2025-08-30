@@ -65,6 +65,8 @@ public class ListCategory {
     }
     @FXML
     protected void switchToSceneUpdateCategory() {
+        if(categoryTable.getSelectionModel().getSelectedItem() == null) return;
+
         ScreenManagerController.switchToWithData(View.UPDATECATEGORY, categoryTable.getSelectionModel().getSelectedItem());
     }
     @FXML

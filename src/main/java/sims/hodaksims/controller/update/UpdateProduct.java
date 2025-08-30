@@ -1,4 +1,4 @@
-package sims.hodaksims.controller.add;
+package sims.hodaksims.controller.update;
 
 import com.fasterxml.jackson.core.io.BigDecimalParser;
 import javafx.beans.property.SimpleStringProperty;
@@ -6,22 +6,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import sims.hodaksims.controller.ScreenManagerController;
-import sims.hodaksims.model.*;
+import sims.hodaksims.model.Category;
+import sims.hodaksims.model.Product;
+import sims.hodaksims.model.Supplier;
+import sims.hodaksims.model.View;
 import sims.hodaksims.repository.CategoryRepository;
 import sims.hodaksims.repository.ProductRepository;
 import sims.hodaksims.repository.SupplierRepository;
-import sims.hodaksims.repository.WarehouseRepository;
 import sims.hodaksims.utils.InputVerifyUtil;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-public class AddProduct {
+public class UpdateProduct <T extends Product> extends AbstractUpdateController<T> {
     @FXML
     private TextField name;
     @FXML
@@ -43,12 +43,14 @@ public class AddProduct {
     private TableColumn<Supplier, String> supplierDeliveryTime;
     @FXML
     private ComboBox<Supplier> supplierDropdown;
+    @FXML
+    private Label title;
 
     private final CategoryRepository<Category> allCategories = new CategoryRepository<>();
     private final SupplierRepository<Supplier> suppRepo = new SupplierRepository<>();
     private final ObservableList<Supplier> suppliers = FXCollections.observableArrayList();
-    private final ObservableList<Supplier> suppliersList = FXCollections.observableArrayList(suppRepo.findAll());
-
+    private  ObservableList<Supplier> suppliersList = FXCollections.observableArrayList(suppRepo.findAll());
+    private Long id;
     public void initialize(){
         category.getItems().addAll(allCategories.findAll());
         supplierTable.setItems(suppliers);
@@ -57,10 +59,22 @@ public class AddProduct {
         supplierMinOrder.setCellValueFactory(cellData -> new SimpleStringProperty((cellData.getValue()).getMinOrder().toString()));
         supplierDeliveryTime.setCellValueFactory(cellData -> new SimpleStringProperty((cellData.getValue()).getDeliveryTime().toString()));
 
-        supplierDropdown.setItems(suppliersList);
-
     }
 
+    @Override
+    public void setFields(T item) {
+        title.setText("Trenutno ažuriramo:"+item.getName()+"Id:"+item.getId().toString() );
+        name.setText(item.getName());
+        sku.setText(item.getSku());
+        price.setText(item.getPrice().toString());
+        category.setValue(item.getCategory());
+        suppliers.addAll(item.getSuppliers());
+        Set<String> supplierOibString =  suppliers.stream().map(x->x.getOib()).collect(Collectors.toSet());
+        suppliersList = FXCollections.observableArrayList(suppliersList.stream()
+                .filter(x -> !supplierOibString.contains(x.getOib())).toList());
+        supplierDropdown.setItems(suppliersList);
+        id= item.getId();
+    }
     public void pushToTable(){
         if (supplierDropdown.getSelectionModel().getSelectedItem() == null)return;
         Supplier supplier = supplierDropdown.getSelectionModel().getSelectedItem();
@@ -73,7 +87,6 @@ public class AddProduct {
         suppliersList.add(supplier);
         suppliers.remove(supplier);
     }
-
     public void beforeInsert(){
         Map<String, String> required = Map.of("SKU", this.sku.getText(),"Ime", this.name.getText(),  "Kategorija", Objects.toString(this.category.getSelectionModel().getSelectedItem(), ""),"Cijena", this.price.getText(), "Dobavljači", suppliers.isEmpty()?"":"true");
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
@@ -86,13 +99,12 @@ public class AddProduct {
     public void insertToDb(){
         ProductRepository<Product> prodRepo = new ProductRepository<>();
         Product finalItem = new Product(this.sku.getText(), this.name.getText(), BigDecimalParser.parse(price.getText()),category.getSelectionModel().getSelectedItem(), suppliers);
-        prodRepo.save(finalItem);
+        finalItem.setId(id);
+        prodRepo.update(finalItem);
         switchToSceneListProducts();
     }
     @FXML
     protected void switchToSceneListProducts() {
         ScreenManagerController.switchTo(View.LISTPRODUCT);
     }
-
-
 }

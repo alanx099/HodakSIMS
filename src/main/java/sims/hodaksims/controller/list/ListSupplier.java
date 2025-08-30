@@ -7,19 +7,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sims.hodaksims.controller.LoginController;
 import sims.hodaksims.controller.ScreenManagerController;
 import sims.hodaksims.model.*;
-import sims.hodaksims.repository.CategoryRepository;
 import sims.hodaksims.repository.SupplierRepository;
-import sims.hodaksims.repository.WarehouseRepository;
+import sims.hodaksims.utils.InputVerifyUtil;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ListSupplier {
@@ -85,6 +82,8 @@ public class ListSupplier {
     }
     @FXML
     protected void showContacts(){
+        if(supplierTable.getSelectionModel().getSelectedItem() == null) return;
+
         Optional<Set<SupplierContact>> selectedContacts = Optional.ofNullable(supplierTable.getSelectionModel().getSelectedItem().getContacts()).filter(contacts -> !contacts.isEmpty());
 
         if(selectedContacts.isPresent()){
@@ -98,6 +97,14 @@ public class ListSupplier {
             alert.setContentText("Naveden dobavljač nema kontakte");
             alert.showAndWait();
             log.info("Nema kontakte");
+        }
+    }
+    @FXML
+    protected void beforeFilter(){
+        Map<String, String> numbersMap = Map.of("Min. Narudba od", this.minOrderFrom.getText(),"Min. Narudba do", this.minOrderTo.getText(),"Vrijeme naručivanja od", this.orderTimeStart.getText(),"Vrijeme naručivanja do",this.orderTimeEnd.getText());
+        Boolean numbers = InputVerifyUtil.checkForNumber(numbersMap);
+        if (Boolean.TRUE.equals(numbers)) {
+            filterAll();
         }
     }
 
@@ -119,7 +126,6 @@ public class ListSupplier {
         if(oibF.isPresent()){
             filteri = filteri.filter(supplier -> supplier.getOib().toLowerCase().contains(oibF.get().toLowerCase()));
         }
-        try {
             if (minOrderFromF.isPresent() && !minOrderFromF.get().isBlank()) {
                 Integer minOrderFromI = Integer.parseInt(minOrderFromF.get());
                 filteri = filteri.filter(supplier -> supplier.getMinOrder().compareTo(minOrderFromI) > 0);
@@ -136,13 +142,6 @@ public class ListSupplier {
                 Integer orderTimeStartI = Integer.parseInt(orderTimeStartF.get());
                 filteri = filteri.filter(supplier -> supplier.getMinOrder().compareTo(orderTimeStartI) > 0);
             }
-        }catch (NumberFormatException e){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Pogreška");
-            alert.setHeaderText("Loše vrijednosti u filteru ");
-            alert.setContentText("U poljima za unos brojeva molimo koristiti isključivo brojeve");
-            alert.showAndWait();
-        }
         if(dateJoinedStartF.isPresent()){
             filteri = filteri.filter(supplier -> supplier.getJoined().isAfter(dateJoinedStartF.get()));
         }
@@ -183,6 +182,7 @@ public class ListSupplier {
     }
     @FXML
     protected void updateSupplierNow(){
+        if(supplierTable.getSelectionModel().getSelectedItem() == null) return;
         ScreenManagerController.switchToWithData(View.UPDATESUPPLIER, supplierTable.getSelectionModel().getSelectedItem());
     }
 }
