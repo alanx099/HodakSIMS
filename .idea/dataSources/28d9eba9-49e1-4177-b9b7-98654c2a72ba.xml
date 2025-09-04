@@ -166,7 +166,9 @@
     <collation id="159" parent="2" name="VIETNAMESE"/>
     <collation id="160" parent="2" name="VIETNAMESE_VIETNAM"/>
     <role id="161" parent="2" name="PUBLIC"/>
-    <schema id="162" parent="2" name="INFORMATION_SCHEMA"/>
+    <schema id="162" parent="2" name="INFORMATION_SCHEMA">
+      <LastIntrospectionLocalTimestamp>2025-09-04.16:25:48</LastIntrospectionLocalTimestamp>
+    </schema>
     <schema id="163" parent="2" name="PUBLIC">
       <Current>1</Current>
       <LastIntrospectionLocalTimestamp>2025-06-14.10:04:59</LastIntrospectionLocalTimestamp>

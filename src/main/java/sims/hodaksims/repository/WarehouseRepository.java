@@ -8,7 +8,9 @@ import sims.hodaksims.utils.DbConUtil;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * WareHouse repository nasljeđuuje abstrakrnu klasu {@link AbstractRepository}
@@ -218,4 +220,22 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
         }
         return result;
     }
+    public Set<Pair<Product, Integer>> getInventory(Long id){
+        ProductRepository<Product> pRep = new ProductRepository<>();
+        Set<Pair<Product, Integer>> result = new HashSet<>();
+        try(Connection connection = DbConUtil.getConnection();
+            PreparedStatement stmtCap = connection.prepareStatement("SELECT INVENTORY.* FROM INVENTORY WHERE WAREHOUSE_ID = ?")){
+            stmtCap.setLong(1,id);
+            ResultSet resultSetCap = stmtCap.executeQuery();
+            while(resultSetCap.next()){
+                Long productId = resultSetCap.getLong("product_id");
+                Integer quantity = resultSetCap.getInt("quantity");
+                result.add(new Pair<>(pRep.findById(productId),quantity));
+            }
+        } catch (SQLException e) {
+            throw new RepositoryAccessException(e.getMessage());
+        }
+        return result;
+    }
+
 }

@@ -10,7 +10,9 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * ContractRepository klasa nasljeđuje abstraktnu klasu {@link AbstractRepository}
@@ -158,7 +160,26 @@ public class ContractRepository<T extends Contract> extends AbstractRepository<T
         Contract resCont = new Contract(supplierId, wareHouseId, startDate, endDate);
         resCont.setId(id);
         return (T)resCont;
-
+    }
+    public Set<Pair<Supplier, List<Product>>> getSuppliersFromWarehouse(Long warehouseId) throws RepositoryAccessException {
+        SupplierRepository<Supplier> supplierRepository = new SupplierRepository<>();
+        Set<Pair<Supplier, List<Product>>> resSet = new HashSet<>();
+        Set<Long> supplierIds = new HashSet<>();
+        try(Connection connection = DbConUtil.getConnection();
+            PreparedStatement stmt = connection.prepareStatement("SELECT CONTRACT.SUPPLIER_ID FROM CONTRACT WHERE WAREHOUSE_ID=? AND DATE_START<=CURRENT_DATE AND DATE_END>=CURRENT_DATE ");
+        ){
+            stmt.setLong(1,warehouseId);
+            ResultSet result = stmt.executeQuery();
+            while(result.next()){
+                supplierIds.add(result.getLong("SUPPLIER_ID"));
+            }
+        }catch (SQLException e){
+            throw new RepositoryAccessException(e.getMessage());
+        }
+        for(Long supplierId : supplierIds){
+            resSet.add(new Pair<>(supplierRepository.findById(supplierId), supplierRepository.getProductList(supplierId)));
+        }
+        return resSet;
     }
 }
 

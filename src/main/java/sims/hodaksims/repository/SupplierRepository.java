@@ -231,5 +231,20 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
             }
         }
     }
+    public List<Product> getProductList(Long id){
+        ProductRepository<Product> pRep = new ProductRepository<>();
+        List<Product> res = new ArrayList<>();
+        try(Connection connection = DbConUtil.getConnection();
+            PreparedStatement stmtCap = connection.prepareStatement("SELECT PRODUCT_SUPPLIER.* FROM PRODUCT_SUPPLIER  WHERE supplier_id = ?")) {
+            stmtCap.setLong(1, id);
+            ResultSet resultSetCap = stmtCap.executeQuery();
+            while(resultSetCap.next()){
+                    res.add(pRep.findById(resultSetCap.getLong("PRODUCT_ID")));
+            }
+        }catch (SQLException e){
+            throw new RepositoryAccessException(e.getMessage());
+        }
+        return res;
+    }
 
 }

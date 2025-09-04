@@ -40,6 +40,10 @@
          <items>
             <MenuItem mnemonicParsing="false" onAction="#switchToSceneChanges" text="Lista promjena" />
          </items></Menu>
+      <Menu mnemonicParsing="false" text="Inventory">
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#switchToSceneInventory" text="Inventory" />
+         </items></Menu>
       <Menu fx:id="user" mnemonicParsing="false" text="Welcome User!" />
   </menus>
 </MenuBar>

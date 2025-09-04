@@ -17,6 +17,14 @@ public class Supplier extends Entity implements Logable {
     private LocalDate joined;
     private Set<SupplierContact> contacts;
 
+    public Supplier(Supplier selectedItem) {
+        super.setId(selectedItem.getId());
+        this.name = selectedItem.getName();
+        this.oib = selectedItem.getOib();
+        this.deliveryTime = selectedItem.getDeliveryTime();
+
+    }
+
     public Set<SupplierContact> getContacts() {
         return contacts;
     }

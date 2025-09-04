@@ -17,7 +17,7 @@ public class Warehouse extends Entity implements Logable {
     private String country;
     private String streetName;
     private List<WareCapacity> capacity;
-    private Set<Product> inventar;
+    private Set<Pair<Product, Integer>> inventar;
 
     public Warehouse(String name, String city, String postalCode, String streetNumber, String country, String streetName) {
         this.name = name;
@@ -38,11 +38,9 @@ public class Warehouse extends Entity implements Logable {
         this.streetName = streetName;
         this.capacity = capacity;
     }
-        public Set<Product> getInventar() {
-        return inventar;
-    }
 
-    public void setInventar(Set<Product> inventar) {
+
+    public void setInventar(Set<Pair<Product, Integer>> inventar) {
         this.inventar = inventar;
     }
 

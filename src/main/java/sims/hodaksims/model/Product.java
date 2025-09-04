@@ -73,13 +73,7 @@ public class Product extends Entity  implements Logable {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "sku='" + sku + '\'' +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", category=" + category +
-                ", suppliers=" + suppliers +
-                '}';
+        return  name + "  sku:" + sku;
     }
 
     @Override
