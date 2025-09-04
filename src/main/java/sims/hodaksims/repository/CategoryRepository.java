@@ -1,7 +1,9 @@
 package sims.hodaksims.repository;
 
+import javafx.scene.control.Alert;
 import sims.hodaksims.exceptions.EmptyRepositoryResultException;
 import sims.hodaksims.exceptions.RepositoryAccessException;
+import sims.hodaksims.exceptions.RepositoryIntegrityException;
 import sims.hodaksims.model.Category;
 import sims.hodaksims.model.ChangeLog;
 import sims.hodaksims.model.CurrentUser;
@@ -121,19 +123,24 @@ public class CategoryRepository<T extends Category> extends AbstractRepository<T
      * @throws RepositoryAccessException
      */
     @Override
-    public void delete(T delRes) throws RepositoryAccessException {
-        try(Connection connection = DbConUtil.getConnection();
-            PreparedStatement stmt = connection.prepareStatement("DELETE FROM CATEGORY WHERE ID=?")
-        ){
-            stmt.setLong(1,delRes.getId());
+    public void delete(T delRes) throws RepositoryIntegrityException, RepositoryAccessException {
+        try (Connection connection = DbConUtil.getConnection();
+             PreparedStatement stmt = connection.prepareStatement("DELETE FROM CATEGORY WHERE ID=?")
+        ) {
+            stmt.setLong(1, delRes.getId());
             stmt.executeUpdate();
-        }catch (SQLException e){
-            throw new RepositoryAccessException(e.getMessage());
-
+        } catch (SQLException e) {
+            if (e.getMessage().contains("Referential integrity constraint violation")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Pogreška");
+                alert.setHeaderText("Kategorija se koristi\n");
+                alert.setContentText("Nije moguće brisati kategorije koje se koriste");
+                alert.showAndWait();
+                throw new RepositoryIntegrityException(e.getMessage());
+            }
+            ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), delRes.toString(), LocalDateTime.now());
+            unosLog.delEntry("categoy");
         }
-        ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), delRes.toString(), LocalDateTime.now());
-        unosLog.delEntry("categoy");
-
     }
 
     /**

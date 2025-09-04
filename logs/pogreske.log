@@ -1,21 +1,43 @@
-2025-09-04 16:10:11,989 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 16:15:39,762 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 16:16:27,606 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 16:20:02,015 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 16:20:32,302 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 16:20:54,127 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 17:31:54,359 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 17:33:06,573 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 17:37:21,548 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 17:38:48,648 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 17:48:17,801 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 17:54:25,521 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 17:58:44,064 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 18:09:51,051 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 18:11:45,925 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 18:12:30,178 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 18:18:17,157 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 19:08:35,046 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 19:45:53,377 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 19:47:45,373 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
-2025-09-04 20:13:47,404 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 20:44:17,830 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 20:44:32,854 INFO [JavaFX Application Thread] s.h.c.l.ListCategory [ListCategory.java:54] Referential integrity constraint violation: "CONSTRAINT_BE: PUBLIC.WAREHOUSE_CAPACITY FOREIGN KEY(CATEGORY_ID) REFERENCES PUBLIC.CATEGORY(ID) (69)"; SQL statement:
+DELETE FROM CATEGORY WHERE ID=? [23503-232]
+2025-09-04 21:20:01,306 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 21:24:57,876 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 21:25:55,566 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 21:26:08,785 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] No data is available [2000-232]
+2025-09-04 21:28:03,086 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 21:28:13,542 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] No data is available [2000-232]
+2025-09-04 21:29:15,059 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 21:29:23,296 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] No data is available [2000-232]
+2025-09-04 21:29:24,973 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] No data is available [2000-232]
+2025-09-04 21:30:34,726 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 21:30:45,356 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] No data is available [2000-232]
+2025-09-04 21:31:56,254 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 21:32:04,326 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:45] 1/1
+2025-09-04 21:32:04,332 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] No data is available [2000-232]
+2025-09-04 21:36:42,797 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 21:36:50,268 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:45] 1/41
+2025-09-04 21:36:50,272 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:56] 67
+2025-09-04 21:36:53,321 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:45] 1/41
+2025-09-04 21:36:53,324 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:56] 51
+2025-09-04 21:37:21,325 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:45] 1/41
+2025-09-04 21:37:21,328 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:56] 35
+2025-09-04 21:37:25,043 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:45] 1/41
+2025-09-04 21:37:25,046 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:56] 19
+2025-09-04 21:37:28,315 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:45] 1/41
+2025-09-04 21:37:28,318 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:56] 3
+2025-09-04 21:37:28,321 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] Parameter "#1" is not set [90012-232]
+2025-09-04 21:37:31,746 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:45] 1/41
+2025-09-04 21:37:31,749 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:56] 3
+2025-09-04 21:37:31,750 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] Parameter "#1" is not set [90012-232]
+2025-09-04 21:37:33,767 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:45] 1/41
+2025-09-04 21:37:33,771 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:56] 3
+2025-09-04 21:37:33,772 ERROR [JavaFX Application Thread] s.h.e.RepositoryAccessException [RepositoryAccessException.java:13] Parameter "#1" is not set [90012-232]
+2025-09-04 21:39:28,763 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 21:39:50,641 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:55] 500
+2025-09-04 21:39:56,990 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:55] 3
+2025-09-04 21:40:07,970 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:55] 499
+2025-09-04 21:42:02,378 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 21:42:29,764 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:64] 715/715
+2025-09-04 21:43:04,140 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 21:43:30,898 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:58] 413

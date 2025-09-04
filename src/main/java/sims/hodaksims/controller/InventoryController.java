@@ -82,7 +82,6 @@ public class InventoryController {
     ObservableList<Supplier> currSupplierList = FXCollections.observableArrayList();
     ObservableList<Product> supplierProducts = FXCollections.observableArrayList();
     ObservableList<WareCapacity> inventorySpace = FXCollections.observableArrayList();
-    ObservableList<Supplier> cantOrder= FXCollections.observableArrayList();
     ObservableList<Pair<Supplier, Pair<Warehouse,Pair<Product,Integer>>>> realOrder = FXCollections.observableArrayList();
 
     public void initialize(){
@@ -127,6 +126,15 @@ public class InventoryController {
             Integer amount = (int) Math.round(orderAmmountSlider.getValue());
             realOrder.add(new Pair<>(new Supplier(orderSupplier.getSelectionModel().getSelectedItem()), new Pair<> (selectedWarehouse.getSelectionModel().getSelectedItem(),new Pair<>(orderProduct.getSelectionModel().getSelectedItem(), amount))));
         }
+    }
+    @FXML
+    public void sendProduct(){
+        if(productSend.getSelectionModel().getSelectedItem()!= null && productAmmountSlider != null && productAmmountSlider.getValue() > 0 ){
+            InventoryDbActions.depart(selectedWarehouse.getSelectionModel().getSelectedItem(),productSend.getSelectionModel().getSelectedItem().getKey(),(int)productAmmountSlider.getValue());
+            productQuantity.setAll(warehouseRepository.getInventory(selectedWarehouse.getSelectionModel().getSelectedItem().getId()));
+            inventorySpace.setAll(selectedWarehouse.getSelectionModel().getSelectedItem().getCapacity());
+        }
+
     }
 
     private void selectedWarehouseLogic(){
@@ -254,6 +262,5 @@ public class InventoryController {
     public void clearSend(){}
     @FXML
     public void filterReset(){}
-    @FXML
-    public void sendProduct(){}
+
 }

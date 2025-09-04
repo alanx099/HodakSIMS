@@ -5,28 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4471e722-e8a0-4346-a13e-98506052ee56" name="Changes" comment="Ground Zero">
-      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/InventoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Pair.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/InventoryDbActions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/28d9eba9-49e1-4177-b9b7-98654c2a72ba.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/28d9eba9-49e1-4177-b9b7-98654c2a72ba.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/28d9eba9-49e1-4177-b9b7-98654c2a72ba/storage_v2/_src_/database/SIMS.fNYmAA/schema/INFORMATION_SCHEMA.NBgcMw.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/28d9eba9-49e1-4177-b9b7-98654c2a72ba/storage_v2/_src_/database/SIMS.fNYmAA/schema/INFORMATION_SCHEMA.NBgcMw.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/exceptions/RepositoryIntegrityException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/changes.ser" beforeDir="false" afterPath="$PROJECT_DIR$/changes.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/pogreske.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/pogreske.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/main/SIMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/main/SIMS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Supplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/model/Warehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/ContractRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/ContractRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/SupplierRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/SupplierRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/WarehouseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/WarehouseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/Inventory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/Inventory.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/Menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sims/hodaksims/controller/Menu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/controller/list/ListCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/exceptions/BadCredentialsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/exceptions/BadCredentialsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/AbstractRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/AbstractRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/CategoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/InventoryDbActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sims/hodaksims/repository/InventoryDbActions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +29,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Exception" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Exception" />
       </list>
     </option>
   </component>
@@ -232,7 +219,7 @@
       <workItem from="1756550766004" duration="3176000" />
       <workItem from="1756673454087" duration="1212000" />
       <workItem from="1756729127360" duration="8257000" />
-      <workItem from="1756828420910" duration="58814000" />
+      <workItem from="1756828420910" duration="63993000" />
     </task>
     <servers />
   </component>

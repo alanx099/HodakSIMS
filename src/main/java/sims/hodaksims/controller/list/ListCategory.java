@@ -5,8 +5,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sims.hodaksims.controller.ScreenManagerController;
 import sims.hodaksims.exceptions.RepositoryAccessException;
+import sims.hodaksims.exceptions.RepositoryIntegrityException;
 import sims.hodaksims.model.Category;
 import sims.hodaksims.model.View;
 import sims.hodaksims.repository.CategoryRepository;
@@ -27,6 +30,7 @@ public class ListCategory {
     @FXML
     private TableColumn<Category, String> descroptionColumn;
 
+    private static Logger log = LoggerFactory.getLogger(ListCategory.class);
 
     private final CategoryRepository<Category> allCategories = new CategoryRepository<>();
     private final List<Category> loadedCategories = allCategories.findAll();
@@ -46,19 +50,14 @@ public class ListCategory {
         if(answer.isPresent() && answer.get()== ButtonType.OK){
                 try {
                     allCategories.delete(categoryTable.getSelectionModel().getSelectedItem());
-                } catch (RepositoryAccessException e) {
-                    if(e.getMessage().contains("Referential integrity constraint violation")){
-                        Alert alertRF = new Alert(Alert.AlertType.ERROR);
-                        alertRF.setTitle("Pogreška");
-                        alertRF.setHeaderText("Željenu stavku nije moguće obrisati\n");
-                        alertRF.setContentText("Stavku nije moguće obrisati jer postoji stavka koja nju koristi");
-                        alertRF.showAndWait();
-                    }
+                } catch (RepositoryIntegrityException | RepositoryAccessException e){
+                    log.info(e.getMessage());
+                }
                 }
                 categoryTable.getItems().remove((categoryTable.getSelectionModel().getSelectedItem()));
         }
 
-    }
+
     @FXML
     protected void switchToSceneAddCategory() {
         ScreenManagerController.switchTo(View.ADDCATEGORY);
