@@ -45,5 +45,15 @@
             <MenuItem mnemonicParsing="false" onAction="#switchToSceneInventory" text="Inventory" />
          </items></Menu>
       <Menu fx:id="user" mnemonicParsing="false" text="Welcome User!" />
+      <Menu fx:id="regCor" disable="true" mnemonicParsing="false" text="Registriraj korisnika">
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#switchToSceneRegister" text="Registriraj Korisnika" />
+         </items>
+      </Menu>
+      <Menu mnemonicParsing="false" text="Odjava">
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#switchToSceneLogout" text="Odjavi se " />
+         </items>
+      </Menu>
   </menus>
 </MenuBar>

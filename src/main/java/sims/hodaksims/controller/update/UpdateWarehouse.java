@@ -16,7 +16,9 @@ import sims.hodaksims.utils.InputVerifyUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+ * UpdateWarehouse je kontroler klasa za unos skladišta
+ */
 public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateController<T> {
     @FXML
     private TextField name;
@@ -49,6 +51,9 @@ public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateControll
     private  ObservableList<Category> loadedCategories = FXCollections.observableArrayList(allCategories.findAll());
     private final ObservableList<WareCapacity> currCapacity = FXCollections.observableArrayList();
     private final WarehouseRepository<Warehouse> wareRepo = new WarehouseRepository<>();
+    /**
+     * initialize postavlja podatke u javafx izbornike
+     */
     public void initialize(){
         capacityTable.setItems(currCapacity);
         categories.setItems(loadedCategories);
@@ -87,6 +92,9 @@ public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateControll
 
     }
     @FXML
+    /**
+     * beforePushToTable provjerava odabrane vrijednosti
+     */
     public void beforePushToTable() {
         Map<String, String> required = Map.of("Kategorija", Objects.toString(this.categories.getSelectionModel().getSelectedItem(), ""),"Količina", this.setAmmount.getText());
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
@@ -96,6 +104,9 @@ public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateControll
             pushToTable();
         }
     }
+    /**
+     * pushToTable ubacuje odabrane vrijednosti u tablicu
+     */
     public void pushToTable(){
         Category curCat = categories.getValue();
         Integer ammount = Integer.parseInt(setAmmount.getText());
@@ -110,6 +121,9 @@ public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateControll
         currCapacity.remove(cap);
     }
     @FXML
+    /**
+     * beforeInsert metoda koja se poziva kako bi se provjerili podatci prije unosa
+     */
     public void beforeInsert(){
         Map<String, String> required = Map.of("Ime",name.getText(),"Država",country.getText(), "Grad",city.getText(),"Poštanski broj", postalNb.getText(),"Ulica",street.getText(),"Kučni broj", streetNb.getText(), "Kapacitet", currCapacity.isEmpty()?"":"true" );
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
@@ -117,6 +131,9 @@ public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateControll
             insertToDb();
         }
     }
+    /**
+     * insertToDb ažurira podatke u bazi
+     */
     public void insertToDb(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Ažuriranje skladišta");
@@ -140,6 +157,9 @@ public class UpdateWarehouse<T extends Warehouse> extends AbstractUpdateControll
         }
     }
     @FXML
+    /**
+     * switchToSceneAddSkaldiste prebacuje korisnika na ekran za listu skladišta
+     */
     protected void switchToSceneListSkaldiste() {
         ScreenManagerController.switchTo(View.LISTWAREHOUSE);
     }

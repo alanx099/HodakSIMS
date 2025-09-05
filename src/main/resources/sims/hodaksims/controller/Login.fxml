@@ -35,6 +35,7 @@
             <GridPane alignment="CENTER" prefHeight="133.0" prefWidth="252.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="34.0" prefWidth="117.0" />
+               <ColumnConstraints />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
@@ -52,10 +53,6 @@
                   <Font name="System Bold" size="14.0" />
                </font>
                   </Button>
-                  <Button fx:id="register" alignment="CENTER" mnemonicParsing="false" onAction="#goToRegister" text="Registracija" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Button>
             </GridPane>
       </GridPane>
     </center>

@@ -3,6 +3,10 @@ package sims.hodaksims.exceptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * EmptyRepositoryResultException iznimka za problem s repositoriem
+ *
+ */
 public class EmptyRepositoryResultException extends RuntimeException {
     private static final Logger log = LoggerFactory.getLogger(EmptyRepositoryResultException.class);
 

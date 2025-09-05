@@ -17,6 +17,12 @@ import java.util.NoSuchElementException;
 public sealed interface Authenticable permits CurrentUser, User {
     static final Logger log = LoggerFactory.getLogger(Authenticable.class);
     UsersRepository<User> userRep = new UsersRepository<>();
+
+    /**
+     * authenticate autenticira pokušaj logina
+     * @param usrAuth korisnik
+     * @throws BadCredentialsException baca pogrešku
+     */
     default void authenticate(User usrAuth) throws BadCredentialsException {
         try{
             List<User> currUsers = userRep.findAll();

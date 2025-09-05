@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+/**
+ * ListCategory je kontroler klasa koja lista category objekte u bazi
+ */
 public class ListCategory {
     @FXML
     TextField nameFilter;
@@ -35,12 +38,19 @@ public class ListCategory {
     private final CategoryRepository<Category> allCategories = new CategoryRepository<>();
     private final List<Category> loadedCategories = allCategories.findAll();
     private final ObservableList<Category> obvCategories = FXCollections.observableArrayList();
+    /**
+     * initialize postavlja podatke u javafx izbornike
+     */
     public void initialize(){
         obvCategories.addAll(loadedCategories);
         categoryTable.getItems().addAll(obvCategories);
         nameColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getName()));
         descroptionColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getDescription()));
     }
+
+    /**
+     * deleteSelectedCategory briže odabranu kategoriju iz baze podataka
+     */
     public void deleteSelectedCategory(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Brisanje kategorije");
@@ -59,16 +69,25 @@ public class ListCategory {
 
 
     @FXML
+    /**
+     * switchToSceneAddCategory prebacuje korisnika na formu za dodavanje kategorije
+     */
     protected void switchToSceneAddCategory() {
         ScreenManagerController.switchTo(View.ADDCATEGORY);
     }
     @FXML
+    /**
+     * switchToSceneUpdateCategory prebaci korisnika na ekran za ažuriranje korisnika
+     */
     protected void switchToSceneUpdateCategory() {
         if(categoryTable.getSelectionModel().getSelectedItem() == null) return;
 
         ScreenManagerController.switchToWithData(View.UPDATECATEGORY, categoryTable.getSelectionModel().getSelectedItem());
     }
     @FXML
+    /**
+     * filterAll pokreće zadane filtere
+     */
     protected void filterAll(){
         Optional<String> nameF = Optional.ofNullable(nameFilter.getText());
         Optional<String> descF = Optional.ofNullable(descriptionFilter.getText());
@@ -86,6 +105,9 @@ public class ListCategory {
         categoryTable.getItems().addAll(obvCategories);
     }
     @FXML
+    /**
+     * resetFilter briše sve filtere
+     */
     protected void resetFilter(){
         nameFilter.clear();
         descriptionFilter.clear();

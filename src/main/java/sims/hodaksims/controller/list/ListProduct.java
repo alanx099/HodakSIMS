@@ -18,6 +18,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+/**
+ * ListProduct kontroler klasa za listanje proizvoda
+ */
 public class ListProduct {
     @FXML
     private TextField sku;
@@ -53,6 +56,9 @@ public class ListProduct {
     private final ProductRepository<Product> prodRepo = new ProductRepository<>();
     private final List<Product> products = prodRepo.findAll();
     private final ObservableList<Product> prodObv= FXCollections.observableArrayList(products);
+    /**
+     * initialize postavlja podatke u javafx izbornike
+     */
     public void initialize(){
             supplierTable.setItems(currSuppliers);
             categories.getItems().addAll(loadedCategories);
@@ -76,6 +82,10 @@ public class ListProduct {
             suppOIB.setCellValueFactory(cellData -> new SimpleStringProperty((cellData.getValue()).getOib()));
 
     }
+
+    /**
+     * showSuppliers prikazuje dobavljače odabranog proizvoda
+     */
     public void showSuppliers(){
         if(productsTable.getSelectionModel().getSelectedItem() == null) return;
         Optional<List<Supplier>> selectedCategories = Optional.ofNullable(productsTable.getSelectionModel().getSelectedItem().getSuppliers());
@@ -93,6 +103,9 @@ public class ListProduct {
         }
     }
 
+    /**
+     * deleteSelectedProduct briše iz baze podataka odabrani proizvod
+     */
     @FXML
     protected void deleteSelectedProduct(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -106,6 +119,9 @@ public class ListProduct {
             }
     }
     @FXML
+    /**
+     * beforeFilter provjerava unose u filteru prije primjene filtera
+     */
     protected void beforeFilter(){
         Map<String, String> numbersMap = Map.of("Cijena od", this.priceFrom.getText(), "Cijena do", this.priceTo.getText());
         Boolean numbers = InputVerifyUtil.checkForDecimal(numbersMap);
@@ -115,6 +131,9 @@ public class ListProduct {
     }
 
     @FXML
+    /**
+     * filterAll primjenjuje vrijednosti iz filtera
+     */
     protected void filterAll(){
         Optional<String> nameF = Optional.ofNullable(name.getText());
         Optional<String> skuF = Optional.ofNullable(sku.getText());
@@ -142,6 +161,9 @@ public class ListProduct {
         productsTable.setItems(prodObv);
     }
     @FXML
+    /**
+     * filterReset resetira vrijednosti u filteru
+     */
     protected void filterReset(){
         name.clear();
         sku.clear();
@@ -152,10 +174,16 @@ public class ListProduct {
         productsTable.setItems(prodObv);
     }
     @FXML
+    /**
+     * addNewProduct prebacuje korisnika na ekran za dodavanje proizvoda
+     */
     protected void addNewProduct(){
         ScreenManagerController.switchTo(View.ADDPRODUCT);
     }
     @FXML
+    /**
+     * updateProductNow prebacuje korisnika na ekran za ažuriranje proizvoda
+     */
     protected void updateProductNow(){
         if(productsTable.getSelectionModel().getSelectedItem() == null) return;
         ScreenManagerController.switchToWithData(View.UPDATEPRODUCT, productsTable.getSelectionModel().getSelectedItem());

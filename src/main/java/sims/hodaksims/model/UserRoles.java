@@ -5,6 +5,11 @@ package sims.hodaksims.model;
  */
 public enum UserRoles {
     USER,ADMIN;
+
+    /**
+     * getName dohvati ime
+     * @return
+     */
     public String getName(){
         return this.toString();
     }

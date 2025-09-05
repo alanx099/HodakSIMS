@@ -19,6 +19,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
+/**
+ * ListSupplier klasa za ispis svih dobavljača i
+ */
 public class ListSupplier {
     @FXML
     private TextField name;
@@ -66,7 +69,9 @@ public class ListSupplier {
     private final List<Supplier> suppliers = supplierRepository.findAll();
     private final ObservableList<Supplier> supplierObv = FXCollections.observableArrayList(suppliers);
     private final ObservableList<SupplierContact> currContacts = FXCollections.observableArrayList();
-
+    /**
+     * initialize postavlja podatke u javafx izbornike
+     */
     public void initialize(){
         supplierTable.setItems(supplierObv);
         supplierName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
@@ -81,6 +86,9 @@ public class ListSupplier {
         addresColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAddress()));
     }
     @FXML
+    /**
+     * Prikazuje kontakte odabranog dobavljača
+     */
     protected void showContacts(){
         if(supplierTable.getSelectionModel().getSelectedItem() == null) return;
 
@@ -100,6 +108,9 @@ public class ListSupplier {
         }
     }
     @FXML
+    /**
+     * beforeFilter provjerava unose u filteru prije primjene filtera
+     */
     protected void beforeFilter(){
         Map<String, String> numbersMap = Map.of("Min. Narudba od", this.minOrderFrom.getText(),"Min. Narudba do", this.minOrderTo.getText(),"Vrijeme naručivanja od", this.orderTimeStart.getText(),"Vrijeme naručivanja do",this.orderTimeEnd.getText());
         Boolean numbers = InputVerifyUtil.checkForNumber(numbersMap);
@@ -109,6 +120,9 @@ public class ListSupplier {
     }
 
     @FXML
+    /**
+     * filterAll primjenjuje vrijednosti iz filtera
+     */
     protected void filterAll(){
         Optional<String> nameF = Optional.ofNullable(name.getText());
         Optional<String> oibF = Optional.ofNullable(oib.getText());
@@ -152,6 +166,9 @@ public class ListSupplier {
         supplierTable.setItems(supplierObv);
     }
     @FXML
+    /**
+     * filterReset resetira vrijednosti u filteru
+     */
     protected void filterReset(){
         name.clear();
         oib.clear();
@@ -165,10 +182,16 @@ public class ListSupplier {
         supplierTable.setItems(supplierObv);
     }
     @FXML
+    /**
+     * addNewSupplier prebacuje korisnika na ekran za dodavanje novog dobavljača
+     */
     protected void addNewSupplier(){
         ScreenManagerController.switchTo(View.ADDSUPPLIER);
     }
     @FXML
+    /**
+     * deleteSelectedSupplier briše odabranog dobavljača iz baze
+     */
     protected void deleteSelectedSupplier(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Brisanje skladišta");
@@ -181,6 +204,9 @@ public class ListSupplier {
         }
     }
     @FXML
+    /**
+     * updateSupplierNow prebacuje odabranog korisnika na ekran za ažuriranje Dobavljača
+     */
     protected void updateSupplierNow(){
         if(supplierTable.getSelectionModel().getSelectedItem() == null) return;
         ScreenManagerController.switchToWithData(View.UPDATESUPPLIER, supplierTable.getSelectionModel().getSelectedItem());

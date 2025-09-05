@@ -161,6 +161,13 @@ public class ContractRepository<T extends Contract> extends AbstractRepository<T
         resCont.setId(id);
         return (T)resCont;
     }
+
+    /**
+     * getSuppliersFromWarehouse vraća sve dobavljače od skladišta
+     * @param warehouseId warehouseId
+     * @return warehouseId
+     * @throws RepositoryAccessException RepositoryAccessException
+     */
     public Set<Pair<Supplier, List<Product>>> getSuppliersFromWarehouse(Long warehouseId) throws RepositoryAccessException {
         SupplierRepository<Supplier> supplierRepository = new SupplierRepository<>();
         Set<Pair<Supplier, List<Product>>> resSet = new HashSet<>();

@@ -9,6 +9,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Klasa za baze podataka
+ */
 public class DbConUtil {
     private static final Logger log = LoggerFactory.getLogger(DbConUtil.class);
 
@@ -16,6 +19,11 @@ public class DbConUtil {
 
     }
 
+    /**
+     * getConnection dohvati vezu
+     * @return Connection
+     * @throws SQLException SQLException
+     */
     public static Connection getConnection() throws SQLException {
         Properties props = new Properties();
         try(final FileReader f = new FileReader("database.properties")) {

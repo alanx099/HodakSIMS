@@ -1,80 +1,39 @@
 package sims.hodaksims.controller;
-
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
-import javafx.util.StringConverter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import sims.hodaksims.model.*;
 import sims.hodaksims.repository.ContractRepository;
 import sims.hodaksims.repository.InventoryDbActions;
 import sims.hodaksims.repository.WarehouseRepository;
-import javax.swing.*;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
+import sims.hodaksims.utils.InventoryMath;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-
 public class InventoryController {
-    private static Logger log = LoggerFactory.getLogger(InventoryController.class);
-    @FXML
-    ComboBox<Warehouse> selectedWarehouse;
-    @FXML
-    ComboBox<Supplier> orderSupplier;
-    @FXML
-    ComboBox<Product> orderProduct;
-    @FXML
-    Slider orderAmmountSlider;
-    @FXML
-    Label orderAmmountLabel;
-    @FXML
-    ComboBox<Pair<Product, Integer>> productSend;
-    @FXML
-    Slider productAmmountSlider;
-    @FXML
-    Label sendAmmountLabel;
-    @FXML
-    TableView<Pair<Product, Integer>> productTable;
-    @FXML
-    TableColumn<Pair<Product, Integer>,String> productSku;
-    @FXML
-    TableColumn<Pair<Product, Integer>,String> productName;
-    @FXML
-    TableColumn<Pair<Product, Integer>, String> productAmmount;
-    @FXML
-    TextField productFilterName;
-    @FXML
-    TextField productFilterSku;
-    @FXML
-    TextField productFilterAmmountStart;
-    @FXML
-    TextField productFilterAmmountEnd;
-    @FXML
-    TextField productFilterMinimumStart;
-    @FXML
-    TextField productFilterMinimumEnd;
-    @FXML
-    TableView<WareCapacity> capacityTable;
-    @FXML
-    TableColumn<WareCapacity, String> categoryCapacity;
-    @FXML
-    TableColumn<WareCapacity, String> freeCapacity;
-    @FXML
-    TableColumn<WareCapacity, String> capacatyMax;
-    @FXML
-    TableColumn<WareCapacity, String> percentageLeft;
-    @FXML
-    TextArea deliLable;
+    @FXML ComboBox<Warehouse> selectedWarehouse;
+    @FXML ComboBox<Supplier> orderSupplier;
+    @FXML ComboBox<Product> orderProduct;
+    @FXML Slider orderAmmountSlider;
+    @FXML Label orderAmmountLabel;
+    @FXML ComboBox<Pair<Product, Integer>> productSend;
+    @FXML Slider productAmmountSlider;
+    @FXML Label sendAmmountLabel;
+    @FXML TableView<Pair<Product, Integer>> productTable;
+    @FXML TableColumn<Pair<Product, Integer>,String> productSku;
+    @FXML TableColumn<Pair<Product, Integer>,String> productName;
+    @FXML TableColumn<Pair<Product, Integer>, String> productAmmount;
+    @FXML TableView<WareCapacity> capacityTable;
+    @FXML TableColumn<WareCapacity, String> categoryCapacity;
+    @FXML TableColumn<WareCapacity, String> freeCapacity;
+    @FXML TableColumn<WareCapacity, String> capacatyMax;
+    @FXML TableColumn<WareCapacity, String> percentageLeft;
+    @FXML TextArea deliLable;
     WarehouseRepository<Warehouse> warehouseRepository= new WarehouseRepository<>();
     ContractRepository<Contract> contractRepository= new ContractRepository<>();
     ObservableList<Pair<Product, Integer>> productQuantity = FXCollections.observableArrayList();
@@ -83,14 +42,12 @@ public class InventoryController {
     ObservableList<Product> supplierProducts = FXCollections.observableArrayList();
     ObservableList<WareCapacity> inventorySpace = FXCollections.observableArrayList();
     ObservableList<Pair<Supplier, Pair<Warehouse,Pair<Product,Integer>>>> realOrder = FXCollections.observableArrayList();
-
     public void initialize(){
         selectedWarehouseLogic();
         productTableLogic();
-        waregouseCapacatyTableLogic();
+        warehouseCapacityTableLogic();
         productOrderLogic();
         productSendingLogic();
-
         Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e ->{
                 deliLable.setText("");
             for(Pair<Supplier, Pair<Warehouse,Pair<Product,Integer>>> s: realOrder){
@@ -106,7 +63,7 @@ public class InventoryController {
                deliLable.appendText(s.getKey().getName() + ", " +s.getKey().getDeliveryTime().toString()+"\n");
             }
         }));
-        timer.setCycleCount(Timeline.INDEFINITE);
+        timer.setCycleCount(Animation.INDEFINITE);
         timer.play();
     }
     @FXML
@@ -136,7 +93,6 @@ public class InventoryController {
         }
 
     }
-
     private void selectedWarehouseLogic(){
         selectedWarehouse.getItems().setAll(warehouseRepository.findAll());
         selectedWarehouse.getSelectionModel().selectFirst();
@@ -167,13 +123,13 @@ public class InventoryController {
         productName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getKey().getName()));
         productAmmount.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().toString()));
     }
-    private void waregouseCapacatyTableLogic(){
+    private void warehouseCapacityTableLogic(){
         inventorySpace.setAll(selectedWarehouse.getSelectionModel().getSelectedItem().getCapacity());
         capacityTable.setItems(inventorySpace);
         categoryCapacity.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory().getName()));
-        freeCapacity.setCellValueFactory(cellData -> new SimpleStringProperty(calculateMaxOrder(productQuantity, cellData.getValue().getCategory(), selectedWarehouse.getSelectionModel().getSelectedItem().getCapacity()).toString()));
+        freeCapacity.setCellValueFactory(cellData -> new SimpleStringProperty(InventoryMath.calculateMaxOrder(productQuantity, cellData.getValue().getCategory(), selectedWarehouse.getSelectionModel().getSelectedItem().getCapacity()).toString()));
         capacatyMax.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCapacity().toString()));
-        percentageLeft.setCellValueFactory(cellData -> new SimpleStringProperty(calculatePercentage(productQuantity,cellData.getValue()) + "%"));
+        percentageLeft.setCellValueFactory(cellData -> new SimpleStringProperty(InventoryMath.calculatePercentage(productQuantity,cellData.getValue()) + "%"));
     }
     private void productSendingLogic(){
         productSend.setItems(productQuantity);
@@ -183,9 +139,7 @@ public class InventoryController {
                 productAmmountSlider.setMax(Double.parseDouble(productSend.getSelectionModel().getSelectedItem().getValue().toString()));
             }
         });
-        productAmmountSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            sendAmmountLabel.setText(Integer.toString(newValue.intValue()));
-        });
+        productAmmountSlider.valueProperty().addListener((observable, oldValue, newValue) -> sendAmmountLabel.setText(Integer.toString(newValue.intValue())));
     }
     private void productOrderLogic(){
         orderSupplier.setItems(currSupplierList);
@@ -201,7 +155,7 @@ public class InventoryController {
         );
         orderProduct.setOnAction(event ->{
             if(orderProduct.getValue() != null){
-                Double max = calculateMaxOrder(productQuantity, orderProduct.getSelectionModel().getSelectedItem().getCategory(), selectedWarehouse.getSelectionModel().getSelectedItem().getCapacity()).doubleValue();
+                Double max = InventoryMath.calculateMaxOrder(productQuantity, orderProduct.getSelectionModel().getSelectedItem().getCategory(), selectedWarehouse.getSelectionModel().getSelectedItem().getCapacity()).doubleValue();
                 Double min = orderSupplier.getSelectionModel().getSelectedItem().getMinOrder().doubleValue();
                 if(min<= max){
                     orderAmmountSlider.setDisable(false);
@@ -215,29 +169,11 @@ public class InventoryController {
                     alert.setContentText("Minimalna naruđba ovog dobavljača je veća od mjesta u skladištu ");
                     alert.showAndWait();
                 }
-
             }
         });
+        orderAmmountSlider.valueProperty().addListener((observable, oldValue, newValue) ->  orderAmmountLabel.setText(Integer.toString(newValue.intValue())));
+    }
 
-        orderAmmountSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            orderAmmountLabel.setText(Integer.toString(newValue.intValue()));
-        });
-    }
-    private Integer calculateStoredAmmount(ObservableList<Pair<Product, Integer>> products, Category category){
-        return products.stream().filter(x -> x.getKey().getCategory().getName().equals(category.getName())).mapToInt(Pair::getValue).sum();
-    }
-    private Integer calculateMaxOrder(ObservableList<Pair<Product, Integer>> products, Category category, List<WareCapacity> capacity){
-        return  capacity.stream().filter(x -> x.getCategory().getName().equals(category.getName())).findFirst().map(WareCapacity::getCapacity).orElse(0) - calculateStoredAmmount(products, category);
-    }
-    private BigDecimal calculatePercentage(ObservableList<Pair<Product, Integer>> products, WareCapacity wareCapacity){
-        BigDecimal categorySum = BigDecimal.valueOf(calculateStoredAmmount(products, wareCapacity.getCategory()));
-        BigDecimal productMax =  BigDecimal.valueOf(wareCapacity.getCapacity());
-        BigDecimal hundred = BigDecimal.valueOf(100);
-        if(productMax.equals(BigDecimal.ZERO)){
-            return BigDecimal.ZERO;
-        }
-        return categorySum.divide(productMax,10, RoundingMode.HALF_UP).multiply(hundred).setScale(2, RoundingMode.HALF_UP);
-    }
     public void clearAll(){
         clearOrderProduct();
         productAmmountSlider.setValue(0);
@@ -262,5 +198,7 @@ public class InventoryController {
     public void clearSend(){}
     @FXML
     public void filterReset(){}
+
+
 
 }

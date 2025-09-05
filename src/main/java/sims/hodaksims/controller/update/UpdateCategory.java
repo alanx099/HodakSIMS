@@ -13,7 +13,9 @@ import sims.hodaksims.repository.CategoryRepository;
 import sims.hodaksims.utils.InputVerifyUtil;
 
 import java.util.Map;
-
+/**
+ * UpdateCategory klasa je Controller klasa kojom kontrolliramo javafx od forme za ažuriranje category objekta u bazu
+ */
 public class UpdateCategory<T extends Category> extends AbstractUpdateController<T> {
     static final Logger log = LoggerFactory.getLogger(UpdateCategory.class);
     private final CategoryRepository<Category> cRep = new CategoryRepository<>();
@@ -32,12 +34,16 @@ public class UpdateCategory<T extends Category> extends AbstractUpdateController
         name.setText(edit.getName());
         description.setText(edit.getDescription());
     }
-
+    /**
+     * switchToSceneListCategory metoda za prebacivanje trenutnog ekrana na listu kategorija
+     */
     @FXML
     protected void switchToSceneListCategory() {
         ScreenManagerController.switchTo(View.LISTCATEGORY);
     }
-
+    /**
+     * Metoda insertToDb ažurira kategoriju u bazu podataka
+     */
     @FXML
     public void insertToDb(){
         Category nCat = new Category(name.getText(), description.getText());
@@ -45,6 +51,9 @@ public class UpdateCategory<T extends Category> extends AbstractUpdateController
         cRep.update(nCat);
         this.switchToSceneListCategory();
     }
+    /**
+     * Metoda before insert poziva se prije unosa u bazu kako bi se unjeli ispravni podaci
+     */
     public void beforeInsert(){
         Map<String, String> required = Map.of("Ime",  name.getText(), "Opis", description.getText());
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);

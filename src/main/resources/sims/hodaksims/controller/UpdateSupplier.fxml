@@ -128,7 +128,7 @@
                   <FlowPane alignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="5">
                      <children>
                         <Button mnemonicParsing="false" onAction="#beforeInsert" text="Unesi dobavljača" />
-                        <Button mnemonicParsing="false" onAction="#switchToSceneListWarehouse" text="Natrag" />
+                        <Button mnemonicParsing="false" onAction="#switchToSceneListSupplier" text="Natrag" />
                      </children>
                   </FlowPane>
                </children>

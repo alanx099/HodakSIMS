@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * AddProduct je kontroler klasa za unos proizvoda
+ */
 public class AddProduct {
     @FXML
     private TextField name;
@@ -48,7 +51,9 @@ public class AddProduct {
     private final SupplierRepository<Supplier> suppRepo = new SupplierRepository<>();
     private final ObservableList<Supplier> suppliers = FXCollections.observableArrayList();
     private final ObservableList<Supplier> suppliersList = FXCollections.observableArrayList(suppRepo.findAll());
-
+    /**
+     * initialize postavlja podatke u javafx izbornike
+     */
     public void initialize(){
         category.getItems().addAll(allCategories.findAll());
         supplierTable.setItems(suppliers);
@@ -61,19 +66,28 @@ public class AddProduct {
 
     }
 
+    /**
+     * pushToTable ubacuje odabrane vrijednosti u tablicu
+     */
     public void pushToTable(){
         if (supplierDropdown.getSelectionModel().getSelectedItem() == null)return;
         Supplier supplier = supplierDropdown.getSelectionModel().getSelectedItem();
         suppliersList.remove(supplier);
         suppliers.add(supplier);
     }
+
+    /**
+     * Briše odabranu stavku iz tablice
+     */
     public void deleteSelectedCapacity(){
         if(supplierTable.getSelectionModel().getSelectedItem()==null)return;
         Supplier supplier = supplierTable.getSelectionModel().getSelectedItem();
         suppliersList.add(supplier);
         suppliers.remove(supplier);
     }
-
+    /**
+     * beforeInsert metoda koja se poziva kako bi se provjerili podatci prije unosa
+     */
     public void beforeInsert(){
         Map<String, String> required = Map.of("SKU", this.sku.getText(),"Ime", this.name.getText(),  "Kategorija", Objects.toString(this.category.getSelectionModel().getSelectedItem(), ""),"Cijena", this.price.getText(), "Dobavljači", suppliers.isEmpty()?"":"true");
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
@@ -83,12 +97,19 @@ public class AddProduct {
             insertToDb();
         }
     }
+    /**
+     * insertToDb unosi podatke u bazu
+     */
     public void insertToDb(){
         ProductRepository<Product> prodRepo = new ProductRepository<>();
         Product finalItem = new Product(this.sku.getText(), this.name.getText(), BigDecimalParser.parse(price.getText()),category.getSelectionModel().getSelectedItem(), suppliers);
         prodRepo.save(finalItem);
         switchToSceneListProducts();
     }
+
+    /**
+     * prebacuje korisnika na scenu s proizvodima
+     */
     @FXML
     protected void switchToSceneListProducts() {
         ScreenManagerController.switchTo(View.LISTPRODUCT);

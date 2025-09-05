@@ -115,6 +115,12 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
         }
     }
 
+    /**
+     * supplierFields
+     * @param entity entity
+     * @param stmt stmt
+     * @throws SQLException SQLException
+     */
     private void supplierFields(T entity, PreparedStatement stmt) throws SQLException {
         stmt.setString(1, entity.getName());
         stmt.setString(2, entity.getOib());
@@ -197,6 +203,12 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
         supplier.setId(id);
         return (T)supplier;
     }
+
+    /**
+     * extractContactList dohvati kontakte
+     * @param rez rez
+     * @return SupplierContact
+     */
     private Set<SupplierContact> extractContactList(Supplier rez){
         Set<SupplierContact> result = new HashSet<>();
         try(Connection connection = DbConUtil.getConnection();
@@ -216,6 +228,11 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
 
         return result;
     }
+
+    /**
+     * insertContracts unesi kontakte
+     * @param entity entity
+     */
     private void insertContracts(T entity){
         for (SupplierContact cap : entity.getContacts()){
             try(    Connection connection = DbConUtil.getConnection();
@@ -231,6 +248,12 @@ public class SupplierRepository<T extends Supplier> extends AbstractRepository<T
             }
         }
     }
+
+    /**
+     * getProductList dohvati proizvode
+     * @param id
+     * @return
+     */
     public List<Product> getProductList(Long id){
         ProductRepository<Product> pRep = new ProductRepository<>();
         List<Product> res = new ArrayList<>();

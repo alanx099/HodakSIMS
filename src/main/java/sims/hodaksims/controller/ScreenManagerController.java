@@ -40,7 +40,7 @@ public class ScreenManagerController {
      * kada nju pozovemo u kodu možemo odabrati stranicu koja
      * se nalazi unutar Veiew enumeracije
      * @see View
-     * @param view
+     * @param view enum
      */
     public static void switchTo(View view){
         if (scene == null) {
@@ -54,6 +54,14 @@ public class ScreenManagerController {
             log.error(e.getMessage());
         }
     }
+
+    /**
+     * switchToWithData metoda za promjena ekrana s podatcima za ažuriranje
+     * @param view enum ekrana
+     * @param podatak stari podatci
+     * @param <K> update controler
+     * @param <V> podatak
+     */
     public static<K extends AbstractUpdateController<V>,V extends Entity> void switchToWithData(View view, V podatak ){
         if (scene == null) {
             log.info("Nije odabrana scena");

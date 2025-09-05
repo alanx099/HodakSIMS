@@ -41,3 +41,41 @@ DELETE FROM CATEGORY WHERE ID=? [23503-232]
 2025-09-04 21:42:29,764 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:64] 715/715
 2025-09-04 21:43:04,140 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
 2025-09-04 21:43:30,898 INFO [JavaFX Application Thread] s.h.r.InventoryDbActions [InventoryDbActions.java:58] 413
+2025-09-04 23:36:56,285 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-04 23:37:49,224 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-05 09:18:41,219 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:37] SIMS started
+2025-09-05 10:31:55,699 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:40] SIMS started
+2025-09-05 11:23:46,135 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:40] SIMS started
+2025-09-05 11:24:16,701 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:40] SIMS started
+2025-09-05 11:25:07,505 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:40] SIMS started
+2025-09-05 11:27:31,173 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:40] SIMS started
+2025-09-05 11:27:32,634 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:27:40,219 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:40] SIMS started
+2025-09-05 11:27:47,871 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:27:51,848 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:27:54,630 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:27:57,784 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:28:01,716 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:28:01,751 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:28:08,270 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:28:10,786 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:28:15,276 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:28:21,347 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:28:21,371 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:28:28,308 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:28:56,931 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:28:56,959 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:29:07,251 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:29:14,184 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:29:16,216 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:29:21,629 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:29:25,286 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:29:25,306 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:29:36,762 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:40] SIMS started
+2025-09-05 11:30:25,946 INFO [JavaFX Application Thread] s.h.c.u.UpdateSupplier [UpdateSupplier.java:121] Krivi unos
+2025-09-05 11:30:31,526 INFO [JavaFX Application Thread] s.h.c.u.UpdateSupplier [UpdateSupplier.java:121] Krivi unos
+2025-09-05 11:32:13,587 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:40] SIMS started
+2025-09-05 11:32:14,637 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:76] ADMIN
+2025-09-05 11:38:50,465 INFO [JavaFX Application Thread] s.h.m.SIMS [SIMS.java:40] SIMS started
+2025-09-05 11:38:51,693 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:122] ADMIN
+2025-09-05 11:38:54,898 INFO [JavaFX Application Thread] s.h.c.MenuController [MenuController.java:122] ADMIN

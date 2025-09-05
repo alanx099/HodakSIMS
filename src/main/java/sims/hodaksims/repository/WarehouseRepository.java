@@ -107,6 +107,12 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
         }
     }
 
+    /**
+     * warehoseFields
+     * @param entity entity
+     * @param stmt stmt
+     * @throws SQLException SQLException
+     */
     private void warehoseFields(T entity, PreparedStatement stmt) throws SQLException {
         stmt.setString(1, entity.getName());
         stmt.setString(2, entity.getCity());
@@ -188,6 +194,10 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
         return (T)warehouse;
     }
 
+    /**
+     * insertCapacity unesi kapacitet
+     * @param entity
+     */
     private void insertCapacity(Warehouse entity) {
         for (WareCapacity cap : entity.getCapacity()) {
             try (Connection connection = DbConUtil.getConnection();
@@ -202,7 +212,11 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
         }
     }
 
-
+    /**
+     * extractCapacatyList
+     * @param rez rez
+     * @return rez
+     */
     private List<WareCapacity> extractCapacatyList(Long rez)   {
         List<WareCapacity> result = new ArrayList<>();
         CategoryRepository<Category> cRep = new CategoryRepository<>();
@@ -220,6 +234,12 @@ public class WarehouseRepository<T extends Warehouse> extends AbstractRepository
         }
         return result;
     }
+
+    /**
+     * getInventory dohvati inventar
+     * @param id
+     * @return
+     */
     public Set<Pair<Product, Integer>> getInventory(Long id){
         ProductRepository<Product> pRep = new ProductRepository<>();
         Set<Pair<Product, Integer>> result = new HashSet<>();

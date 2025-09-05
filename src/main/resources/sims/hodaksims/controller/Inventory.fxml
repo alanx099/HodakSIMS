@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
@@ -35,10 +34,13 @@
             <RowConstraints maxHeight="146.0" minHeight="19.0" prefHeight="146.0" vgrow="NEVER" />
             <RowConstraints maxHeight="109.0" minHeight="12.0" prefHeight="37.0" vgrow="NEVER" />
             <RowConstraints maxHeight="192.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="178.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="178.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="133.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="151.0" minHeight="43.0" prefHeight="96.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="178.0" minHeight="10.0" prefHeight="26.40001220703124" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="178.0" minHeight="10.0" prefHeight="40.39998779296877" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="178.0" minHeight="10.0" prefHeight="36.40001220703124" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="178.0" minHeight="0.0" prefHeight="17.79998779296875" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="178.0" minHeight="10.0" prefHeight="31.399987792968773" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="133.0" minHeight="0.0" prefHeight="61.5999816894531" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="151.0" minHeight="43.0" prefHeight="54.20001220703125" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="106.0" minHeight="16.0" prefHeight="36.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -54,63 +56,30 @@
             <GridPane GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="176.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="170.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="9.0" prefWidth="42.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="155.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TextField fx:id="productFilterName" promptText="Coca Cola" GridPane.columnIndex="1">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </TextField>
-                  <TextField fx:id="productFilterAmmountEnd" promptText="Do" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                     <opaqueInsets>
-                        <Insets right="10.0" />
-                     </opaqueInsets>
-                  </TextField>
-                  <TextField fx:id="productFilterSku" promptText="00228269289" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <opaqueInsets>
-                        <Insets right="10.0" />
-                     </opaqueInsets>
-                  </TextField>
-                  <Label text="Ime" GridPane.halignment="LEFT">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label text="Sku" GridPane.halignment="LEFT" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label text="Količina" GridPane.halignment="LEFT" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="productFilterAmmountStart" promptText="Od" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <opaqueInsets>
-                        <Insets right="10.0" />
-                     </opaqueInsets>
-                  </TextField>
-                  <ComboBox prefWidth="150.0" promptText="Kategorija" GridPane.columnIndex="3" />
+                  <ComboBox prefWidth="150.0" promptText="Kategorija" />
+                  <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#filterReset" text="Resetiraj filter" />
+                        <Button mnemonicParsing="false" onAction="#filterAll" text="Filtriraj" />
+                     </children>
+                  </FlowPane>
                </children>
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </GridPane>
-            <Label text="Pregled Kapaciteta Skladišta" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Label text="Pregled Kapaciteta Skladišta" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TableView fx:id="capacityTable" maxHeight="300.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="7" GridPane.rowSpan="2">
+            <TableView fx:id="capacityTable" maxHeight="300.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="10" GridPane.rowSpan="2">
               <columns>
                 <TableColumn fx:id="categoryCapacity" prefWidth="169.0" text="Kategorija" />
                   <TableColumn fx:id="freeCapacity" prefWidth="214.0" text="Slobodni kapacitet" />
@@ -124,7 +93,7 @@
                   <Insets />
                </GridPane.margin>
             </TableView>
-            <TableView fx:id="productTable" prefHeight="391.0" prefWidth="388.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="6">
+            <TableView fx:id="productTable" prefHeight="391.0" prefWidth="388.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="8">
               <columns>
                 <TableColumn fx:id="productSku" prefWidth="59.199951171875" text="Sku" />
                 <TableColumn fx:id="productName" prefWidth="148.0" text="Proizvod" />
@@ -137,7 +106,7 @@
                   <Insets right="30.0" />
                </GridPane.margin>
             </TableView>
-            <FlowPane alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+            <FlowPane alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="30.0" />
                </GridPane.margin>
@@ -152,10 +121,6 @@
                <padding>
                   <Insets right="10.0" top="3.0" />
                </padding>
-               <children>
-                  <Button mnemonicParsing="false" onAction="#filterAll" text="Filtriraj" />
-                  <Button mnemonicParsing="false" onAction="#filterReset" text="Resetiraj filter" />
-               </children>
             </FlowPane>
             <Label text="Naruči dostavu " GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <font>
@@ -261,8 +226,12 @@
                </padding>
             </GridPane>
             <ComboBox fx:id="selectedWarehouse" prefWidth="150.0" GridPane.columnIndex="2" />
-            <FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <TextArea fx:id="deliLable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+               <children>
+                  <TextArea fx:id="deliLable" prefHeight="74.0" prefWidth="393.0" />
+               </children></FlowPane>
+            <FlowPane alignment="CENTER" prefHeight="53.0" prefWidth="503.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+            <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="8" />
          </children>
       </GridPane>
    </center>

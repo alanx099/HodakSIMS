@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+/**
+ * ListContracts klasa za prikaz liste ugovora unutar baze
+ */
 public class ListContracts {
     @FXML
     TextField nameFilter;
@@ -48,6 +51,9 @@ public class ListContracts {
     private final WarehouseRepository<Warehouse> wRep = new WarehouseRepository<>();
     private final List<Supplier> suppList = sRep.findAll();
     private final List<Warehouse> warehouseList = wRep.findAll();
+    /**
+     * initialize postavlja podatke u javafx izbornike
+     */
     public void initialize(){
         contractTable.setItems(contractObservableList);
         supplierFilter.getItems().setAll(suppList);
@@ -57,6 +63,10 @@ public class ListContracts {
         start.setCellValueFactory(cellData-> new SimpleStringProperty(cellData.getValue().getStartDate().toString()));
         end.setCellValueFactory(cellData-> new SimpleStringProperty(cellData.getValue().getEndDate().toString()));
     }
+
+    /**
+     * deleteSelectedContract briše odabrani ugovor
+     */
     public void deleteSelectedContract(){
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Brisanje ugovora");
@@ -69,15 +79,24 @@ public class ListContracts {
             }
     }
     @FXML
+    /**
+     * switchToSceneAddContact prebacuje korisnika na ekran za dodavanje ugovora
+     */
     protected void switchToSceneAddContact() {
         ScreenManagerController.switchTo(View.ADDCONTRACT);
     }
     @FXML
+    /**
+     * switchToSceneUpdateContract prebacuje korisnika na ekran za ažuriranje ugobora
+     */
     protected void switchToSceneUpdateContract() {
         if(contractTable.getSelectionModel().getSelectedItem() == null) return;
         ScreenManagerController.switchToWithData(View.UPDATECONTRACT, contractTable.getSelectionModel().getSelectedItem());
     }
     @FXML
+    /**
+     * filterAll pokreće zadane filtere
+     */
     protected void filterAll(){
         Optional<Supplier> supplierF = Optional.ofNullable(supplierFilter.getSelectionModel().getSelectedItem());
         Optional<Warehouse> warehouseF = Optional.ofNullable(warehouseFilter.getSelectionModel().getSelectedItem());
@@ -101,13 +120,14 @@ public class ListContracts {
         contractObservableList.addAll(theStream.toList());
     }
     @FXML
+    /**
+     * resetFilter briše sve filtere
+     */
     protected void resetFilter(){
         supplierFilter.getSelectionModel().clearSelection();
         warehouseFilter.getSelectionModel().clearSelection();
         startFilter.getEditor().clear();
         endFilter.getEditor().clear();
         contractObservableList.setAll(contracts);
-
-
     }
 }

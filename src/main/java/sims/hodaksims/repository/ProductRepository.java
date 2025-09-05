@@ -136,15 +136,8 @@ public class ProductRepository<T extends Product> extends AbstractRepository<T>{
                 capStmt.executeUpdate();
             }
 
-            for (Supplier cap : entity.getSuppliers()) {
-                try (PreparedStatement capStmt = connection.prepareStatement("INSERT INTO PRODUCT_SUPPLIER(PRODUCT_ID,SUPPLIER_ID) VALUES(?,?)")) {
-                    capStmt.setLong(1, entity.getId());
-                    capStmt.setLong(2, cap.getId());
-                    capStmt.executeUpdate();
-                } catch (SQLException e) {
-                    log.error(e.getMessage());
-                }
-            }
+            insertSupplier(connection,entity);
+
             T newItem = this.findById(entity.getId());
             ChangeLog unosLog = new ChangeLog(CurrentUser.getInstance().getUserCur().getRole(), entity.getName(), LocalDateTime.now());
             unosLog.updateEntry(oldItem,newItem, DESC);
@@ -198,24 +191,48 @@ public class ProductRepository<T extends Product> extends AbstractRepository<T>{
         product.setId(id);
         return (T)product;
     }
+
+    /**
+     * getSupplierList dohvati dobavljače
+     * @param id id
+     * @return Supplier
+     * @throws RepositoryAccessException RepositoryAccessException
+     */
     private List<Supplier> getSupplierList(Long id) throws RepositoryAccessException {
         List<Supplier> result = new ArrayList<>();
-        SupplierRepository<Supplier> sRep = new SupplierRepository<>();
         try(Connection connection = DbConUtil.getConnection();
             PreparedStatement stmt =connection.prepareStatement("SELECT PRODUCT_SUPPLIER .* FROM PRODUCT_SUPPLIER  WHERE PRODUCT_ID = ?");
         ){
             stmt.setLong(1,id);
             ResultSet resultSet = stmt.executeQuery();
-            try {while(resultSet.next()){
-                Long suppId = resultSet.getLong("supplier_id");
-                result.add(sRep.findById(suppId));
-            }}catch(SQLException e){
-                log.error(e.getMessage());
-            }
+            result = getSupRes(resultSet);
         } catch (SQLException e) {
             throw new RepositoryAccessException(e.getMessage());
         }
         return result;
+    }
+    private List<Supplier> getSupRes(ResultSet resultSet ){
+        List<Supplier> result = new ArrayList<>();
+        SupplierRepository<Supplier> sRep = new SupplierRepository<>();
+        try {while(resultSet.next()){
+            Long suppId = resultSet.getLong("supplier_id");
+            result.add(sRep.findById(suppId));
+        }}catch(SQLException e){
+            log.error(e.getMessage());
+        }
+        return result;
+    }
+    private void insertSupplier(Connection connection ,Product entity){
+        for (Supplier cap : entity.getSuppliers()) {
+            try (
+                    PreparedStatement capStmt = connection.prepareStatement("INSERT INTO PRODUCT_SUPPLIER(PRODUCT_ID,SUPPLIER_ID) VALUES(?,?)")) {
+                capStmt.setLong(1, entity.getId());
+                capStmt.setLong(2, cap.getId());
+                capStmt.executeUpdate();
+            } catch (SQLException e) {
+                log.error(e.getMessage());
+            }
+        }
     }
 
 }

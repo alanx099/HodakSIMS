@@ -10,14 +10,15 @@ import sims.hodaksims.model.*;
 import sims.hodaksims.repository.CategoryRepository;
 import sims.hodaksims.repository.WarehouseRepository;
 import sims.hodaksims.utils.InputVerifyUtil;
-
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * ListWarehouse je kontroler klasa za prikaz Skladišta
+ */
 public class ListWarehouse {
     @FXML
     private TextField name;
@@ -62,6 +63,9 @@ public class ListWarehouse {
     private final WarehouseRepository<Warehouse> wareRepo = new WarehouseRepository<>();
     private final List<Warehouse> wareHoses = wareRepo.findAll();
     private final ObservableList<Warehouse> wareObv= FXCollections.observableArrayList(wareHoses);
+    /**
+     * initialize postavlja podatke u javafx izbornike
+     */
     public void initialize(){
             capacityTable.getItems().addAll(currCapacity);
             categories.getItems().addAll(loadedCategories);
@@ -86,6 +90,10 @@ public class ListWarehouse {
             tableStreet.setCellValueFactory(cellData -> new SimpleStringProperty((cellData.getValue()).getStreetName()));
             tableStreetNumber.setCellValueFactory(cellData -> new SimpleStringProperty((cellData.getValue()).getStreetNumber()));
     }
+
+    /**
+     * showCapacity prikazuje kapacitet odabranog skladišta u tablici
+     */
     public void showCapacity(){
         if(wareTable.getSelectionModel().getSelectedItem() == null) return;
         Optional<List<WareCapacity>> selectedCategories = Optional.ofNullable(wareTable.getSelectionModel().getSelectedItem().getCapacity());
@@ -102,10 +110,12 @@ public class ListWarehouse {
             alert.showAndWait();
         }
     }
+    /**
+     * beforeFilter provjerava unose u filteru prije primjene filtera
+     */
     public void beforeFilter() {
         Map<String, String> numbersMap = Map.of("Količina", this.setAmmount.getText());
         Boolean numbers = InputVerifyUtil.checkForNumber(numbersMap);
-        String category = Objects.toString(this.categories.getSelectionModel().getSelectedItem());
         if (Boolean.TRUE.equals(numbers)){
             filterAll();
         }
@@ -114,6 +124,9 @@ public class ListWarehouse {
         capacityTable.getItems().removeAll((capacityTable.getSelectionModel().getSelectedItem()));
     }
     @FXML
+    /**
+     * deleteSelectedWareHouse briše odabrano skladište iz baze podataka
+     */
     protected void deleteSelectedWareHouse(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Brisanje skladišta");
@@ -126,6 +139,9 @@ public class ListWarehouse {
             }
     }
     @FXML
+    /**
+     * filterAll primjenjuje vrijednosti iz filtera
+     */
     protected void filterAll(){
         Optional<String> nameF = Optional.ofNullable(name.getText());
         Optional<String> countryF = Optional.ofNullable(country.getText());
@@ -173,6 +189,9 @@ public class ListWarehouse {
 
     }
     @FXML
+    /**
+     * filterReset resetira vrijednosti u filteru
+     */
     protected void filterReset(){
         name.clear();
         country.clear();
@@ -186,10 +205,16 @@ public class ListWarehouse {
         wareTable.setItems(wareObv);
     }
     @FXML
+    /**
+     * addNewWarehouse prebacuje korisnika na ekran za dodavanje novog skladišta
+     */
     protected void addNewWarehouse(){
         ScreenManagerController.switchTo(View.ADDWAREHOUSE);
     }
     @FXML
+    /**
+     * updateWareHouse prebacuje korisnika na ekran za ažuriranje odabranog skladišta
+     */
     protected void updateWareHouse(){
         if(wareTable.getSelectionModel().getSelectedItem() == null) return;
         ScreenManagerController.switchToWithData(View.UPADTEWAREHOUSE, wareTable.getSelectionModel().getSelectedItem());

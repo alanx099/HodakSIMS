@@ -13,7 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -32,7 +31,8 @@ public class UsersRepository<T extends User>{
      * @throws RepositoryAccessException
      */
     public T findById(Long var1){
-        return null;
+        List<T> users = findAll();
+        return users.stream().filter(user -> user.getId().equals(var1)).findFirst().orElse(null);
     }
 
     /**

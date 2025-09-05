@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * ChangeLog klasa za praćenje i spremanje promjena koja se vrše po objektima
+ */
 public class ChangeLog implements Serializable {
     private UserRoles role;
     private String promjena;
@@ -23,33 +26,56 @@ public class ChangeLog implements Serializable {
         this.dateLog = dateLog;
     }
 
+    /**
+     * getRoleNew dohvati rolu
+     * @return rola
+     */
     public UserRoles getRoleNew() {
         return role;
     }
 
+    /**
+     * setRoleNew postavi rolu
+     * @param role rola
+     */
     public void setRoleNew(UserRoles role) {
         this.role = role;
     }
 
+    /**
+     * getPromjena dohvati promjenu
+     * @return promjena
+     */
     public String getPromjena() {
         return promjena;
     }
 
+    /**
+     * setPromjena postavi promjenu
+     * @param promjena promjena
+     */
     public void setPromjena(String promjena) {
         this.promjena = promjena;
     }
 
+    /**
+     * getDateLog dohvati vrijeme
+     * @return getDateLog
+     */
     public LocalDateTime getDateLog() {
         return dateLog;
     }
 
-
+    /**
+     * setDateLog  postavi vrijeme
+     * @param dateLog
+     */
     public void setDateLog(LocalDateTime dateLog) {
         this.dateLog = dateLog;
     }
     /**
      * Metoda za spremanje promjene od korisnika
-     * @throws IOException
+     * @throws IOException file
      */
     public void saveChangeLog() throws IOException {
         List<ChangeLog> changes = loadChangeLog();
@@ -61,6 +87,10 @@ public class ChangeLog implements Serializable {
         }
     }
 
+    /**
+     * loadChangeLog učitava promjene iz datoteke
+     * @return
+     */
     public static List<ChangeLog> loadChangeLog(){
         List<ChangeLog> changes = new ArrayList<>();
         try(FileInputStream filIn = new FileInputStream("changes.ser");
@@ -71,6 +101,14 @@ public class ChangeLog implements Serializable {
         }
         return changes;
     }
+
+    /**
+     * updateEntry unosi promjenu nad entitetom
+     * @param oldObject stari entitet
+     * @param newObject novi entitet
+     * @param desc opis promjene
+     * @param <T> bilokoj tip
+     */
     public<T extends Entity & Logable> void updateEntry(T oldObject, T newObject, String desc){
         try{
             String[] oldValue = oldObject.changesToString();
@@ -90,14 +128,16 @@ public class ChangeLog implements Serializable {
             for(int i = Math.toIntExact(Arrays.stream(printNew).count())-1; i > diffrence.intValue()+1 ; i--){
                 this.setPromjena( this.getPromjena() + printNew[i]+"-> added"+"\n" );
             }}
-
-
             this.saveChangeLog();
         }catch(IOException e){
             log.error(e.getMessage());
         }
     }
 
+    /**
+     * newEntry zapis unosa novog objekta
+     * @param desc opis promjena
+     */
     public void newEntry(String desc){
             this.setPromjena("Stvoren novi "+desc+" objekt:"+this.getPromjena());
             try{
@@ -106,6 +146,11 @@ public class ChangeLog implements Serializable {
                 log.error(e.getMessage());
             }
     }
+
+    /**
+     * delEntry zapis obrisanog entiteta
+     * @param desc opis
+     */
     public void delEntry(String desc){
         this.setPromjena("Obrisan "+desc+" objekt:"+this.getPromjena());
         try{

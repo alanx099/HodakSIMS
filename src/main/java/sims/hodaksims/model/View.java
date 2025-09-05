@@ -36,6 +36,11 @@ public enum View {
     View(String filename){
         this.filename = filename;
     }
+
+    /**
+     * getFilename dohvati ime datoteke
+     * @return filename
+     */
     public String getFilename(){
         return filename;
     }

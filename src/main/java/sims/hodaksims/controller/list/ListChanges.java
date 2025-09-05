@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+/**
+ * Klasa za prikaz promjena unutar aplikacije
+ */
 public class ListChanges {
     @FXML
     Button resetFilter;
@@ -42,6 +45,9 @@ public class ListChanges {
     private final List<ChangeLog> loadedChanges = ChangeLog.loadChangeLog();
     private final ObservableList<ChangeLog> obvChanges = FXCollections.observableArrayList();
     private final ObservableList<UserRoles> roles =FXCollections.observableArrayList();
+    /**
+     * initialize postavlja podatke u javafx izbornike
+     */
     public void initialize(){
         obvChanges.addAll(loadedChanges);
         roles.addAll(UserRoles.values());
@@ -55,8 +61,10 @@ public class ListChanges {
         rolePicker.setItems(roles);
     }
     @FXML
+    /**
+     * Prebacuje odabranu promjenu u veći ekran
+     */
     public void setBigDescription(){
-
         Optional<ChangeLog> row = Optional.ofNullable(changesTable.getSelectionModel().getSelectedItem());
         if(row.isPresent()){
             changeExpanded.setText(row.get().getPromjena());
@@ -70,6 +78,9 @@ public class ListChanges {
 
     }
     @FXML
+    /**
+     * resetFilters briše postavljene filtere
+     */
     public void resetFilters(){
         rolePicker.getSelectionModel().clearSelection();
         dateFrom.setValue(null);
@@ -79,6 +90,9 @@ public class ListChanges {
         changesTable.setItems(obvChanges);
     }
     @FXML
+    /**
+     * applyFilters aktivira odabrane filtere
+     */
     public void applyFilters(){
         Optional<String> changes = Optional.ofNullable(changeText.getText());
         Optional<UserRoles> rolesF = Optional.ofNullable(rolePicker.getSelectionModel().getSelectedItem());

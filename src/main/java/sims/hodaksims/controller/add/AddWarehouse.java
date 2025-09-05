@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * AddWarehouse je kontroler klasa za unos skladišta
+ */
 public class AddWarehouse {
     @FXML
     private TextField name;
@@ -47,6 +50,10 @@ public class AddWarehouse {
     private  ObservableList<Category> loadedCategories = FXCollections.observableArrayList(allCategories.findAll());
     private final ObservableList<WareCapacity> currCapacity = FXCollections.observableArrayList();
     private final WarehouseRepository<Warehouse> wareRepo = new WarehouseRepository<>();
+
+    /**
+     * initialize postavlja podatke u javafx izbornike
+     */
     public void initialize(){
             capacityTable.setItems(currCapacity);
             categories.setItems(loadedCategories);
@@ -64,6 +71,9 @@ public class AddWarehouse {
             categoryColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getCategory().getName()));
             ammountColumn.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getCapacity().toString()));
     }
+    /**
+     * beforePushToTable provjerava odabrane vrijednosti
+     */
         public void beforePushToTable() {
             Map<String, String> required = Map.of("Kategorija", Objects.toString(this.categories.getSelectionModel().getSelectedItem(), ""),"Količina", this.setAmmount.getText());
             Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
@@ -73,6 +83,9 @@ public class AddWarehouse {
                 pushToTable();
             }
         }
+    /**
+     * pushToTable ubacuje odabrane vrijednosti u tablicu
+     */
         public void pushToTable(){
         Category curCat = categories.getValue();
         Integer ammount = Integer.parseInt(setAmmount.getText());
@@ -80,12 +93,18 @@ public class AddWarehouse {
         loadedCategories.remove(categories.getSelectionModel().getSelectedItem());
         currCapacity.add(capacityToPush);
     }
+    /**
+     * Briše odabranu stavku iz tablice
+     */
     public void deleteSelectedCapacity(){
         if(capacityTable.getSelectionModel().getSelectedItem()==null)return;
         WareCapacity cap = capacityTable.getSelectionModel().getSelectedItem();
         loadedCategories.add(cap.getCategory());
         currCapacity.remove(cap);
     }
+    /**
+     * beforeInsert metoda koja se poziva kako bi se provjerili podatci prije unosa
+     */
     public void beforeInsert(){
         Map<String, String> required = Map.of("Ime",name.getText(),"Država",country.getText(), "Grad",city.getText(),"Poštanski broj", postalNb.getText(),"Ulica",street.getText(),"Kučni broj", streetNb.getText(), "Kapacitet", currCapacity.isEmpty()?"":"true" );
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
@@ -93,6 +112,9 @@ public class AddWarehouse {
             insertToDb();
         }
     }
+    /**
+     * insertToDb unosi podatke u bazu
+     */
     public void insertToDb(){
             String wName = name.getText();
             String wCountry = country.getText();
@@ -106,6 +128,9 @@ public class AddWarehouse {
             switchToSceneAddSkaldiste();
     }
     @FXML
+    /**
+     * switchToSceneAddSkaldiste prebacuje korisnika na ekran za listu skladišta
+     */
     protected void switchToSceneAddSkaldiste() {
         ScreenManagerController.switchTo(View.LISTWAREHOUSE);
     }

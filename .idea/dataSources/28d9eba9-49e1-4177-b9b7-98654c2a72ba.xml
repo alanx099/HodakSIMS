@@ -171,7 +171,7 @@
     </schema>
     <schema id="163" parent="2" name="PUBLIC">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-06-14.10:04:59</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-09-04.20:33:38</LastIntrospectionLocalTimestamp>
     </schema>
     <user id="164" parent="2" name="SIMS">
       <Admin>1</Admin>
@@ -196,21 +196,28 @@
       <SequenceStartValue>1</SequenceStartValue>
       <SequenceStoredType>BIGINT|0s</SequenceStoredType>
     </column>
-    <column id="176" parent="165" name="INVENTORY_ID">
-      <NotNull>1</NotNull>
+    <column id="176" parent="165" name="REORDER_AMMOUNT">
       <Position>2</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="177" parent="165" name="REORDER_AMMOUNT">
+    <column id="177" parent="165" name="SUPPLIER_ID">
+      <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="178" parent="165" name="SUPPLIER_ID">
-      <NotNull>1</NotNull>
+    <column id="178" parent="165" name="WAREHOUSE_ID">
       <Position>4</Position>
+      <StoredType>BIGINT|0s</StoredType>
+    </column>
+    <column id="179" parent="165" name="PRODUCT_ID">
+      <Position>5</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <foreign-key id="179" parent="165" name="CONSTRAINT_8B">
+    <column id="180" parent="165" name="TRIGGER_QUANTITY">
+      <Position>6</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <foreign-key id="181" parent="165" name="CONSTRAINT_8B">
       <ColNames>SUPPLIER_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <OnDelete>restrict</OnDelete>
@@ -218,77 +225,77 @@
       <RefKeyName>CONSTRAINT_C</RefKeyName>
       <RefTableName>SUPPLIER</RefTableName>
     </foreign-key>
-    <index id="180" parent="165" name="PRIMARY_KEY_8">
+    <index id="182" parent="165" name="PRIMARY_KEY_6A">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="181" parent="165" name="CONSTRAINT_INDEX_8">
+    <index id="183" parent="165" name="CONSTRAINT_8B_INDEX_6">
       <ColNames>SUPPLIER_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
     </index>
-    <key id="182" parent="165" name="CONSTRAINT_8">
+    <key id="184" parent="165" name="CONSTRAINT_8">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="183" parent="166" name="ID">
+    <column id="185" parent="166" name="ID">
       <ColumnKind>generated-stored</ColumnKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>BIGINT|0s</StoredType>
       <SequenceInline>1</SequenceInline>
-      <SequenceSequenceIdentity>1(33)</SequenceSequenceIdentity>
+      <SequenceSequenceIdentity>1(101)</SequenceSequenceIdentity>
       <SequenceStartValue>1</SequenceStartValue>
       <SequenceStoredType>BIGINT|0s</SequenceStoredType>
     </column>
-    <column id="184" parent="166" name="NAME">
+    <column id="186" parent="166" name="NAME">
       <Position>2</Position>
       <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <column id="185" parent="166" name="DESCRIPTION">
+    <column id="187" parent="166" name="DESCRIPTION">
       <Position>3</Position>
       <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <index id="186" parent="166" name="PRIMARY_KEY_3">
+    <index id="188" parent="166" name="PRIMARY_KEY_3">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="187" parent="166" name="CONSTRAINT_3">
+    <key id="189" parent="166" name="CONSTRAINT_3">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="188" parent="167" name="ID">
+    <column id="190" parent="167" name="ID">
       <ColumnKind>generated-stored</ColumnKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>BIGINT|0s</StoredType>
       <SequenceInline>1</SequenceInline>
-      <SequenceSequenceIdentity>1(33)</SequenceSequenceIdentity>
+      <SequenceSequenceIdentity>1(46)</SequenceSequenceIdentity>
       <SequenceStartValue>1</SequenceStartValue>
       <SequenceStoredType>BIGINT|0s</SequenceStoredType>
     </column>
-    <column id="189" parent="167" name="DATE_START">
+    <column id="191" parent="167" name="DATE_START">
       <Position>2</Position>
       <StoredType>DATE|0s</StoredType>
     </column>
-    <column id="190" parent="167" name="DATE_END">
+    <column id="192" parent="167" name="DATE_END">
       <Position>3</Position>
       <StoredType>DATE|0s</StoredType>
     </column>
-    <column id="191" parent="167" name="SUPPLIER_ID">
+    <column id="193" parent="167" name="SUPPLIER_ID">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="192" parent="167" name="WAREHOUSE_ID">
+    <column id="194" parent="167" name="WAREHOUSE_ID">
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <foreign-key id="193" parent="167" name="CONSTRAINT_CDB0">
+    <foreign-key id="195" parent="167" name="CONSTRAINT_CDB0">
       <ColNames>SUPPLIER_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <OnDelete>restrict</OnDelete>
@@ -296,7 +303,7 @@
       <RefKeyName>CONSTRAINT_C</RefKeyName>
       <RefTableName>SUPPLIER</RefTableName>
     </foreign-key>
-    <foreign-key id="194" parent="167" name="CONSTRAINT_CDB">
+    <foreign-key id="196" parent="167" name="CONSTRAINT_CDB">
       <ColNames>WAREHOUSE_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <OnDelete>restrict</OnDelete>
@@ -304,53 +311,49 @@
       <RefKeyName>CONSTRAINT_2</RefKeyName>
       <RefTableName>WAREHOUSE</RefTableName>
     </foreign-key>
-    <index id="195" parent="167" name="PRIMARY_KEY_CD">
+    <index id="197" parent="167" name="PRIMARY_KEY_CD">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="196" parent="167" name="CONSTRAINT_INDEX_CD">
+    <index id="198" parent="167" name="CONSTRAINT_INDEX_CD">
       <ColNames>SUPPLIER_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
     </index>
-    <index id="197" parent="167" name="CONSTRAINT_INDEX_C">
+    <index id="199" parent="167" name="CONSTRAINT_INDEX_C">
       <ColNames>WAREHOUSE_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
     </index>
-    <key id="198" parent="167" name="CONSTRAINT_CD">
+    <key id="200" parent="167" name="CONSTRAINT_CD">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="199" parent="168" name="ID">
+    <column id="201" parent="168" name="ID">
       <ColumnKind>generated-stored</ColumnKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>BIGINT|0s</StoredType>
       <SequenceInline>1</SequenceInline>
-      <SequenceSequenceIdentity>1(33)</SequenceSequenceIdentity>
+      <SequenceSequenceIdentity>1(37)</SequenceSequenceIdentity>
       <SequenceStartValue>1</SequenceStartValue>
       <SequenceStoredType>BIGINT|0s</SequenceStoredType>
     </column>
-    <column id="200" parent="168" name="PRODUCT_ID">
+    <column id="202" parent="168" name="PRODUCT_ID">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="201" parent="168" name="WAREHOUSE_ID">
+    <column id="203" parent="168" name="WAREHOUSE_ID">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="202" parent="168" name="REORDER_QUANTITY">
+    <column id="204" parent="168" name="QUANTITY">
       <Position>4</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="203" parent="168" name="QUANTITY">
-      <Position>5</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <foreign-key id="204" parent="168" name="CONSTRAINT_2DA8">
+    <foreign-key id="205" parent="168" name="CONSTRAINT_2DA8">
       <ColNames>PRODUCT_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <OnDelete>restrict</OnDelete>
@@ -358,7 +361,7 @@
       <RefKeyName>CONSTRAINT_1</RefKeyName>
       <RefTableName>PRODUCT</RefTableName>
     </foreign-key>
-    <foreign-key id="205" parent="168" name="CONSTRAINT_2DA">
+    <foreign-key id="206" parent="168" name="CONSTRAINT_2DA">
       <ColNames>WAREHOUSE_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <OnDelete>restrict</OnDelete>
@@ -366,52 +369,52 @@
       <RefKeyName>CONSTRAINT_2</RefKeyName>
       <RefTableName>WAREHOUSE</RefTableName>
     </foreign-key>
-    <index id="206" parent="168" name="PRIMARY_KEY_2D">
+    <index id="207" parent="168" name="PRIMARY_KEY_1">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="207" parent="168" name="CONSTRAINT_INDEX_2D">
+    <index id="208" parent="168" name="CONSTRAINT_2DA8_INDEX_1">
       <ColNames>PRODUCT_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
     </index>
-    <index id="208" parent="168" name="CONSTRAINT_INDEX_2">
+    <index id="209" parent="168" name="CONSTRAINT_2DA_INDEX_1">
       <ColNames>WAREHOUSE_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
     </index>
-    <key id="209" parent="168" name="CONSTRAINT_2D">
+    <key id="210" parent="168" name="CONSTRAINT_2D">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="210" parent="169" name="ID">
+    <column id="211" parent="169" name="ID">
       <ColumnKind>generated-stored</ColumnKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>BIGINT|0s</StoredType>
       <SequenceInline>1</SequenceInline>
-      <SequenceSequenceIdentity>1(33)</SequenceSequenceIdentity>
+      <SequenceSequenceIdentity>1(43)</SequenceSequenceIdentity>
       <SequenceStartValue>1</SequenceStartValue>
       <SequenceStoredType>BIGINT|0s</SequenceStoredType>
     </column>
-    <column id="211" parent="169" name="SKU">
+    <column id="212" parent="169" name="SKU">
       <Position>2</Position>
       <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <column id="212" parent="169" name="NAME">
+    <column id="213" parent="169" name="NAME">
       <Position>3</Position>
       <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <column id="213" parent="169" name="PRICE">
+    <column id="214" parent="169" name="PRICE">
       <Position>4</Position>
       <StoredType>NUMERIC(10,2)|0s</StoredType>
     </column>
-    <column id="214" parent="169" name="CATEGORY_ID">
+    <column id="215" parent="169" name="CATEGORY_ID">
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <foreign-key id="215" parent="169" name="CONSTRAINT_18">
+    <foreign-key id="216" parent="169" name="CONSTRAINT_18">
       <ColNames>CATEGORY_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <OnDelete>restrict</OnDelete>
@@ -419,41 +422,41 @@
       <RefKeyName>CONSTRAINT_3</RefKeyName>
       <RefTableName>CATEGORY</RefTableName>
     </foreign-key>
-    <index id="216" parent="169" name="PRIMARY_KEY_18">
+    <index id="217" parent="169" name="PRIMARY_KEY_18">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="217" parent="169" name="CONSTRAINT_18_INDEX_1">
+    <index id="218" parent="169" name="CONSTRAINT_18_INDEX_1">
       <ColNames>CATEGORY_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
     </index>
-    <key id="218" parent="169" name="CONSTRAINT_1">
+    <key id="219" parent="169" name="CONSTRAINT_1">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="219" parent="170" name="ID">
+    <column id="220" parent="170" name="ID">
       <ColumnKind>generated-stored</ColumnKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>BIGINT|0s</StoredType>
       <SequenceInline>1</SequenceInline>
-      <SequenceSequenceIdentity>1(33)</SequenceSequenceIdentity>
+      <SequenceSequenceIdentity>1(65)</SequenceSequenceIdentity>
       <SequenceStartValue>1</SequenceStartValue>
       <SequenceStoredType>BIGINT|0s</SequenceStoredType>
     </column>
-    <column id="220" parent="170" name="PRODUCT_ID">
+    <column id="221" parent="170" name="PRODUCT_ID">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="221" parent="170" name="SUPPLIER_ID">
+    <column id="222" parent="170" name="SUPPLIER_ID">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <foreign-key id="222" parent="170" name="CONSTRAINT_D2">
+    <foreign-key id="223" parent="170" name="CONSTRAINT_D2">
       <ColNames>PRODUCT_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <OnDelete>restrict</OnDelete>
@@ -461,7 +464,7 @@
       <RefKeyName>CONSTRAINT_1</RefKeyName>
       <RefTableName>PRODUCT</RefTableName>
     </foreign-key>
-    <foreign-key id="223" parent="170" name="CONSTRAINT_D2F">
+    <foreign-key id="224" parent="170" name="CONSTRAINT_D2F">
       <ColNames>SUPPLIER_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <OnDelete>restrict</OnDelete>
@@ -469,96 +472,96 @@
       <RefKeyName>CONSTRAINT_C</RefKeyName>
       <RefTableName>SUPPLIER</RefTableName>
     </foreign-key>
-    <index id="224" parent="170" name="PRIMARY_KEY_D">
+    <index id="225" parent="170" name="PRIMARY_KEY_D">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="225" parent="170" name="CONSTRAINT_INDEX_D">
+    <index id="226" parent="170" name="CONSTRAINT_INDEX_D">
       <ColNames>PRODUCT_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
     </index>
-    <index id="226" parent="170" name="CONSTRAINT_INDEX_D2">
+    <index id="227" parent="170" name="CONSTRAINT_INDEX_D2">
       <ColNames>SUPPLIER_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
     </index>
-    <key id="227" parent="170" name="CONSTRAINT_D">
+    <key id="228" parent="170" name="CONSTRAINT_D">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="228" parent="171" name="ID">
+    <column id="229" parent="171" name="ID">
       <ColumnKind>generated-stored</ColumnKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>BIGINT|0s</StoredType>
       <SequenceInline>1</SequenceInline>
-      <SequenceSequenceIdentity>1(33)</SequenceSequenceIdentity>
+      <SequenceSequenceIdentity>1(67)</SequenceSequenceIdentity>
       <SequenceStartValue>1</SequenceStartValue>
       <SequenceStoredType>BIGINT|0s</SequenceStoredType>
     </column>
-    <column id="229" parent="171" name="NAME">
+    <column id="230" parent="171" name="NAME">
       <Position>2</Position>
       <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <column id="230" parent="171" name="OIB">
+    <column id="231" parent="171" name="OIB">
       <Position>3</Position>
       <StoredType>CHARACTER(11)|0s</StoredType>
     </column>
-    <column id="231" parent="171" name="MIN_ORDER">
+    <column id="232" parent="171" name="MIN_ORDER">
       <Position>4</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="232" parent="171" name="DELIVERY_TIME">
+    <column id="233" parent="171" name="DELIVERY_TIME">
       <Position>5</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="233" parent="171" name="JOINED">
+    <column id="234" parent="171" name="JOINED">
       <Position>6</Position>
       <StoredType>TIMESTAMP|0s</StoredType>
     </column>
-    <index id="234" parent="171" name="PRIMARY_KEY_C">
+    <index id="235" parent="171" name="PRIMARY_KEY_C">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="235" parent="171" name="CONSTRAINT_C">
+    <key id="236" parent="171" name="CONSTRAINT_C">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="236" parent="172" name="ID">
+    <column id="237" parent="172" name="ID">
       <ColumnKind>generated-stored</ColumnKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>BIGINT|0s</StoredType>
       <SequenceInline>1</SequenceInline>
-      <SequenceSequenceIdentity>1(33)</SequenceSequenceIdentity>
+      <SequenceSequenceIdentity>1(99)</SequenceSequenceIdentity>
       <SequenceStartValue>1</SequenceStartValue>
       <SequenceStoredType>BIGINT|0s</SequenceStoredType>
     </column>
-    <column id="237" parent="172" name="NAME">
+    <column id="238" parent="172" name="NAME">
       <Position>2</Position>
       <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <column id="238" parent="172" name="EMAIL">
+    <column id="239" parent="172" name="EMAIL">
       <Position>3</Position>
       <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <column id="239" parent="172" name="PHONE">
+    <column id="240" parent="172" name="PHONE">
       <Position>4</Position>
       <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <column id="240" parent="172" name="ADDRESS">
+    <column id="241" parent="172" name="ADDRESS">
       <Position>5</Position>
       <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <column id="241" parent="172" name="SUPPLIER_ID">
+    <column id="242" parent="172" name="SUPPLIER_ID">
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <foreign-key id="242" parent="172" name="CONSTRAINT_1A2">
+    <foreign-key id="243" parent="172" name="CONSTRAINT_1A2">
       <ColNames>SUPPLIER_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <OnDelete>restrict</OnDelete>
@@ -566,89 +569,89 @@
       <RefKeyName>CONSTRAINT_C</RefKeyName>
       <RefTableName>SUPPLIER</RefTableName>
     </foreign-key>
-    <index id="243" parent="172" name="PRIMARY_KEY_1A">
+    <index id="244" parent="172" name="PRIMARY_KEY_1A">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="244" parent="172" name="CONSTRAINT_INDEX_1A">
+    <index id="245" parent="172" name="CONSTRAINT_INDEX_1A">
       <ColNames>SUPPLIER_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
     </index>
-    <key id="245" parent="172" name="CONSTRAINT_1A">
+    <key id="246" parent="172" name="CONSTRAINT_1A">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="246" parent="173" name="ID">
+    <column id="247" parent="173" name="ID">
       <ColumnKind>generated-stored</ColumnKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>BIGINT|0s</StoredType>
       <SequenceInline>1</SequenceInline>
-      <SequenceSequenceIdentity>1(33)</SequenceSequenceIdentity>
+      <SequenceSequenceIdentity>1(104)</SequenceSequenceIdentity>
       <SequenceStartValue>1</SequenceStartValue>
       <SequenceStoredType>BIGINT|0s</SequenceStoredType>
     </column>
-    <column id="247" parent="173" name="NAME">
+    <column id="248" parent="173" name="NAME">
       <Position>2</Position>
       <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <column id="248" parent="173" name="CITY">
+    <column id="249" parent="173" name="CITY">
       <Position>3</Position>
       <StoredType>CHARACTER VARYING(100)|0s</StoredType>
     </column>
-    <column id="249" parent="173" name="POSTAL_CODE">
+    <column id="250" parent="173" name="POSTAL_CODE">
       <Position>4</Position>
       <StoredType>CHARACTER VARYING(100)|0s</StoredType>
     </column>
-    <column id="250" parent="173" name="COUNTRY">
+    <column id="251" parent="173" name="COUNTRY">
       <Position>5</Position>
       <StoredType>CHARACTER VARYING(100)|0s</StoredType>
     </column>
-    <column id="251" parent="173" name="STREET_NAME">
+    <column id="252" parent="173" name="STREET_NAME">
       <Position>6</Position>
       <StoredType>CHARACTER VARYING(100)|0s</StoredType>
     </column>
-    <column id="252" parent="173" name="STREET_NUMBER">
+    <column id="253" parent="173" name="STREET_NUMBER">
       <Position>7</Position>
       <StoredType>CHARACTER VARYING(10)|0s</StoredType>
     </column>
-    <index id="253" parent="173" name="PRIMARY_KEY_E4">
+    <index id="254" parent="173" name="PRIMARY_KEY_E4">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="254" parent="173" name="CONSTRAINT_2">
+    <key id="255" parent="173" name="CONSTRAINT_2">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="255" parent="174" name="ID">
+    <column id="256" parent="174" name="ID">
       <ColumnKind>generated-stored</ColumnKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>BIGINT|0s</StoredType>
       <SequenceInline>1</SequenceInline>
-      <SequenceSequenceIdentity>1(33)</SequenceSequenceIdentity>
+      <SequenceSequenceIdentity>1(237)</SequenceSequenceIdentity>
       <SequenceStartValue>1</SequenceStartValue>
       <SequenceStoredType>BIGINT|0s</SequenceStoredType>
     </column>
-    <column id="256" parent="174" name="CAPACITY">
+    <column id="257" parent="174" name="CAPACITY">
       <Position>2</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="257" parent="174" name="WAREHOUSE_ID">
+    <column id="258" parent="174" name="WAREHOUSE_ID">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="258" parent="174" name="CATEGORY_ID">
+    <column id="259" parent="174" name="CATEGORY_ID">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <foreign-key id="259" parent="174" name="CONSTRAINT_BE4">
+    <foreign-key id="260" parent="174" name="CONSTRAINT_BE4">
       <ColNames>WAREHOUSE_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <OnDelete>restrict</OnDelete>
@@ -656,7 +659,7 @@
       <RefKeyName>CONSTRAINT_2</RefKeyName>
       <RefTableName>WAREHOUSE</RefTableName>
     </foreign-key>
-    <foreign-key id="260" parent="174" name="CONSTRAINT_BE">
+    <foreign-key id="261" parent="174" name="CONSTRAINT_BE">
       <ColNames>CATEGORY_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <OnDelete>restrict</OnDelete>
@@ -664,20 +667,20 @@
       <RefKeyName>CONSTRAINT_3</RefKeyName>
       <RefTableName>CATEGORY</RefTableName>
     </foreign-key>
-    <index id="261" parent="174" name="PRIMARY_KEY_B">
+    <index id="262" parent="174" name="PRIMARY_KEY_B">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="262" parent="174" name="CONSTRAINT_INDEX_BE">
+    <index id="263" parent="174" name="CONSTRAINT_INDEX_BE">
       <ColNames>WAREHOUSE_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
     </index>
-    <index id="263" parent="174" name="CONSTRAINT_INDEX_B">
+    <index id="264" parent="174" name="CONSTRAINT_INDEX_B">
       <ColNames>CATEGORY_ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
     </index>
-    <key id="264" parent="174" name="CONSTRAINT_B">
+    <key id="265" parent="174" name="CONSTRAINT_B">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>

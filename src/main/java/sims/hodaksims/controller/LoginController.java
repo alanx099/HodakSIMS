@@ -29,7 +29,9 @@ public class LoginController {
     @FXML
     Button login;
 
-
+    /**
+     * goToWelcome autenticira korisnika i prebacuje ga u aplikaciju
+     */
     public void goToWelcome(){
         String user = userName.getText();
         String pass = password.getText();
@@ -56,8 +58,12 @@ public class LoginController {
         }
 
     }
+
+    /**
+     * goToRegister prebacuje korisnika za registraciju
+     */
     public void goToRegister(){
-        ScreenManagerController.switchTo(View.LISTCHANGES);
+        ScreenManagerController.switchTo(View.REGISTER);
     }
 
 }

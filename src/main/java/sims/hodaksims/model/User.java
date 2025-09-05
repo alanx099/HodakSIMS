@@ -38,26 +38,50 @@ public non-sealed class User extends Entity implements Serializable, Authenticab
         this.role = builder.role;
     }
 
+    /**
+     * getRole dohvati rolu
+     * @return role
+     */
     public UserRoles getRole() {
         return role;
     }
 
+    /**
+     * setRole postavi rolu
+     * @param  role role
+     */
     public void setRole(UserRoles role) {
         this.role = role;
     }
 
+    /**
+     * getUsername dohvati korisničko ime
+     * @return username
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * setUsername postavi korisničko ime
+     * @param username username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * getPassword  dohvati šifru
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * setPassword postavi lozinku
+     * @param password password
+     */
     public void setPassword(String password) {
         this.password = password;
     }

@@ -9,14 +9,10 @@ import sims.hodaksims.model.User;
 import sims.hodaksims.model.UserRoles;
 import sims.hodaksims.model.View;
 import sims.hodaksims.repository.UsersRepository;
-
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 
 public class RegisterController  {
@@ -54,7 +50,6 @@ public class RegisterController  {
         UserRoles role = rolesBox.getValue();
         UsersRepository<User> userRep  = new UsersRepository<>();
         try {
-
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = digest.digest(password.getBytes());
             User newUser = new User.UserBuilder(userName).setPassword(Arrays.toString(hashBytes)).setRole(role).build();

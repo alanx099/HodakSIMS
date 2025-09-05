@@ -1,5 +1,4 @@
 package sims.hodaksims.controller.update;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +14,9 @@ import sims.hodaksims.repository.SupplierRepository;
 import sims.hodaksims.utils.InputVerifyUtil;
 
 import java.util.*;
-
+/**
+ * AddSupplier je kontroller klasa za ažuriranje dobavljača
+ */
 public class UpdateSupplier<T extends Supplier> extends AbstractUpdateController<T> {
     @FXML
     private TextField name;
@@ -52,6 +53,9 @@ public class UpdateSupplier<T extends Supplier> extends AbstractUpdateController
 
     SupplierRepository<Supplier> supplierRep = new SupplierRepository<>();
     ObservableList<SupplierContact> obvContacts = FXCollections.observableArrayList();
+    /**
+     * initialize postavlja podatke u javafx izbornike
+     */
     public void initialize(){
     contactTable.setItems(obvContacts);
     colName.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getName()));
@@ -70,6 +74,9 @@ public class UpdateSupplier<T extends Supplier> extends AbstractUpdateController
         naslov.setText("Ažuriranje dobavljača: " + item.getName());
         idPromjene.setText(item.getId().toString());
     }
+    /**
+     * beforePushToTable provjerava odabrane vrijednosti
+     */
     public void beforePushToTable(){
         Map<String, String> required = Map.of("Ime", this.contName.getText(), "Email", this.contEmail.getText(),"Adresa", this.contAddress.getText());
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
@@ -77,6 +84,9 @@ public class UpdateSupplier<T extends Supplier> extends AbstractUpdateController
             this.pushToTable();
         }
     }
+    /**
+     * pushToTable ubacuje odabrane vrijednosti u tablicu
+     */
     public void pushToTable(){
     String nameC = this.contName.getText();
     String email = this.contEmail.getText();
@@ -89,10 +99,15 @@ public class UpdateSupplier<T extends Supplier> extends AbstractUpdateController
     contTel.clear();
     contAddress.clear();
     }
+    /**
+     * Briše odabranu stavku iz tablice
+     */
     public void deleteSelectedCapacity(){
         obvContacts.remove(contactTable.getSelectionModel().getSelectedItem());
     }
-
+    /**
+     * beforeInsert metoda koja se poziva kako bi se provjerili podatci prije unosa
+     */
     public void beforeInsert(){
         Map<String, String> required = Map.of("Ime", this.name.getText(), "OIB", this.oib.getText(),"Minimalna naruđba", this.minOrder.getText(), "Vrijeme naruđbe", this.orderTime.getText(),"Osoba za kontakt",obvContacts.isEmpty()?"":"true" );
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
@@ -106,6 +121,9 @@ public class UpdateSupplier<T extends Supplier> extends AbstractUpdateController
             log.info("Krivi unos");
         }
     }
+    /**
+     * insertToDb ažirira podatke u bazi
+     */
     public void insertToDb(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Ažuriranje dobavljača");
@@ -123,11 +141,14 @@ public class UpdateSupplier<T extends Supplier> extends AbstractUpdateController
             Supplier curSup = new Supplier(contactSet, nameNew, oibNew, minOrderNew, orderTimeNew);
             curSup.setId(ids);
             supplierRep.update(curSup);
-            switchToSceneListWarehouse();
+            switchToSceneListSupplier();
         }
     }
     @FXML
-    protected void switchToSceneListWarehouse() {
+    /**
+     * switchToSceneListWarehouse prebacuje ekran na listu dobavljača
+     */
+    protected void switchToSceneListSupplier() {
         ScreenManagerController.switchTo(View.LISTSUPPLIER);
     }
 

@@ -4,23 +4,26 @@ import com.fasterxml.jackson.core.io.BigDecimalParser;
 import javafx.scene.control.Alert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sims.hodaksims.controller.update.UpdateContract;
-
-import javax.swing.*;
-import javax.swing.text.StyledEditorKit;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.maxBy;
-import static java.util.stream.Collectors.toList;
-
+/**
+ * InputVerifyUtil klasa za provjeru unosa
+ */
 public class InputVerifyUtil {
+    /**
+     * InputVerifyUtil privatni konstruktor
+     */
     private InputVerifyUtil() {
     }
     final Logger log = LoggerFactory.getLogger(InputVerifyUtil.class);
-    public static Boolean checkForNumber(Map<String, String> checkThese){
 
+    /**
+     *checkForNumber metoda za provjeru ispravnog broja
+     * @param checkThese checkThese
+     * @return checkForNumber
+     */
+    public static Boolean checkForNumber(Map<String, String> checkThese){
         List<String> result = checkThese.keySet().stream().filter(
                 x->{ try{
                     if(checkThese.get(x).isEmpty()) {
@@ -37,6 +40,12 @@ public class InputVerifyUtil {
         }
         return result.isEmpty();
     }
+
+    /**
+     * checkForDecimal provjeri za ispravni decimal
+     * @param checkThese checkThese
+     * @return checkForDecimal
+     */
     public static Boolean checkForDecimal(Map<String, String> checkThese){
 
         List<String> result = checkThese.keySet().stream().filter(
@@ -55,6 +64,11 @@ public class InputVerifyUtil {
         }
         return result.isEmpty();
     }
+
+    /**
+     * alertNumber poziv alerta na ui-u
+     * @param polja polja
+     */
     public static void alertNumber(List<String> polja){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Pogreška");
@@ -65,6 +79,12 @@ public class InputVerifyUtil {
         }
         alert.showAndWait();
     }
+
+    /**
+     * checkForRequired provjeri requirementse
+     * @param checkThese checkThese
+     * @return checkThese
+     */
     public static Boolean checkForRequired(Map<String, String> checkThese){
         List<String> result = checkThese.keySet().stream().filter(
                 x-> checkThese.get(x).isEmpty()
@@ -74,6 +94,11 @@ public class InputVerifyUtil {
         }
         return result.isEmpty();
     }
+
+    /**
+     * alertNull alert za prazno
+     * @param polja polja
+     */
     public static void alertNull(List<String> polja){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Pogreška");

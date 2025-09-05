@@ -19,6 +19,9 @@ import org.slf4j.LoggerFactory;
 import sims.hodaksims.controller.ScreenManagerController;
 import sims.hodaksims.model.View;
 
+/**
+ * SIMS pokretna točka aplikacije
+ */
 public class SIMS extends Application {
     /**
      * Ulaz u aplikaciju

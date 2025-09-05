@@ -14,6 +14,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * AddSupplier je kontroller klasa za unos dobavljača
+ */
 public class AddSupplier {
     @FXML
     private TextField name;
@@ -45,6 +48,9 @@ public class AddSupplier {
 
     SupplierRepository<Supplier> supplierRep = new SupplierRepository<>();
     ObservableList<SupplierContact> obvContacts = FXCollections.observableArrayList();
+    /**
+     * initialize postavlja podatke u javafx izbornike
+     */
     public void initialize(){
     contactTable.setItems(obvContacts);
     colName.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getName()));
@@ -52,7 +58,9 @@ public class AddSupplier {
     colTel.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getPhone()));
     colAddress.setCellValueFactory(cellData-> new SimpleStringProperty((cellData.getValue()).getAddress()));
     }
-
+    /**
+     * pushToTable ubacuje odabrane vrijednosti u tablicu
+     */
     public void pushToTable(){
     String nameC = this.contName.getText();
     String email = this.contEmail.getText();
@@ -66,10 +74,15 @@ public class AddSupplier {
     contTel.clear();
     contAddress.clear();
     }
-
+    /**
+     * Briše odabranu stavku iz tablice
+     */
     public void deleteSelectedCapacity(){
     obvContacts.remove(contactTable.getSelectionModel().getSelectedItem());
     }
+    /**
+     * beforePushToTable provjerava odabrane vrijednosti
+     */
     public void beforePushToTable(){
         Map<String, String> required = Map.of("Ime", this.contName.getText(), "Email", this.contEmail.getText(),"Adresa", this.contAddress.getText());
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
@@ -77,6 +90,9 @@ public class AddSupplier {
             this.pushToTable();
         }
     }
+    /**
+     * beforeInsert metoda koja se poziva kako bi se provjerili podatci prije unosa
+     */
     public void beforeInsert(){
         Map<String, String> required = Map.of("Ime", this.name.getText(), "OIB", this.oib.getText(),"Minimalna naruđba", this.minOrder.getText(), "Vrijeme naruđbe", this.orderTime.getText(),"Osoba za kontakt",obvContacts.isEmpty()?"":"true" );
         Boolean requiredCheck = InputVerifyUtil.checkForRequired(required);
@@ -87,6 +103,9 @@ public class AddSupplier {
         }
 
     }
+    /**
+     * insertToDb unosi podatke u bazu
+     */
     public void insertToDb(){
         Set<SupplierContact> contactSet = new HashSet<>(obvContacts);
         String nameNew = this.name.getText();
@@ -95,11 +114,14 @@ public class AddSupplier {
         Integer orderTimeNew = Integer.parseInt(this.orderTime.getText());
         Supplier curSup = new Supplier(contactSet, nameNew, oibNew, minOrderNew, orderTimeNew);
         supplierRep.save(curSup);
-        switchToSceneAddWarehouse();
+        switchToSceneListSupplier();
     }
     @FXML
-    protected void switchToSceneAddWarehouse() {
-        ScreenManagerController.switchTo(View.LISTCHANGES);
+    /**
+     * switchToSceneListWarehouse prebacuje ekran na listu dobavljača
+     */
+    protected void switchToSceneListSupplier() {
+        ScreenManagerController.switchTo(View.LISTSUPPLIER);
     }
 
 }
