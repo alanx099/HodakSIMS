@@ -62,7 +62,7 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ComboBox prefWidth="150.0" promptText="Kategorija" />
+                  <ComboBox fx:id="catFilter" prefWidth="150.0" promptText="Kategorija" />
                   <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
                         <Button mnemonicParsing="false" onAction="#filterReset" text="Resetiraj filter" />
@@ -171,7 +171,6 @@
                   <FlowPane alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
                      <children>
                         <Button mnemonicParsing="false" onAction="#sendOrder" text="Pošalji" />
-                        <Button mnemonicParsing="false" onAction="#clearOrderFields" text="Očisti" />
                      </children>
                   </FlowPane>
                   <Label fx:id="orderAmmountLabel" text="Količina" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
@@ -211,7 +210,6 @@
                   <Slider fx:id="productAmmountSlider" disable="true" min="1.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <FlowPane alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#clearSend" text="Očisti" />
                         <Button mnemonicParsing="false" onAction="#sendProduct" text="Pošalji" />
                      </children>
                   </FlowPane>

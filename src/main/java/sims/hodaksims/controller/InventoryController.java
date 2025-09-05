@@ -9,16 +9,21 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.Duration;
 import sims.hodaksims.model.*;
+import sims.hodaksims.repository.CategoryRepository;
 import sims.hodaksims.repository.ContractRepository;
 import sims.hodaksims.repository.InventoryDbActions;
 import sims.hodaksims.repository.WarehouseRepository;
 import sims.hodaksims.utils.InventoryMath;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class InventoryController {
     @FXML ComboBox<Warehouse> selectedWarehouse;
     @FXML ComboBox<Supplier> orderSupplier;
     @FXML ComboBox<Product> orderProduct;
+    @FXML ComboBox<Category> catFilter;
     @FXML Slider orderAmmountSlider;
     @FXML Label orderAmmountLabel;
     @FXML ComboBox<Pair<Product, Integer>> productSend;
@@ -34,6 +39,7 @@ public class InventoryController {
     @FXML TableColumn<WareCapacity, String> capacatyMax;
     @FXML TableColumn<WareCapacity, String> percentageLeft;
     @FXML TextArea deliLable;
+    CategoryRepository<Category> categories = new CategoryRepository<>();
     WarehouseRepository<Warehouse> warehouseRepository= new WarehouseRepository<>();
     ContractRepository<Contract> contractRepository= new ContractRepository<>();
     ObservableList<Pair<Product, Integer>> productQuantity = FXCollections.observableArrayList();
@@ -48,6 +54,8 @@ public class InventoryController {
         warehouseCapacityTableLogic();
         productOrderLogic();
         productSendingLogic();
+        catFilter.getItems().addAll(categories.findAll());
+
         Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e ->{
                 deliLable.setText("");
             for(Pair<Supplier, Pair<Warehouse,Pair<Product,Integer>>> s: realOrder){
@@ -57,6 +65,9 @@ public class InventoryController {
                    productQuantity.setAll(warehouseRepository.getInventory(selectedWarehouse.getSelectionModel().getSelectedItem().getId()));
                    inventorySpace.setAll(selectedWarehouse.getSelectionModel().getSelectedItem().getCapacity());
                    realOrder.remove(s);
+                   if(catFilter.getSelectionModel().getSelectedItem()!=null){
+                       filterAll();
+                   }
                return;
                }
                 s.getKey().setDeliveryTime(curr-1);
@@ -82,6 +93,7 @@ public class InventoryController {
             }
             Integer amount = (int) Math.round(orderAmmountSlider.getValue());
             realOrder.add(new Pair<>(new Supplier(orderSupplier.getSelectionModel().getSelectedItem()), new Pair<> (selectedWarehouse.getSelectionModel().getSelectedItem(),new Pair<>(orderProduct.getSelectionModel().getSelectedItem(), amount))));
+
         }
     }
     @FXML
@@ -90,6 +102,10 @@ public class InventoryController {
             InventoryDbActions.depart(selectedWarehouse.getSelectionModel().getSelectedItem(),productSend.getSelectionModel().getSelectedItem().getKey(),(int)productAmmountSlider.getValue());
             productQuantity.setAll(warehouseRepository.getInventory(selectedWarehouse.getSelectionModel().getSelectedItem().getId()));
             inventorySpace.setAll(selectedWarehouse.getSelectionModel().getSelectedItem().getCapacity());
+            if(catFilter.getSelectionModel().getSelectedItem()!=null){
+                filterAll();
+            }
+
         }
 
     }
@@ -190,14 +206,20 @@ public class InventoryController {
         orderAmmountSlider.setDisable(true);
     }
     @FXML
-    public void filterAll(){}
-
+    public void filterAll(){
+        if(catFilter.getSelectionModel().getSelectedItem()!=null){
+            productQuantity.setAll(warehouseRepository.getInventory(selectedWarehouse.getSelectionModel().getSelectedItem().getId()));
+            Stream<Pair<Product, Integer>> theStream = productQuantity.stream();
+            productQuantity.setAll(theStream.filter(p -> p.getKey().getCategory().getId().equals(catFilter.getSelectionModel().getSelectedItem().getId())).collect(Collectors.toSet()));
+        }
+    }
     @FXML
-    public void clearOrderFields(){}
-    @FXML
-    public void clearSend(){}
-    @FXML
-    public void filterReset(){}
+    public void filterReset(){
+        if(catFilter.getSelectionModel().getSelectedItem()!=null){
+            catFilter.getSelectionModel().clearSelection();
+            productQuantity.setAll(warehouseRepository.getInventory(selectedWarehouse.getSelectionModel().getSelectedItem().getId()));
+        }
+    }
 
 
 

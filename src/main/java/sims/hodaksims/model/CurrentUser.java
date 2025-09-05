@@ -27,9 +27,9 @@ public non-sealed class CurrentUser implements Authenticable  {
      * @return instance
      */
     public static CurrentUser getInstance(User user){
-        if (instance == null) {
+
             instance = new CurrentUser(user);
-        }
+
         return instance;
     }
 
